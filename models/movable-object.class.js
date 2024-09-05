@@ -1,9 +1,5 @@
 class MovableObject extends DrawableObject {
 
- 
-  
-
-  
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -22,8 +18,13 @@ class MovableObject extends DrawableObject {
 
 
     isAboveGround() {
-
+        if (this instanceof ThrowableObject) {
+            	return true;
+            
+        }
+        else{
         return this.y < 180;
+    }
     }
 
     hit() {
@@ -45,28 +46,6 @@ class MovableObject extends DrawableObject {
         this.energy == 0;
     }
 
-
-
-
-
-
-
-
-    drawFrame(ctx) {
-
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
-
-
-
-
-
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
