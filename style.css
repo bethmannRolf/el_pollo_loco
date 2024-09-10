@@ -30,6 +30,7 @@ h1{
     text-shadow: 4px 6px 8px rgba(0, 0, 0, 0.4);
     letter-spacing: 5px;
     font-size: 400%;
+    user-select: none;
 }
 
 

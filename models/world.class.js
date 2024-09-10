@@ -7,10 +7,14 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+
     statusBar = new Statusbar();
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
-    throwableObjects = []
+    throwableObjects = [];
+    collectableCoinObjects = [new CollectableCoinObject()]
+    collectableBottleObjects = [new CollectableBottleObject()]
+  
     
 
 
@@ -79,6 +83,8 @@ checkCollisions(){
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects)
+        this.addObjectsToMap(this.collectableCoinObjects);
+        this.addObjectsToMap(this.collectableBottleObjects);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () {
