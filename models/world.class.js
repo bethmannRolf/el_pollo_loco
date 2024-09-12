@@ -12,8 +12,8 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObjects = [];
-    collectableCoinObjects = [new CollectableCoinObject()]
-    collectableBottleObjects = [new CollectableBottleObject()]
+    
+ 
   
     
 
@@ -83,8 +83,8 @@ checkCollisions(){
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects)
-        this.addObjectsToMap(this.collectableCoinObjects);
-        this.addObjectsToMap(this.collectableBottleObjects);
+        this.addObjectsToMap(this.level.collectableCoinObjects);
+        this.addObjectsToMap(this.level.collectableBottleObjects);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () {

@@ -12,8 +12,8 @@ class CollectableCoinObject extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_COIN_ALTERNATING[0]);
         this.loadImages(this.IMAGES_COIN_ALTERNATING)
-        this.x = 100;
-        this.y = 100;
+        this.x = 200 + 1600  * Math.random();
+        this.y = 80 + 80 * Math.random();
 
         this.animate()
     }
