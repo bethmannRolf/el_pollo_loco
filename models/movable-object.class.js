@@ -5,6 +5,8 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1;
     energy = 100;
+    coins = 0;
+    bottles = 0;
     lastHit = 0;
 
     applyGravity() {
@@ -25,6 +27,10 @@ class MovableObject extends DrawableObject {
         else{
         return this.y < 180;
     }
+    }
+
+    collectCoin(){
+        console.log('Münze einsammmeln')
     }
 
     hit() {

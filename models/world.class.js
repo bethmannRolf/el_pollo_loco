@@ -28,13 +28,17 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        
+
     }
 
     run() {
 
         setInterval(() => {
+            
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCoinCollisions();
         }, 200);
     }
 
@@ -60,21 +64,12 @@ checkCoinCollisions(){
 this.level.collectableCoinObjects.forEach((collectableCoin) =>{
     if(this.character.isColliding(collectableCoin)){
     
-// modify coinbar
+        this.character.collectCoin()
 
     }
 });
 }
 
-checkBottleCollisions(){
-    this.level.collectableBottleObjects.forEach((collectableBottle) =>{
-        if(this.character.isColliding(collectableBottle)){
-        
-    // modify bottleBar
-    
-        }
-    });
-    }
 
 
 
