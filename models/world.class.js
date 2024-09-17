@@ -12,13 +12,8 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObjects = [];
+    throwing_sound = new Audio('audio/throwing.mp3')
     
- 
-  
-    
-
-
-
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -44,8 +39,8 @@ class World {
     }
 
     checkThrowObjects(){
-
         if (this.keyboard.D) {
+            this.throwing_sound.play();
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjects.push(bottle)
         }
@@ -55,14 +50,36 @@ class World {
 checkCollisions(){
     this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
-
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy)
-
         }
     });
-
 }
+
+checkCoinCollisions(){
+this.level.collectableCoinObjects.forEach((collectableCoin) =>{
+    if(this.character.isColliding(collectableCoin)){
+    
+// modify coinbar
+
+    }
+});
+}
+
+checkBottleCollisions(){
+    this.level.collectableBottleObjects.forEach((collectableBottle) =>{
+        if(this.character.isColliding(collectableBottle)){
+        
+    // modify bottleBar
+    
+        }
+    });
+    }
+
+
+
+
+
 
 
 
