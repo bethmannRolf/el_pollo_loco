@@ -9,6 +9,8 @@ class MovableObject extends DrawableObject {
     bottles = 0;
     lastHit = 0;
 
+    coinCollectSound = new Audio();
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -30,8 +32,15 @@ class MovableObject extends DrawableObject {
     }
 
     collectCoin(){
+        this.coins += 20;
         console.log('Münze einsammmeln')
     }
+
+removeCoin(){
+
+
+}
+
 
     hit() {
         this.energy -= 5;

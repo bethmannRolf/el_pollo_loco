@@ -61,14 +61,23 @@ checkCollisions(){
 }
 
 checkCoinCollisions(){
-this.level.collectableCoinObjects.forEach((collectableCoin) =>{
+this.level.collectableCoinObjects.forEach((collectableCoin, index) =>{
     if(this.character.isColliding(collectableCoin)){
+
     
         this.character.collectCoin()
+        this.coinBar.setPercentage(this.character.coins)
+        console.log(index)
+        this.level.collectableCoinObjects.splice(index, 1)
+        
+
 
     }
 });
 }
+
+
+
 
 
 

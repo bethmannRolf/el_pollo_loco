@@ -66,7 +66,8 @@ const level1 = new Level(
         new CollectableCoinObject(),
         new CollectableCoinObject(),
         new CollectableCoinObject(),
-        new CollectableCoinObject()        
+        new CollectableCoinObject(),
+        new CollectableCoinObject()             
     ],
     [
         new CollectableBottleObject(),
