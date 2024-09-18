@@ -33,13 +33,13 @@ class MovableObject extends DrawableObject {
 
     collectCoin(){
         this.coins += 20;
-        console.log('Münze einsammmeln')
+        console.log('Münze eingesammelt !');
     }
 
-removeCoin(){
-
-
-}
+    collectBottle(){
+        this.bottles += 20;
+        console.log('Flasche eingesammelt !');
+    }
 
 
     hit() {
@@ -76,11 +76,7 @@ removeCoin(){
     }
 
     moveLeft() {
-
-
         this.x -= this.speed
-
-
     }
 
     jump() {
@@ -93,10 +89,5 @@ removeCoin(){
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height
-
     }
-
-
-
-
 }

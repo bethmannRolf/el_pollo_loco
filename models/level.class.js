@@ -4,7 +4,7 @@ class Level {
     clouds;
     backgroundObjects;
     collectableCoinObjects;
-    collectableBottleObjects
+    collectableBottleObjects;
     level_end_x = 4500;
 
 

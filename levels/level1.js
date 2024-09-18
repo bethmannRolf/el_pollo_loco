@@ -73,6 +73,7 @@ const level1 = new Level(
         new CollectableBottleObject(),
         new CollectableBottleObject(),
         new CollectableBottleObject(),
+        new CollectableBottleObject(),
         new CollectableBottleObject()
     ]
 

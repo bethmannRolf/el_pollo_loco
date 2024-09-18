@@ -13,7 +13,7 @@ class World {
     coinBar = new CoinBar();
     throwableObjects = [];
     throwing_sound = new Audio('audio/throwing.mp3')
-    
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,21 +28,22 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        
+
 
     }
 
     run() {
 
         setInterval(() => {
-            
+
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCoinCollisions();
+            this.checkBottleCollisions();
         }, 200);
     }
 
-    checkThrowObjects(){
+    checkThrowObjects() {
         if (this.keyboard.D) {
             this.throwing_sound.play();
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
@@ -51,31 +52,36 @@ class World {
 
     }
 
-checkCollisions(){
-    this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-            this.character.hit();
-            this.statusBar.setPercentage(this.character.energy)
-        }
-    });
-}
-
-checkCoinCollisions(){
-this.level.collectableCoinObjects.forEach((collectableCoin, index) =>{
-    if(this.character.isColliding(collectableCoin)){
-
-    
-        this.character.collectCoin()
-        this.coinBar.setPercentage(this.character.coins)
-        console.log(index)
-        this.level.collectableCoinObjects.splice(index, 1)
-        
-
-
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy)
+            }
+        });
     }
-});
-}
 
+    checkCoinCollisions() {
+        this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
+            if (this.character.isColliding(collectableCoin)) {
+                this.character.collectCoin()
+                this.coinBar.setPercentage(this.character.coins)
+                console.log('Coinindex', index)
+                this.level.collectableCoinObjects.splice(index, 1);
+            }
+        });
+    }
+
+    checkBottleCollisions() {
+        this.level.collectableBottleObjects.forEach((collectableBottle, index) => {
+            if (this.character.isColliding(collectableBottle)) {
+                this.character.collectBottle();
+                this.bottleBar.setPercentage(this.character.bottles)
+                console.log('Bottleindex', index)
+                this.level.collectableBottleObjects.splice(index, 1);
+            }
+        });
+    }
 
 
 
