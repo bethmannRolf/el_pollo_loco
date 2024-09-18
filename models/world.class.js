@@ -15,6 +15,7 @@ class World {
     throwing_sound = new Audio('audio/throwing.mp3')
 
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -83,22 +84,11 @@ class World {
         });
     }
 
-
-
-
-
-
-
-
-
-
-
-
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
+        this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
         // Space for fixed objects
         this.addToMap(this.bottleBar);
@@ -107,7 +97,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
+
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects)
         this.addObjectsToMap(this.level.collectableCoinObjects);

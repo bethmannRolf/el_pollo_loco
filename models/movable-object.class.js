@@ -9,7 +9,8 @@ class MovableObject extends DrawableObject {
     bottles = 0;
     lastHit = 0;
 
-    coinCollectSound = new Audio();
+    collectCoinSound = new Audio('audio/coin1.mp3');
+    collectBottleSound = new Audio('audio/collect_bottle.mp3');
 
     applyGravity() {
         setInterval(() => {
@@ -32,11 +33,13 @@ class MovableObject extends DrawableObject {
     }
 
     collectCoin(){
+        this.collectCoinSound.play();
         this.coins += 20;
         console.log('Münze eingesammelt !');
     }
 
     collectBottle(){
+        this.collectBottleSound.play(); 
         this.bottles += 20;
         console.log('Flasche eingesammelt !');
     }
