@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     coins = 0;
     bottles = 0;
     lastHit = 0;
+   
 
     collectCoinSound = new Audio('audio/coin1.mp3');
     collectBottleSound = new Audio('audio/collect_bottle.mp3');
@@ -61,7 +62,7 @@ class MovableObject extends DrawableObject {
     }
 
     isDead() {
-        this.energy == 0;
+        this.energy <= 0;
     }
 
 
