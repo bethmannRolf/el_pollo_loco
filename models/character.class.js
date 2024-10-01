@@ -92,16 +92,6 @@ class Character extends MovableObject {
         this.animate();
     }
 
-    idle() {
-
-    }
-
-    idleLong() {
-
-
-
-    }
-
     getTimeSinceLastPress() {
         if (this.lastPress === null) {
             return null;
@@ -113,12 +103,13 @@ class Character extends MovableObject {
 
 
 
+
     getPressTime() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.D) {
                 this.lastPressTime = new Date().getTime();
             }
-            console.log("lastPress:", this.lastPressTime);
+            // console.log("lastPress:", this.lastPressTime);
         }, 50);
     }
 
@@ -126,9 +117,10 @@ class Character extends MovableObject {
 
     animate() {
 
-
+     
 
         setInterval(() => {
+          
             this.walking_sound.pause();
 
             // this.background_music.play();
@@ -157,9 +149,12 @@ class Character extends MovableObject {
         setInterval(() => {
 
            let timeSinceLastPress = this.getTimeSinceLastPress();
-           if (timeSinceLastPress !== null) {
-            console.log("Zeit seit dem letzten Tastendruck (ms):", timeSinceLastPress);
-        }
+
+
+
+        //    if (timeSinceLastPress !== null) {
+        //     console.log("Zeit seit dem letzten Tastendruck (ms):", timeSinceLastPress);
+        // }
 
 
            
@@ -172,10 +167,10 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT)
             }
 
-            else if (timeSinceLastPress >= 2000 && timeSinceLastPress <= 3999 ) {
+            else if (timeSinceLastPress >= 2000 && timeSinceLastPress <= 4999 ) {
                 this.playAnimation(this.IMAGES_IDLE)
             }
-            else if (timeSinceLastPress >= 4000) {
+            else if (timeSinceLastPress >= 5000) {
                 this.playAnimation(this.IMAGES_IDLE_LONG)
             }
            

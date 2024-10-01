@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
     coins = 0;
     bottles = 0;
     lastHit = 0;
-   
+
 
     collectCoinSound = new Audio('audio/coin1.mp3');
     collectBottleSound = new Audio('audio/collect_bottle.mp3');
@@ -25,22 +25,28 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            	return true;
-            
+            return true;
+
         }
-        else{
-        return this.y < 180;
-    }
+        else {
+            return this.y < 180;
+        }
     }
 
-    collectCoin(){
+
+
+
+
+
+
+    collectCoin() {
         this.collectCoinSound.play();
         this.coins += 20;
         console.log('Münze eingesammelt !');
     }
 
-    collectBottle(){
-        this.collectBottleSound.play(); 
+    collectBottle() {
+        this.collectBottleSound.play();
         this.bottles += 20;
         console.log('Flasche eingesammelt !');
     }
@@ -50,7 +56,7 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
-        }else{
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
