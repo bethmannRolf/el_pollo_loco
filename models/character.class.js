@@ -167,10 +167,10 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT)
             }
 
-            else if (timeSinceLastPress >= 2000 && timeSinceLastPress <= 4999 ) {
+            else if (timeSinceLastPress >= 2000 && timeSinceLastPress <= 4999 && !this.isAboveGround() ) {
                 this.playAnimation(this.IMAGES_IDLE)
             }
-            else if (timeSinceLastPress >= 5000) {
+            else if (timeSinceLastPress >= 5000 && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_IDLE_LONG)
             }
            
