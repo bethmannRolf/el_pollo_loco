@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     y = 140;
     height = 300;
     width = 300;
-    firstContact
+
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -32,8 +32,8 @@ class Endboss extends MovableObject {
 
     IMAGES_DEAD = [
         'img/4_enemie_boss_chicken/5_dead/G24.png',
-        'img/4_enemie_boss_chicken/5_dead/G25.png',
-        'img/4_enemie_boss_chicken/5_dead/G26.png'
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G24.png'
     ];
 
     IMAGES_ATTACK = [
@@ -51,28 +51,46 @@ class Endboss extends MovableObject {
 
     constructor() {
         super();
-        // this.loadImage(this.IMAGES_WALKING[0]);
-this.loadImages(this.IMAGES_WALKING);
+        this.loadImage(this.IMAGES_WALKING[0]);
+        this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
-        
-        
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.x = 3800
         this.animate()
-       
+
     }
 
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ATTACK)
-        }, 100)
+            if (this.world && this.world.character) { // Sicherstellen, dass die Welt und der Charakter existieren
+                const distance = this.calculateDistance(this.world.character);
+                this.updateAnimation(distance);
+            }
+        }, 100); // Beispielintervall
     }
 
-    // write function for first contact with endboss
+    calculateDistance(character) {
+        return Math.abs(character.x - this.x); // Distanzberechnung
+    }
 
+    updateAnimation(distanceToCharacter) {
+        if (distanceToCharacter < 200) {
+            this.playAnimation(this.IMAGES_ATTACK); // Wenn der Charakter nahe ist
+        } else if (distanceToCharacter < 400) {
+            this.playAnimation(this.IMAGES_ALERT); // Wenn der Charakter in der Nähe ist
+        } else {
+            this.playAnimation(this.IMAGES_WALKING); // Wenn der Charakter weiter weg ist
+        }
+    }
+    
+
+
+    getDistanceToCharacter(character) {
+        return Math.abs(this.x - character.x); // Differenz in der x-Richtung
+    }
 
 
 

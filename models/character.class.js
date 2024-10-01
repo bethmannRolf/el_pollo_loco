@@ -101,9 +101,6 @@ class Character extends MovableObject {
 
     }
 
-
-
-
     getPressTime() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.D) {
@@ -113,16 +110,9 @@ class Character extends MovableObject {
         }, 50);
     }
 
-
-
     animate() {
-
-     
-
         setInterval(() => {
-          
             this.walking_sound.pause();
-
             // this.background_music.play();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();

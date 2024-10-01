@@ -31,13 +31,16 @@ class World {
     setWorld() {
         this.character.world = this;
 
-
+        // Füge den Endboss zur Welt hinzu
+        this.level.enemies.forEach(enemy => {
+            if (enemy instanceof Endboss) {
+                enemy.world = this; // Setze die world-Referenz für den Endboss
+            }
+        });
     }
 
     run() {
-
         setInterval(() => {
-
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCoinCollisions();
