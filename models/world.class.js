@@ -79,15 +79,33 @@ class World {
 
 
 
-
+/*
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown) {
-                console.log("von oben getroffen");
+               
+            
                 this.character.jump();
             }
         });
     }
+*/
+    
+checkCollisionFromAbove() {
+    this.level.enemies.forEach((enemy, index) => {
+        if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead()) {
+            this.character.jump();   // Charakter springt bei Kollision von oben
+            enemy.hitByJump();       // Gegner wird getroffen
+            if (enemy.isDead()) {    // Überprüfen, ob der Gegner tot ist
+                setTimeout(() => {
+                    this.level.enemies.splice(index, 1);  // Gegner nach einer kurzen Verzögerung aus dem Level entfernen
+                }, 500);  // Warte 0,5 Sekunden, bevor der Gegner entfernt wird
+            }
+        }
+    });
+}
+
+
 
 
 

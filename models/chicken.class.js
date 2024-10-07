@@ -32,24 +32,27 @@ class Chicken extends MovableObject {
     }
 
 
+    animate() {
+        setInterval(() => {
+            if (!this.isDead()) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
 
-    // animate() {
-    //     setInterval(() => {
-    //         if (!this.isDead) {
-    //             this.moveLeft();
-    //         }
-    //     }, 1000 / 60);
-
-    //     setInterval(() => {
-    //         if (!this.isDead) {
-    //             this.playAnimation(this.IMAGES_WALKING);
-    //         } else {
-    //             this.playAnimation(this.IMAGES_DEAD);  // Spiele Animation für totes Huhn
-    //         }
-    //     }, 100);
-    // }
+        setInterval(() => {
+            if (!this.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
+            } else {
+                this.playAnimation(this.IMAGES_DEAD);  // Spiele Animation für totes Huhn
+            }
+        }, 100);
+    }
 
 
+
+
+
+/*
     animate() {
         setInterval(() => {
 
@@ -61,6 +64,6 @@ class Chicken extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING)
         }, 100)
     }
-
+*/
 
 }

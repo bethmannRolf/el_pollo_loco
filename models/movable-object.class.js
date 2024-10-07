@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     coins = 0;
     bottles = 0;
     lastHit = 0;
+   
 
 
     collectCoinSound = new Audio('audio/coin1.mp3');
@@ -55,6 +56,8 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit
         timePassed = timePassed / 1000;
@@ -62,7 +65,7 @@ class MovableObject extends DrawableObject {
     }
 
     isDead() {
-        this.energy <= 0;
+      return  this.energy <= 0;
     }
 
 
@@ -97,7 +100,9 @@ jumpCooldown = false;
 
 
 jump() {
+    console.log(this.enemy)
     if (!this.jumpCooldown) {
+      
         this.speedY = 20;
         this.jumpCooldown = true;
         setTimeout(() => {
@@ -106,7 +111,10 @@ jump() {
     }
 }
 
+hitByJump(){
 
+    this.energy = 0;
+}
 
 
 
