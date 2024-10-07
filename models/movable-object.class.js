@@ -23,6 +23,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
@@ -36,9 +37,11 @@ class MovableObject extends DrawableObject {
 
     collectCoin() {
         this.collectCoinSound.play();
-        this.coins += 20;
-        
+        this.coins += 20;  
     }
+
+
+
 
     collectBottle() {
         this.collectBottleSound.play();
@@ -100,14 +103,12 @@ jumpCooldown = false;
 
 
 jump() {
-    console.log(this.enemy)
     if (!this.jumpCooldown) {
-      
         this.speedY = 20;
         this.jumpCooldown = true;
         setTimeout(() => {
             this.jumpCooldown = false;
-        }, 100); 
+        }, 50); 
     }
 }
 

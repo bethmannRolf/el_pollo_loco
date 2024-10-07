@@ -57,10 +57,13 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.character.bottles > 0) {
             this.throwing_sound.play();
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
-            this.throwableObjects.push(bottle)
+            this.throwableObjects.push(bottle);
+           this.character.bottles -= 20; 
+           this.bottleBar.setPercentage(this.character.bottles)
+             
         }
 
     }
@@ -73,6 +76,8 @@ class World {
             }
         });
     }
+
+
 
 
 
