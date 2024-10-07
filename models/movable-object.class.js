@@ -33,22 +33,16 @@ class MovableObject extends DrawableObject {
         }
     }
 
-
-
-
-
-
-
     collectCoin() {
         this.collectCoinSound.play();
         this.coins += 20;
-        console.log('Münze eingesammelt !');
+        
     }
 
     collectBottle() {
         this.collectBottleSound.play();
         this.bottles += 20;
-        console.log('Flasche eingesammelt !');
+       
     }
 
 
@@ -91,9 +85,30 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed
     }
 
+/*
+
     jump() {
         this.speedY = 20;
     }
+
+*/
+
+jumpCooldown = false;
+
+
+jump() {
+    if (!this.jumpCooldown) {
+        this.speedY = 20;
+        this.jumpCooldown = true;
+        setTimeout(() => {
+            this.jumpCooldown = false;
+        }, 100); 
+    }
+}
+
+
+
+
 
 
     isColliding(mo) {
@@ -102,4 +117,58 @@ class MovableObject extends DrawableObject {
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
+
+
+
+
+    isCollidingFromAbove(mo) {
+        const tolerance = 20; 
+        return (
+            this.y + this.height <= mo.y + tolerance &&
+            this.y + this.height > mo.y &&        
+            this.x + this.width > mo.x - tolerance && 
+            this.x < mo.x + mo.width + tolerance   
+        );
+    }
+    
+
+
+
+
+
+
+
+/*
+    isCollidingFromAbove(mo) {
+        // console.log('Überprüfe Kollision von oben mit', mo);
+        return this.y + this.height <= mo.y + 20 && 
+               this.y + this.height > mo.y &&
+               this.x + this.width > mo.x &&
+               this.x < mo.x + mo.width;
+    }
+    
+*/
+
+
+
+
+/*
+    isCollidingFromAbove(mo) {
+        return this.y + this.height <= mo.y +10  && // Der Charakter ist über dem Objekt (mit Toleranz)
+               this.y + this.height > mo.y &&      // Der Charakter trifft von oben
+               this.x + this.width > mo.x &&       // Horizontaler Überlapp
+               this.x < mo.x + mo.width;           // Horizontaler Überlapp
+    }
+    
+*/
+/*
+    checkCollisionFromAbove(mo) {
+        if (this.isCollidingFromAbove(mo)) {
+            this.jump();  // Charakter springt, wenn er von oben kollidiert
+            return false;  // Verhindert die Kollision
+        }
+        return this.isColliding(mo);  // Ansonsten normale Kollision
+    }
+*/
+
 }

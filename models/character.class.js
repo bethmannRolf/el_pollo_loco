@@ -139,15 +139,7 @@ class Character extends MovableObject {
         setInterval(() => {
 
            let timeSinceLastPress = this.getTimeSinceLastPress();
-
-
-
-        //    if (timeSinceLastPress !== null) {
-        //     console.log("Zeit seit dem letzten Tastendruck (ms):", timeSinceLastPress);
-        // }
-
-
-           
+   
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD)
 

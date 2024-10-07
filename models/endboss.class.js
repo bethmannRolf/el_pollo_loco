@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     y = 140;
     height = 300;
     width = 300;
+    energy = 15
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -60,7 +61,12 @@ class Endboss extends MovableObject {
         this.x = 3800
         this.animate()
 
+
     }
+
+
+    
+
 
 
     animate() {

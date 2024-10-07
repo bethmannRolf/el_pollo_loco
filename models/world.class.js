@@ -40,11 +40,19 @@ class World {
     }
 
     run() {
+
+        setInterval(() => {
+            this.checkCollisionFromAbove();
+        }, 50);
+
+
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCoinCollisions();
+
             this.checkBottleCollisions();
+
         }, 200);
     }
 
@@ -59,12 +67,32 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !this.character.isCollidingFromAbove(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy)
             }
         });
     }
+
+
+
+
+
+
+
+    checkCollisionFromAbove() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown) {
+                console.log("von oben getroffen");
+                this.character.jump();
+            }
+        });
+    }
+
+
+
+
+
 
     checkCoinCollisions() {
         this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
@@ -104,7 +132,7 @@ class World {
         this.addToMap(this.character);
 
         this.addObjectsToMap(this.level.enemies);
-        
+
         this.addObjectsToMap(this.throwableObjects)
         this.addObjectsToMap(this.level.collectableCoinObjects);
         this.addObjectsToMap(this.level.collectableBottleObjects);
