@@ -31,61 +31,108 @@ class World {
     setWorld() {
         this.character.world = this;
 
-        // Füge den Endboss zur Welt hinzu
+
         this.level.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
-                enemy.world = this; // Setze die world-Referenz für den Endboss
+                enemy.world = this;
             }
         });
     }
 
     run() {
-
         setInterval(() => {
             this.checkCollisionFromAbove();
-          
+
         }, 50);
 
 
         setInterval(() => {
-         
+
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCoinCollisions();
             this.checkBottleCollisions();
-          this.checkBottleEnemyCollisions();
+            this.checkBottleEnemyCollisions();
         }, 200);
     }
 
 
 
-
-
-
-
+/*
 
     checkBottleEnemyCollisions() {
         this.throwableObjects.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
-                if (bottle.isColliding(enemy)) {
-                    bottle.splash(); // Animation der Flasche auf "Splash" wechseln
-                    enemy.hitByBottle(); 
-    
+                if (bottle.isColliding(enemy) && !enemy.isDead()) {
+                    bottle.splash();
+                    enemy.hitByBottle();
+                   
+                      this.statusBarEndboss.setPercentage(enemy.energy);
                     if (enemy.isDead()) {
                         setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1); // Gegner entfernen
-                        }, 1500);
+                            this.level.enemies.splice(enemyIndex, 1);
+                            console.log("success")
+                        }, 500);
                     }
-    
-                    // Entferne die Flasche nach der Kollision
+
                     setTimeout(() => {
-                        this.throwableObjects.splice(bottleIndex, 1); // Flasche entfernen
+                        this.throwableObjects.splice(bottleIndex, 1);
                     }, 100);
+                    
                 }
             });
         });
     }
-    
+*/
+
+checkBottleEnemyCollisions() {
+    this.throwableObjects.forEach((bottle, bottleIndex) => {
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+            if (bottle.isColliding(enemy)) {
+                bottle.splash();
+                enemy.hitByBottle();
+               
+                  this.statusBarEndboss.setPercentage(enemy.energy);
+                  
+                if (enemy.isDead()) {
+                    setTimeout(() => {
+                        this.level.enemies.splice(enemyIndex, 1);
+                        console.log("success")
+                    }, 500);
+                }
+
+                setTimeout(() => {
+                    this.throwableObjects.splice(bottleIndex, 1);
+                }, 100);
+                
+            }
+        });
+    });
+}
+
+
+
+
+
+    checkCollisionFromAbove() {
+        this.level.enemies.forEach((enemy, index) => {
+            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead()) {
+                this.character.jump();
+                enemy.hitByJump();
+                if (enemy.isDead()) {
+                    setTimeout(() => {
+                        this.level.enemies.splice(index, 1);
+                    }, 500);
+                }
+            }
+        });
+    }
+
+
+
+
+
+
 
 
 
@@ -95,11 +142,11 @@ class World {
             this.throwing_sound.play();
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this);
             this.throwableObjects.push(bottle);
-            this.character.bottles -= 20; 
+            this.character.bottles -= 20;
             this.bottleBar.setPercentage(this.character.bottles);
         }
     }
-    
+
 
 
 
@@ -122,20 +169,8 @@ class World {
 
 
 
-    
-checkCollisionFromAbove() {
-    this.level.enemies.forEach((enemy, index) => {
-        if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead()) {
-            this.character.jump();   // Charakter springt bei Kollision von oben
-            enemy.hitByJump();       // Gegner wird getroffen
-            if (enemy.isDead()) {    // Überprüfen, ob der Gegner tot ist
-                setTimeout(() => {
-                    this.level.enemies.splice(index, 1);  // Gegner nach einer kurzen Verzögerung aus dem Level entfernen
-                }, 500);  // Warte 0,5 Sekunden, bevor der Gegner entfernt wird
-            }
-        }
-    });
-}
+
+
 
 
 
@@ -200,6 +235,9 @@ checkCollisionFromAbove() {
     }
 
 
+
+
+
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo)
@@ -210,6 +248,10 @@ checkCollisionFromAbove() {
             this.flipImageBack(mo)
         }
     }
+
+
+
+
 
     flipImage(mo) {
         this.ctx.save();

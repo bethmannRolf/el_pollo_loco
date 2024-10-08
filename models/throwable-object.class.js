@@ -32,7 +32,7 @@ constructor(x, y, world) {
     this.y = y;
     this.height = 60;
     this.width = 50;
-    this.world = world;  // Speichere die Referenz zur Welt
+    this.world = world;  
     this.throw();
 }
 
@@ -54,19 +54,19 @@ throw() {
         this.playAnimation(this.IMAGES_ROTATING);
         this.x += 10;
 
-        // Überprüfe Kollision mit Gegnern
+       
         this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy)) {
-                enemy.hitByJump();  // Gegner wird getroffen
-                this.speedY = 0;    // Beende die Bewegung der Flasche
+                enemy.hitByJump();  
+                this.speedY = 0;    
 
-                // Wechsle zur Splash-Animation
-                clearInterval(throwInterval);  // Stoppe die Rotation der Flasche
+               
+                clearInterval(throwInterval);  
                 setInterval(() => {
                     this.playAnimation(this.IMAGES_SPLASH);
                 }, 100);
 
-                // Optional: Entferne die Flasche nach der Kollision
+               
                 setTimeout(() => {
                     this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this);
                 }, 500);
@@ -76,11 +76,9 @@ throw() {
     }, 25);
 }
 
-
+/*
 splash() {
     this.speedY = 0; 
-
-   
     let splashInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_SPLASH);
 
@@ -88,22 +86,26 @@ splash() {
         if (this.currentImage >= this.IMAGES_SPLASH.length) {
             clearInterval(splashInterval);
         }
-    }, 100);
+    }, 200);
+}
+*/
+
+splash() {
+    this.speedY = 0; // Setze die Geschwindigkeit auf 0, um Bewegungen zu stoppen
+    this.currentImage = 0; // Setze das Bild auf das erste Bild der Splash-Animation
+    let splashInterval = setInterval(() => {
+        this.playAnimation(this.IMAGES_SPLASH);
+        
+        if (this.currentImage >= this.IMAGES_SPLASH.length) {
+            clearInterval(splashInterval); // Stoppe die Animation, wenn sie beendet ist
+        }
+    }, 200);
 }
 
 
 
 
 
-
-
-// splash() {
-//     console.log('Splash-Animation für Flasche gestartet');  // Log bei Start der Animation
-//     this.speedY = 0;  // Stoppe die Bewegung
-//     setInterval(() => {
-//         this.playAnimation(this.IMAGES_SPLASH);
-//     }, 100);
-// }
 
 
 

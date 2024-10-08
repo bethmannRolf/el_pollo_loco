@@ -35,6 +35,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
+
+
+
+
     collectCoin() {
         this.collectCoinSound.play();
         this.coins += 20;  
@@ -48,7 +53,6 @@ class MovableObject extends DrawableObject {
         this.bottles += 20;
        
     }
-
 
     hit() {
         this.energy -= 5;
@@ -69,7 +73,7 @@ class MovableObject extends DrawableObject {
 
     hitByBottle(){
    
-        this.energy -= 40;
+        this.energy = this.energy -40
     }
 
 
@@ -97,13 +101,7 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed
     }
 
-/*
 
-    jump() {
-        this.speedY = 20;
-    }
-
-*/
 
 jumpCooldown = false;
 

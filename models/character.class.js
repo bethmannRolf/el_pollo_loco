@@ -106,7 +106,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.D) {
                 this.lastPressTime = new Date().getTime();
             }
-            // console.log("lastPress:", this.lastPressTime);
+          
         }, 50);
     }
 

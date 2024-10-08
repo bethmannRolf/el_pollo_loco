@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     y = 140;
     height = 300;
     width = 300;
+    energy = 100;
   
 
     IMAGES_ALERT = [
@@ -73,7 +74,7 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.world && this.world.character) { // Sicherstellen, dass die Welt und der Charakter existieren
+            if (this.world && this.world.character) { 
                 const distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
             }
@@ -86,7 +87,7 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.world && this.world.character) { // Sicherstellen, dass die Welt und der Charakter existieren
+            if (this.world && this.world.character) { 
                 const distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
             }
@@ -95,16 +96,16 @@ class Endboss extends MovableObject {
     
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
-            // Wenn der Endboss tot ist, keine anderen Animationen abspielen
-            return; // Keine Animation ausführen
+           
+            return; 
         }
     
         if (distanceToCharacter < 200) {
-            this.playAnimation(this.IMAGES_ATTACK); // Wenn der Charakter nahe ist
+            this.playAnimation(this.IMAGES_ATTACK); 
         } else if (distanceToCharacter < 400) {
-            this.playAnimation(this.IMAGES_ALERT); // Wenn der Charakter in der Nähe ist
+            this.playAnimation(this.IMAGES_ALERT); 
         } else {
-            this.playAnimation(this.IMAGES_WALKING); // Wenn der Charakter weiter weg ist
+            this.playAnimation(this.IMAGES_WALKING); 
         }
     }
     
@@ -112,35 +113,33 @@ class Endboss extends MovableObject {
 
 
     getDistanceToCharacter(character) {
-        return Math.abs(this.x - character.x); // Differenz in der x-Richtung
+        return Math.abs(this.x - character.x); 
     }
 
 
-/*
-        hitByBottle() {
-            
-            this.playAnimation(this.IMAGES_HURT); // Animation für den Treffer abspielen
-        }
-    */
+
+
+
+hitByBottle() {
+    this.hitCount++;
+    if (this.hitCount >= 3) {
+        this.energy = 0; 
+        this.playAnimation(this.IMAGES_DEAD); 
+    } else {
+        this.energy = 100 - 40 * this.hitCount; 
+        this.playAnimation(this.IMAGES_HURT);  
+        
    
-        hitByBottle() {
-            this.hitCount++;
-            if (this.hitCount >= 3) { // Wenn er 3 Treffer erlitten hat
-                this.energy = 0; // Setze die Energie auf 0
-                
-                this.playAnimation(this.IMAGES_DEAD); // Animation für tot abspielen
-            } else {
-                this.energy -= 40; // Reduziere die Energie um 40
-                this.playAnimation(this.IMAGES_HURT); // Animation für den Treffer abspielen
-            }
+        if (this.world) {
+            this.world.statusBarEndboss.setPercentage(this.energy); 
         }
-
-
+    }
+}
 
 
 
         isDead() {
-            return this.hitCount >= 3; // Überprüfen, ob er 3 Treffer erlitten hat
+            return this.hitCount >= 3; 
         }
 
 
