@@ -67,6 +67,12 @@ class MovableObject extends DrawableObject {
         return timePassed < 1;
     }
 
+    hitByBottle(){
+   
+        this.energy -= 40;
+    }
+
+
     isDead() {
       return  this.energy <= 0;
     }
@@ -126,6 +132,9 @@ hitByJump(){
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
+
+
+
 
 
 

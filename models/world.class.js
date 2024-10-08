@@ -43,30 +43,67 @@ class World {
 
         setInterval(() => {
             this.checkCollisionFromAbove();
+          
         }, 50);
 
 
         setInterval(() => {
+         
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCoinCollisions();
-
             this.checkBottleCollisions();
-
+          this.checkBottleEnemyCollisions();
         }, 200);
     }
+
+
+
+
+
+
+
+
+    checkBottleEnemyCollisions() {
+        this.throwableObjects.forEach((bottle, bottleIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (bottle.isColliding(enemy)) {
+                    bottle.splash(); // Animation der Flasche auf "Splash" wechseln
+                    enemy.hitByBottle(); 
+    
+                    if (enemy.isDead()) {
+                        setTimeout(() => {
+                            this.level.enemies.splice(enemyIndex, 1); // Gegner entfernen
+                        }, 1500);
+                    }
+    
+                    // Entferne die Flasche nach der Kollision
+                    setTimeout(() => {
+                        this.throwableObjects.splice(bottleIndex, 1); // Flasche entfernen
+                    }, 100);
+                }
+            });
+        });
+    }
+    
+
+
+
 
     checkThrowObjects() {
         if (this.keyboard.D && this.character.bottles > 0) {
             this.throwing_sound.play();
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this);
             this.throwableObjects.push(bottle);
-           this.character.bottles -= 20; 
-           this.bottleBar.setPercentage(this.character.bottles)
-             
+            this.character.bottles -= 20; 
+            this.bottleBar.setPercentage(this.character.bottles);
         }
-
     }
+    
+
+
+
+
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -84,17 +121,7 @@ class World {
 
 
 
-/*
-    checkCollisionFromAbove() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown) {
-               
-            
-                this.character.jump();
-            }
-        });
-    }
-*/
+
     
 checkCollisionFromAbove() {
     this.level.enemies.forEach((enemy, index) => {
