@@ -13,7 +13,8 @@ class World {
     coinBar = new CoinBar();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
-    throwing_sound = new Audio('audio/throwing.mp3')
+    throwing_sound = new Audio('audio/throwing.mp3');
+    splash_sound = new Audio('audio/glass_breaking1.mp3')
 
 
 
@@ -58,39 +59,15 @@ class World {
 
 
 
-/*
-
-    checkBottleEnemyCollisions() {
-        this.throwableObjects.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy, enemyIndex) => {
-                if (bottle.isColliding(enemy) && !enemy.isDead()) {
-                    bottle.splash();
-                    enemy.hitByBottle();
-                   
-                      this.statusBarEndboss.setPercentage(enemy.energy);
-                    if (enemy.isDead()) {
-                        setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1);
-                            console.log("success")
-                        }, 500);
-                    }
-
-                    setTimeout(() => {
-                        this.throwableObjects.splice(bottleIndex, 1);
-                    }, 100);
-                    
-                }
-            });
-        });
-    }
-*/
 
 checkBottleEnemyCollisions() {
+    this.splash_sound.pause();
     this.throwableObjects.forEach((bottle, bottleIndex) => {
         this.level.enemies.forEach((enemy, enemyIndex) => {
             if (bottle.isColliding(enemy)) {
                 bottle.splash();
                 enemy.hitByBottle();
+                this.splash_sound.play();
                
                   this.statusBarEndboss.setPercentage(enemy.energy);
                   
