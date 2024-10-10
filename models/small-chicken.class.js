@@ -5,7 +5,8 @@ class SmallChicken extends MovableObject{
     y = 395;
     height = 35;
     width = 40;
-    energy = 15
+    energy = 15;
+    chirping_sound = new Audio('audio/chick_chirping.mp3')
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -34,13 +35,18 @@ class SmallChicken extends MovableObject{
 
 
     animate() {
+       
         setInterval(() => {
+            this.chirping_sound.pause()
             if (!this.isDead()) {
+
                 this.moveLeft();
+                this.chirping_sound.play();
             }
         }, 1000 / 60);
 
         setInterval(() => {
+
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else {
