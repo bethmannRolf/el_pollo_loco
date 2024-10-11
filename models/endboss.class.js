@@ -116,7 +116,8 @@ hitByBottle() {
         this.energy = 0; 
         this.playAnimation(this.IMAGES_DEAD); 
         setTimeout(() => {
-            stopGame(); // Stoppe das Spiel nach der Animation
+            win = true;
+            stopGame(); 
         }, 1200); 
        
     } else {

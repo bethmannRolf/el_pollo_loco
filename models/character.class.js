@@ -142,6 +142,10 @@ class Character extends MovableObject {
    
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD)
+                setTimeout(() => {
+                    win = false;
+                    stopGame(); 
+                }, 1200); 
 
             }
 

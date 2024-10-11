@@ -2,6 +2,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+win = false;
 
 
 function init() {
@@ -20,7 +21,7 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
     }
-    if (e.keyCode == 38 ) {
+    if (e.keyCode == 38) {
         keyboard.UP = true;
     }
     if (e.keyCode == 40) {
@@ -31,9 +32,9 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = true
-     
+
     }
- 
+
 })
 
 window.addEventListener("keyup", (e) => {
@@ -43,7 +44,7 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = false;
     }
-    if (e.keyCode == 38 ) {
+    if (e.keyCode == 38) {
         keyboard.UP = false;
     }
     if (e.keyCode == 40) {
@@ -60,8 +61,9 @@ window.addEventListener("keyup", (e) => {
 function stopGame() {
     // Stop all intervals
     clearAllIntervals();
-    drawOverlayWinImage();
+    drawOverlayOutroImage();
     document.getElementById('replay-button').classList.remove('d-none');
+
 }
 
 function clearAllIntervals() {
@@ -71,24 +73,30 @@ function clearAllIntervals() {
 }
 
 // Rufe die stopGame Funktion auf, wenn der Endboss tot ist
-if (world.level.enemies.every(enemy => enemy.isDead())) {
-    stopGame();
-}
+// if (world.level.enemies.every(enemy => enemy.isDead())) {
+//     stopGame();
+// }
 
-function drawOverlayWinImage() {
-    document.getElementById('overlay-canvas-win').classList.remove('d-none')
-    const overlayCanvas = document.getElementById('overlay-canvas-win');
+function drawOverlayOutroImage() {
+    document.getElementById('overlay-canvas-outro').classList.remove('d-none')
+    const overlayCanvas = document.getElementById('overlay-canvas-outro');
     const overlayContext = overlayCanvas.getContext('2d');
-    
+
     const image = new Image();
-    image.src = 'img/9_intro_outro_screens/win/win_2.png'; // Pfad zu deinem Bild
+    if (win == true) {
+        image.src = 'img/9_intro_outro_screens/win/win_2.png';
+    }
+    else {
+        image.src = 'img/9_intro_outro_screens/game_over/you lost.png';
+    }
+
     image.onload = () => {
         overlayContext.drawImage(image, 0, 0, overlayCanvas.width, overlayCanvas.height);
     };
 }
 
 function replayGame() {
-    location.reload(); 
+    location.reload();
     document.getElementById('replay-button').classList.add('d-none')
 }
 

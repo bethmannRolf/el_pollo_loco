@@ -45,7 +45,7 @@ canvas#canvas {
     position: relative;
 }
 
-#overlay-canvas-win {
+#overlay-canvas-outro {
     position: absolute;
     top: 0;
     left: 0;
@@ -62,7 +62,10 @@ canvas#canvas {
 
 #replay-button {
     position: absolute;
-    top: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3; 
@@ -87,6 +90,14 @@ canvas#canvas {
     transform: translate(-50%, -50%) scale(1.10); 
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); 
 }
+
+
+
+
+
+
+
+
 
 
 
