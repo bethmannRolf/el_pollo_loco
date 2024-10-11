@@ -76,37 +76,19 @@ throw() {
     }, 25);
 }
 
-/*
+
+
 splash() {
     this.speedY = 0; 
-    let splashInterval = setInterval(() => {
-        this.playAnimation(this.IMAGES_SPLASH);
-
-     
-        if (this.currentImage >= this.IMAGES_SPLASH.length) {
-            clearInterval(splashInterval);
-        }
-    }, 200);
-}
-*/
-
-splash() {
-    this.speedY = 0; // Setze die Geschwindigkeit auf 0, um Bewegungen zu stoppen
-    this.currentImage = 0; // Setze das Bild auf das erste Bild der Splash-Animation
+    this.currentImage = 0; 
     let splashInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_SPLASH);
         
         if (this.currentImage >= this.IMAGES_SPLASH.length) {
-            clearInterval(splashInterval); // Stoppe die Animation, wenn sie beendet ist
+            clearInterval(splashInterval); 
         }
     }, 200);
 }
-
-
-
-
-
-
 
 
 }

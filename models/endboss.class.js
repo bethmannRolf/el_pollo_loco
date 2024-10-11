@@ -85,14 +85,6 @@ class Endboss extends MovableObject {
         return Math.abs(character.x - this.x); 
     }
 
-    animate() {
-        setInterval(() => {
-            if (this.world && this.world.character) { 
-                const distance = this.calculateDistance(this.world.character);
-                this.updateAnimation(distance);
-            }
-        }, 100);
-    }
     
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
@@ -109,8 +101,6 @@ class Endboss extends MovableObject {
         }
     }
     
-    
-
 
     getDistanceToCharacter(character) {
         return Math.abs(this.x - character.x); 
@@ -129,14 +119,11 @@ hitByBottle() {
         this.energy = 100 - 40 * this.hitCount; 
         this.playAnimation(this.IMAGES_HURT);  
         
-   
         if (this.world) {
             this.world.statusBarEndboss.setPercentage(this.energy); 
         }
     }
 }
-
-
 
         isDead() {
             return this.hitCount >= 3; 
