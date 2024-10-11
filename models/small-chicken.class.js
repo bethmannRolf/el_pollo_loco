@@ -41,7 +41,7 @@ class SmallChicken extends MovableObject{
             if (!this.isDead()) {
 
                 this.moveLeft();
-                this.chirping_sound.play();
+                // this.chirping_sound.play();
             }
         }, 1000 / 60);
 

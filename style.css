@@ -37,4 +37,85 @@ h1{
 canvas{
     background-color: black;
     border-radius: 8px;
+    z-index: 1;
 }
+
+canvas#canvas {
+    z-index: 1; 
+    position: relative;
+}
+
+#overlay-canvas-win {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; 
+    opacity: 0.8;
+    width: 720px; 
+    height: 480px;
+}
+.d-none {
+    display: none !important;
+}
+
+
+
+#replay-button {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; 
+    font-size: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
+    border-radius: 16px;
+    border: unset;
+    font-family: 'marlboro', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: black;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#replay-button:hover {
+    background: linear-gradient(to top right, rgb(139, 101, 52), rgb(255, 114, 49));
+    transform: translate(-50%, -50%) scale(1.10); 
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); 
+}
+
+
+
+
+
+
+
+/* #replay-button {
+    
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; 
+    font-size: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    gap:  4px;
+    background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
+    border-radius: 16px;
+    border: unset;
+    font-family: 'marlboro', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+#replay-button:hover{
+   
+} */

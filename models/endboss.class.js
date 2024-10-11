@@ -115,6 +115,10 @@ hitByBottle() {
     if (this.hitCount >= 3) {
         this.energy = 0; 
         this.playAnimation(this.IMAGES_DEAD); 
+        setTimeout(() => {
+            stopGame(); // Stoppe das Spiel nach der Animation
+        }, 1200); 
+       
     } else {
         this.energy = 100 - 40 * this.hitCount; 
         this.playAnimation(this.IMAGES_HURT);  

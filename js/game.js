@@ -56,3 +56,39 @@ window.addEventListener("keyup", (e) => {
         keyboard.D = false;
     }
 })
+
+function stopGame() {
+    // Stop all intervals
+    clearAllIntervals();
+    drawOverlayWinImage();
+    document.getElementById('replay-button').classList.remove('d-none');
+}
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) {
+        window.clearInterval(i);
+    }
+}
+
+// Rufe die stopGame Funktion auf, wenn der Endboss tot ist
+if (world.level.enemies.every(enemy => enemy.isDead())) {
+    stopGame();
+}
+
+function drawOverlayWinImage() {
+    document.getElementById('overlay-canvas-win').classList.remove('d-none')
+    const overlayCanvas = document.getElementById('overlay-canvas-win');
+    const overlayContext = overlayCanvas.getContext('2d');
+    
+    const image = new Image();
+    image.src = 'img/9_intro_outro_screens/win/win_2.png'; // Pfad zu deinem Bild
+    image.onload = () => {
+        overlayContext.drawImage(image, 0, 0, overlayCanvas.width, overlayCanvas.height);
+    };
+}
+
+function replayGame() {
+    location.reload(); 
+    document.getElementById('replay-button').classList.add('d-none')
+}
+
