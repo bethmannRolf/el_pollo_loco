@@ -11,6 +11,7 @@ function init() {
     world = new World(canvas, keyboard);
     document.getElementById('start-button').classList.add('d-none');
     document.getElementById('overlay-canvas-start').classList.add('d-none')
+    document.getElementById('options-container').classList.remove('d-none')
 
 
 
@@ -117,7 +118,7 @@ function initStartScreen() {
 
 function touchEventsStart(){
 
-    
+
 }
 
 

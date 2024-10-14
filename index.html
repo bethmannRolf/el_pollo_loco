@@ -39,32 +39,37 @@
 
 <body onload="initStartScreen()">
   <h1>El Pollo Loco</h1>
+
   <div id="game-container" style="position: relative; display: inline-block;">
-
-
     <canvas id="overlay-canvas-start" class="d-none"></canvas>
     <button id="start-button" onclick="init()" class="d-none">Start Game</button>
-
-
     <canvas id="canvas" width="720" height="480"></canvas>
-
     <canvas id="overlay-canvas-outro" class="d-none" width="720" height="480"></canvas>
     <button id="replay-button" class="d-none" onclick="replayGame()"><span>Replay</span><img class="replay-image-style"
         src="img/button_image/replay.svg"></button>
 
     <div id="options-container" class="d-none ">
-      <button id="button-sound" class="options-button-style general-ingame-button-style"><img src="#"></button>
-      <button id="button-help" class="options-button-style general-ingame-button-style"><img src="#"></button>
-      <button id="button-fullscreen" class="options-button-style general-ingame-button-style"><img src="#"></button>
+      <div id="optionflex-container">
+        <button id="button-sound" class="options-button-style general-ingame-button-style"><img
+            src="img/button_image/soundOn.svg"></button>
+        <button id="button-help" class="options-button-style general-ingame-button-style"><img
+            src="img/button_image/help.svg"></button>
+        <button id="button-fullscreen" class="options-button-style general-ingame-button-style"><img
+            src="img/button_image/enterFullscreen.svg"></button>
+      </div>
     </div>
     <div id="container-control" class="d-none">
       <div id="left-right-container">
-        <button id="button-left" class="control-button-style general-ingame-button-style"><img src="#"></button>
-        <button id="button-right" class="control-button-style general-ingame-button-style"><img src="#"></button>
+        <button id="button-left" class="control-button-style general-ingame-button-style"><img
+            src="img/button_image/arrowLeft.svg"></button>
+        <button id="button-right" class="control-button-style general-ingame-button-style"><img
+            src="img/button_image/arrowRight.svg"></button>
       </div>
       <div id="jump-throw-container">
-        <button id="button-throw" class="control-button-style general-ingame-button-style"><img src="#"></button>
-        <button id="button-jump" class="control-button-style general-ingame-button-style"><img src="#"></button>
+        <button id="button-throw" class="control-button-style general-ingame-button-style"><img
+            src="img/button_image/bomb.svg"></button>
+        <button id="button-jump" class="control-button-style general-ingame-button-style"><img
+            src="img/button_image/arrowUp.svg"></button>
       </div>
     </div>
 
