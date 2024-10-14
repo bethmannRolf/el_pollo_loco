@@ -6,8 +6,11 @@ win = false;
 
 
 function init() {
+    initLevel()
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    document.getElementById('start-button').classList.add('d-none');
+    document.getElementById('overlay-canvas-start').classList.add('d-none')
 
 
 
@@ -59,11 +62,9 @@ window.addEventListener("keyup", (e) => {
 })
 
 function stopGame() {
-    // Stop all intervals
     clearAllIntervals();
     drawOverlayOutroImage();
     document.getElementById('replay-button').classList.remove('d-none');
-
 }
 
 function clearAllIntervals() {
@@ -72,24 +73,18 @@ function clearAllIntervals() {
     }
 }
 
-// Rufe die stopGame Funktion auf, wenn der Endboss tot ist
-// if (world.level.enemies.every(enemy => enemy.isDead())) {
-//     stopGame();
-// }
-
 function drawOverlayOutroImage() {
     document.getElementById('overlay-canvas-outro').classList.remove('d-none')
-    const overlayCanvas = document.getElementById('overlay-canvas-outro');
-    const overlayContext = overlayCanvas.getContext('2d');
+    let overlayCanvas = document.getElementById('overlay-canvas-outro');
+    let overlayContext = overlayCanvas.getContext('2d');
 
-    const image = new Image();
+    let image = new Image();
     if (win == true) {
         image.src = 'img/9_intro_outro_screens/win/win_2.png';
     }
     else {
         image.src = 'img/9_intro_outro_screens/game_over/you lost.png';
     }
-
     image.onload = () => {
         overlayContext.drawImage(image, 0, 0, overlayCanvas.width, overlayCanvas.height);
     };
@@ -99,4 +94,45 @@ function replayGame() {
     location.reload();
     document.getElementById('replay-button').classList.add('d-none')
 }
+
+function initStartScreen() {
+    let startCanvas = document.getElementById('overlay-canvas-start');
+    let startContext = startCanvas.getContext('2d');
+    document.getElementById('start-button').classList.remove('d-none')
+
+
+    startCanvas.classList.remove('d-none');
+  
+
+
+    let image = new Image();
+    image.src = 'img/9_intro_outro_screens/start/startscreen_1.png';
+    image.onload = () => {
+        startContext.drawImage(image, 0, 0, startCanvas.width, startCanvas.height);
+    };
+
+
+
+}
+
+function touchEventsStart(){
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

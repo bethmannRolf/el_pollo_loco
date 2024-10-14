@@ -22,7 +22,7 @@
   <script src="models/status-bar.class.js"></script>
   <script src="models/bottle-bar.class.js"></script>
   <script src="models/coin-bar.class.js"></script>
- 
+
   <script src="models/world.class.js"></script>
   <script src="models/background-object.class.js"></script>
   <script src="models/keyboard.class.js"></script>
@@ -31,23 +31,44 @@
   <script src="models/collectable-coin-object.class.js"></script>
   <script src="models/collectable-bottle-object.class.js"></script>
   <script src="models/endboss.class.js"></script>
- <script src="models/status-bar-endboss.class.js"></script>
+  <script src="models/status-bar-endboss.class.js"></script>
   <script src="levels/level1.js"></script>
-  
+
   <script src="js/game.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="initStartScreen()">
   <h1>El Pollo Loco</h1>
   <div id="game-container" style="position: relative; display: inline-block;">
-   
-    <canvas id="overlay-canvas-outro" class="d-none" width="720" height="480"></canvas>
-    
-   
+
+
+    <canvas id="overlay-canvas-start" class="d-none"></canvas>
+    <button id="start-button" onclick="init()" class="d-none">Start Game</button>
+
+
     <canvas id="canvas" width="720" height="480"></canvas>
-    
- 
-    <button id="replay-button" class="d-none" onclick="replayGame()"><span>Replay</span><img src="img/button_image/restart.svg"></button>
+
+    <canvas id="overlay-canvas-outro" class="d-none" width="720" height="480"></canvas>
+    <button id="replay-button" class="d-none" onclick="replayGame()"><span>Replay</span><img class="replay-image-style"
+        src="img/button_image/replay.svg"></button>
+
+    <div id="options-container" class="d-none ">
+      <button id="button-sound" class="options-button-style general-ingame-button-style"><img src="#"></button>
+      <button id="button-help" class="options-button-style general-ingame-button-style"><img src="#"></button>
+      <button id="button-fullscreen" class="options-button-style general-ingame-button-style"><img src="#"></button>
+    </div>
+    <div id="container-control" class="d-none">
+      <div id="left-right-container">
+        <button id="button-left" class="control-button-style general-ingame-button-style"><img src="#"></button>
+        <button id="button-right" class="control-button-style general-ingame-button-style"><img src="#"></button>
+      </div>
+      <div id="jump-throw-container">
+        <button id="button-throw" class="control-button-style general-ingame-button-style"><img src="#"></button>
+        <button id="button-jump" class="control-button-style general-ingame-button-style"><img src="#"></button>
+      </div>
+    </div>
+
+
   </div>
 
 

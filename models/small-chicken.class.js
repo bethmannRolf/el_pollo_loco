@@ -50,7 +50,7 @@ class SmallChicken extends MovableObject{
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else {
-                this.playAnimation(this.IMAGES_DEAD);  // Spiele Animation für totes Huhn
+                this.playAnimation(this.IMAGES_DEAD); 
             }
         }, 100);
     }
