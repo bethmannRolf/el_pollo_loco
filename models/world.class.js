@@ -1,6 +1,4 @@
 class World {
-
-
     character = new Character();
     level = level1;
     canvas;
@@ -25,7 +23,10 @@ class World {
         this.draw()
         this.setWorld();
         this.run()
+       
     };
+
+
 
 
 
@@ -154,8 +155,6 @@ checkBottleEnemyCollisions() {
 
 
 
-
-
     checkCoinCollisions() {
         this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
             if (this.character.isColliding(collectableCoin)) {
@@ -243,6 +242,11 @@ checkBottleEnemyCollisions() {
         this.ctx.restore();
     }
 
+
+
+
+
+    
 
 
 }
