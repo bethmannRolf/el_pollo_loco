@@ -6,7 +6,7 @@ let background_music = new Audio('audio/background_music1.mp3');
 let isMuted = false;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
-let inGame = false;
+let inGame = true;
 
 function init() {
     initLevel()
@@ -223,3 +223,24 @@ function toggleSound() {
 
 
 */
+
+
+function toggleFullscreen() {
+    let canvas = document.getElementById('canvas');
+    if (!document.fullscreenElement) {
+        if (canvas.requestFullscreen) {
+            canvas.requestFullscreen();
+        } else if (canvas.mozRequestFullScreen) { // Firefox
+            canvas.mozRequestFullScreen();
+        } else if (canvas.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            canvas.webkitRequestFullscreen();
+        } else if (canvas.msRequestFullscreen) { // IE/Edge
+            canvas.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+

@@ -1,29 +1,25 @@
 @font-face {
     font-family: 'marlboro';
     src: url('fonts/marlboro.ttf') format('truetype');
-    /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
 @font-face {
     font-family: 'montague';
     src: url('fonts/montague.ttf') format('truetype');
-    /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
-
-
+.d-none{
+    display: none!important
+}
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     background-image: url('img/website_background/desert4.png');
-
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'marlboro', Arial, Helvetica, sans-serif;
-
 }
 
 h1 {
@@ -33,8 +29,17 @@ h1 {
     user-select: none;
 }
 
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+}
 
 canvas {
+    width: 100%;
+    height: auto;
+    display: block;
     background-color: black;
     border-radius: 8px;
     z-index: 1;
@@ -46,37 +51,33 @@ canvas#canvas {
 }
 
 #overlay-canvas-outro {
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
     opacity: 0.8;
-    width: 720px;
-    height: 480px;
 }
 
-.d-none {
-    display: none !important;
-}
-
-
-
-#replay-button {
+#overlay-canvas-start {
+    display: block;
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 85%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+#start-button, #replay-button {
+    position: absolute;
     z-index: 3;
     font-size: 40px;
     padding: 10px 20px;
     cursor: pointer;
     user-select: none;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
     background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
     border-radius: 16px;
     border: unset;
@@ -86,83 +87,32 @@ canvas#canvas {
     transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-#replay-button:hover {
+#start-button:hover, #replay-button:hover {
     background: linear-gradient(to top right, rgb(139, 101, 52), rgb(255, 114, 49));
     transform: translate(-50%, -50%) scale(1.10);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    user-select: none;
-}
-
-
-#overlay-canvas-start {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    /* opacity: 0.8; */
-    width: 720px;
-    height: 480px;
-    user-select: none;
 }
 
 #start-button {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 3;
-    font-size: 40px;
-    padding: 10px 20px;
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
-    border-radius: 16px;
-    border: unset;
-    font-family: 'marlboro', Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color: black;
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-#start-button:hover {
-    background: linear-gradient(to top right, rgb(139, 101, 52), rgb(255, 114, 49));
-    transform: translate(-50%, -50%) scale(1.10);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    user-select: none;
-
-
+#replay-button {
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
-
-
-
 
 #options-container {
     position: absolute;
     top: 10px;
     right: 20px;
     z-index: 3;
-    user-select: none;
-  
-     display: flex; 
-     justify-content: flex-end;
-    align-items: flex-start; 
-    gap: 10px;
-    user-select: none;
-}
-
-#optionflex-container {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
-    gap: 30px;
-    user-select: none;
+    gap: 10px;
 }
 
 .options-button-style {
@@ -172,50 +122,42 @@ canvas#canvas {
     padding: 10px;
     cursor: pointer;
     user-select: none;
-    user-select: none;
 }
 
 .options-button-style img {
     width: 28px;
     height: 28px;
-    user-select: none;
 }
 
 .general-ingame-button-style {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    user-select: none;
 }
 
 .general-ingame-button-style:hover {
     background-color: rgba(255, 255, 255, 1);
-    user-select: none;
 }
-
 
 .control-container-style {
     position: absolute;
-    bottom: 10px; 
-    width: 90%; 
+    bottom: 10px;
+    width: 90%;
     display: flex;
-    justify-content: space-between; 
-    padding: 0 15px; 
+    justify-content: space-between;
+    padding: 0 15px;
     z-index: 3;
-    user-select: none;
+    left: 50%;
+    transform: translateX(-50%);
 }
-
 
 .control-left-right-style {
     display: flex;
-    gap: 60px; 
-    user-select: none;
+    gap: 60px;
 }
-
 
 .control-jump-throw-style {
     display: flex;
-    gap: 30px; 
-    user-select: none;
+    gap: 30px;
 }
 
 .control-button-style {
@@ -228,24 +170,20 @@ canvas#canvas {
     opacity: 0.7;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    user-select: none;
 }
 
 .control-button-style img {
     width: 30px;
     height: 30px;
-    user-select: none;
 }
 
 .control-button-style:hover {
     background-color: rgba(255, 255, 255, 1);
-    user-select: none;
 }
 
-#sound-image{
+#sound-image {
     user-select: none;
 }
-
 
 #rotate-message {
     display: none;
@@ -263,5 +201,22 @@ canvas#canvas {
     z-index: 9999;
 }
 
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
 
+    #overlay-canvas-outro, #overlay-canvas-start {
+        width: 100%;
+    }
+}
 
+@media only screen and (max-height: 480px) {
+    canvas {
+        width: 100vh;
+    }
+
+    #overlay-canvas-outro, #overlay-canvas-start {
+        width: 100vh;
+    }
+}
