@@ -38,42 +38,35 @@ class SmallChicken extends MovableObject {
 
             if (!this.isDead()) {
                 this.moveLeft();
-
+                
+            }
+            else {
+              
             }
         }, 1000 / 60);
 
+
+        setInterval(() => {
+            if (!this.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
+            } else {
+                 this.playAnimation(this.IMAGES_DEAD);
+            }
+        }, 100);
+
+
+
         setInterval(() => {
 
-            if (this.isDead()) {
-               
-                this.playAnimation(this.IMAGES_DEAD);
-                 this.chirping_sound.pause(); 
-       
+          
+            if (this.isDead() || isMuted == true || inGame == false) {
+                this.chirping_sound.pause();
 
             } else {
-                this.playAnimation(this.IMAGES_WALKING);
-                if (!this.isDead() && !isMuted) {
-                          this.chirping_sound.play(); 
-                    
-                }else{
-                    if (isMuted == true) {
-                        this.chirping_sound.pause();
-                    }
-                }
-          
+                this.chirping_sound.play();
 
             }
         }, 100);
     }
-
-
-
-
-
-
-
-
-
-
 
 }

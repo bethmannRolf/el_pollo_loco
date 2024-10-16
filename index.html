@@ -42,7 +42,7 @@
 <body onload="initStartScreen()">
   <h1>El Pollo Loco</h1>
 
-  <div id="game-container" style="position: relative; display: inline-block;">
+  <div id="game-container" style="position: relative; display: block;">
     <canvas id="overlay-canvas-start" class="d-none"></canvas>
     <button id="start-button" onclick="init()" class="d-none">Start Game</button>
     <canvas id="canvas" width="720" height="480"></canvas>
@@ -74,12 +74,11 @@
             src="img/button_image/arrowUp.svg"></button>
       </div>
     </div>
-
-
-
   </div>
 
-
+ <!-- <div id="rotate-message">
+    <p>Please turn your device</p>
+  </div>  -->
 
 
 </body>

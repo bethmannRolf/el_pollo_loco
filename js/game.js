@@ -1,4 +1,3 @@
-
 let canvas;
 let world;
 let keyboard = new Keyboard();
@@ -7,35 +6,17 @@ let background_music = new Audio('audio/background_music1.mp3');
 let isMuted = false;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
-
-/*
-
-let isMuted = false;
-
-function toggleSound(){
-
-if (isMuted == false) { 
-document.getElementById('sound-image').src ='img/button_image/soundOff.svg';
-isMuted = true;
-}
-else{
-    document.getElementById('sound-image').src ='img/button_image/soundOn.svg';
-    isMuted = false;
-}
-
-
-}
-
-*/
+let inGame = false;
 
 function init() {
     initLevel()
+    inGame = true
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('start-button').classList.add('d-none');
     document.getElementById('overlay-canvas-start').classList.add('d-none')
     document.getElementById('container-control').classList.remove('d-none');
-
+    checkBackgroundMusic()
 }
 
 window.addEventListener("keydown", (e) => {
@@ -56,9 +37,7 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = true
-
     }
-
 })
 
 window.addEventListener("keyup", (e) => {
@@ -82,7 +61,6 @@ window.addEventListener("keyup", (e) => {
     }
 })
 
-
 function touchOn() {
     document.getElementById('button-left').addEventListener('touchstart', (e) => {
         keyboard.LEFT = true;
@@ -103,10 +81,7 @@ function touchOn() {
 
 }
 
-
-
 function touchOut() {
-
     document.getElementById('button-left').addEventListener('touchend', (e) => {
         keyboard.LEFT = false;
         e.preventDefault();
@@ -123,25 +98,25 @@ function touchOut() {
         keyboard.D = false;
         e.preventDefault();
     });
-
-
 }
 
-
+// Stopped work here
 function stopGame() {
+    inGame = false;
+    background_music.pause();
+
     clearAllIntervals();
-    if (win == true && isMuted == false ) {
+    if (win == true && isMuted == false) {
         winning_sound.play();
     }
-    else{
-        if(win == false && isMuted == false){
+    else {
+        if (win == false && isMuted == false) {
             losing_sound.play();
         }
     }
     drawOverlayOutroImage();
     document.getElementById('replay-button').classList.remove('d-none');
     document.getElementById('container-control').classList.add('d-none');
-
 }
 
 function clearAllIntervals() {
@@ -170,13 +145,12 @@ function drawOverlayOutroImage() {
 function replayGame() {
     // initStartScreen(); 
     // world = null
-   
+
     location.reload();
     document.getElementById('replay-button').classList.add('d-none')
 }
 
 function initStartScreen() {
-
     let startCanvas = document.getElementById('overlay-canvas-start');
     let startContext = startCanvas.getContext('2d');
     document.getElementById('start-button').classList.remove('d-none')
@@ -186,56 +160,66 @@ function initStartScreen() {
     image.onload = () => {
         startContext.drawImage(image, 0, 0, startCanvas.width, startCanvas.height);
     };
-    checkBackgroundMusic()
-
-
-
 }
 
-function checkBackgroundMusic(){
-    if (isMuted == false ) {
+function checkBackgroundMusic() {
+    if (isMuted == false && inGame) {
         background_music.play();
-
     }
-    else{
-        if(isMuted == true){
-        background_music.pause();
-    }
+    else {
+        if (isMuted == true) {
+            background_music.pause();
+        }
     }
 }
 
-function toggleSound(){
+function toggleSound() {
     if (isMuted == false) {
         document.getElementById('sound-image').src = 'img/button_image/soundOff.svg';
-    isMuted = true
+        isMuted = true
     }
-    else{
+    else {
         document.getElementById('sound-image').src = 'img/button_image/soundOn.svg';
         isMuted = false;
     }
-
-    checkBackgroundMusic() 
-    }
-
+    checkBackgroundMusic()
+}
 
 
 
+//
+/*
+
+        // Funktion, um zu überprüfen, ob es sich um ein mobiles Gerät handelt
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+        }
+
+        // Überprüft die Ausrichtung und zeigt die Nachricht nur auf mobilen Geräten im Hochformat an
+        function checkOrientation() {
+            if (isMobileDevice()) {
+                if (window.innerWidth < window.innerHeight) {
+                    // Hochformat auf mobilen Geräten
+                    document.getElementById('rotate-message').style.display = 'flex';
+                } else {
+                    // Querformat auf mobilen Geräten
+                    document.getElementById('rotate-message').style.display = 'none';
+                }
+            } else {
+                // Desktop-Geräte zeigen die Nachricht nicht an
+                document.getElementById('rotate-message').style.display = 'none';
+            }
+        }
+
+        // Überprüfe die Ausrichtung beim Laden der Seite
+        window.addEventListener('load', checkOrientation);
+
+        // Überprüfe die Ausrichtung bei jeder Größenänderung des Fensters
+        window.addEventListener('resize', checkOrientation);
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/

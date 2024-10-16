@@ -5,7 +5,7 @@ class Endboss extends MovableObject {
     height = 300;
     width = 300;
     energy = 100;
-  
+
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -60,79 +60,80 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 3800;
-        this.hitCount = 0; 
+        this.hitCount = 0;
         this.energy = 100;
         this.animate()
-
-
     }
 
-
-    
-
+    endboss_cackling = new Audio('audio/cackle3.mp3')
 
 
     animate() {
         setInterval(() => {
-            if (this.world && this.world.character) { 
+            if (this.world && this.world.character) {
                 const distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
+                if (!this.isDead() && !isMuted) {
+                    this.endboss_cackling.play();
+                    
+                }
+                else{
+                    this.endboss_cackling.pause();
+                }
             }
-        }, 100); 
+        }, 100);
     }
 
     calculateDistance(character) {
-        return Math.abs(character.x - this.x); 
+        return Math.abs(character.x - this.x);
     }
 
-    
+
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
-           
-            return; 
+            return;
         }
-    
         if (distanceToCharacter < 200) {
-            this.playAnimation(this.IMAGES_ATTACK); 
+            this.playAnimation(this.IMAGES_ATTACK);
         } else if (distanceToCharacter < 400) {
-            this.playAnimation(this.IMAGES_ALERT); 
+            this.playAnimation(this.IMAGES_ALERT);
         } else {
-            this.playAnimation(this.IMAGES_WALKING); 
+            this.playAnimation(this.IMAGES_WALKING);
         }
     }
-    
+
 
     getDistanceToCharacter(character) {
-        return Math.abs(this.x - character.x); 
+        return Math.abs(this.x - character.x);
     }
 
 
 
 
 
-hitByBottle() {
-    this.hitCount++;
-    if (this.hitCount >= 3) {
-        this.energy = 0; 
-        this.playAnimation(this.IMAGES_DEAD); 
-        setTimeout(() => {
-            win = true;
-            stopGame(); 
-        }, 1200); 
-       
-    } else {
-        this.energy = 100 - 40 * this.hitCount; 
-        this.playAnimation(this.IMAGES_HURT);  
-        
-        if (this.world) {
-            this.world.statusBarEndboss.setPercentage(this.energy); 
+    hitByBottle() {
+        this.hitCount++;
+        if (this.hitCount >= 3) {
+            this.energy = 0;
+            this.playAnimation(this.IMAGES_DEAD);
+            setTimeout(() => {
+                win = true;
+                stopGame();
+            }, 1500);
+
+        } else {
+            this.energy = 100 - 40 * this.hitCount;
+            this.playAnimation(this.IMAGES_HURT);
+
+            if (this.world) {
+                this.world.statusBarEndboss.setPercentage(this.energy);
+            }
         }
     }
-}
 
-        isDead() {
-            return this.hitCount >= 3; 
-        }
+    isDead() {
+        return this.hitCount >= 3;
+    }
 
 
 }

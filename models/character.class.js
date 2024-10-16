@@ -4,6 +4,8 @@ class Character extends MovableObject {
     y = 180;
     speed = 5;
     lastPressTime = null;
+    snoring = false;
+   
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -41,7 +43,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png'
     ];
-
 
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -92,7 +93,8 @@ class Character extends MovableObject {
     }
 
     getTimeSinceLastPress() {
-        if (this.lastPress === null) {
+        if (this.lastPressTime === null) {
+            console.log("Ein Log Stement")
             return null;
         }
         let currentTime = new Date().getTime();
@@ -112,37 +114,43 @@ class Character extends MovableObject {
 
     walking_sound = new Audio('audio/walking_1.mp3');
     jump_sound = new Audio('audio/jump.mp3');
+    snore_sound = new Audio('audio/snoring1.mp3');
 
     animate() {
         setInterval(() => {
-            // this.walking_sound.pause();
-
-        
+            this.walking_sound.pause();
+          
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                if (!this.isAboveGround()) {
+                if (!this.isAboveGround() && isMuted == false ) {
                     this.walking_sound.play();
                 }
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                if (!this.isAboveGround()) {
+                if (!this.isAboveGround() && isMuted == false) {
                     this.walking_sound.play();
                 }
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-                this.jump_sound.play();
+                if (isMuted == false) {
+                  this.jump_sound.play();  
+                }
+                
             }
             this.world.camera_x = -this.x + 100;
 
         }, 1000 / 60);
 
         setInterval(() => {
+            this.snoring = false;
+            this.snore()
 
            let timeSinceLastPress = this.getTimeSinceLastPress();
+           
    
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD)
@@ -155,13 +163,18 @@ class Character extends MovableObject {
 
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
+                
             }
 
             else if (timeSinceLastPress >= 2000 && timeSinceLastPress <= 6999 && !this.isAboveGround() ) {
+                
                 this.playAnimation(this.IMAGES_IDLE)
             }
-            else if (timeSinceLastPress >= 7000 && !this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_IDLE_LONG)
+            else if (timeSinceLastPress >= 7000 && !this.isAboveGround() && inGame == true) {
+                this.playAnimation(this.IMAGES_IDLE_LONG);
+                this.snoring = true;
+                this.snore()
+              
             }
            
             else if (this.isAboveGround()) {
@@ -175,7 +188,15 @@ class Character extends MovableObject {
         }, 50)
     }
 
+snore(){
+    if (this.snoring == true && isMuted == false) {
+        this.snore_sound.play();
+    }
+else{
+    this.snore_sound.pause();
+}
 
+}
 
 
 }
