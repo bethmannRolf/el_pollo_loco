@@ -61,6 +61,50 @@ window.addEventListener("keyup", (e) => {
     }
 })
 
+
+
+window.addEventListener('load', () => {
+    // Funktionen für Touchstart
+    document.getElementById('button-left').addEventListener('touchstart', (e) => {
+        keyboard.LEFT = true;
+        e.preventDefault();
+    });
+    document.getElementById('button-right').addEventListener('touchstart', (e) => {
+        keyboard.RIGHT = true;
+        e.preventDefault();
+    });
+    document.getElementById('button-jump').addEventListener('touchstart', (e) => {
+        keyboard.UP = true;
+        e.preventDefault();
+    });
+    document.getElementById('button-throw').addEventListener('touchstart', (e) => {
+        keyboard.D = true;
+        e.preventDefault();
+    });
+
+    // Funktionen für Touchend
+    document.getElementById('button-left').addEventListener('touchend', (e) => {
+        keyboard.LEFT = false;
+        e.preventDefault();
+    });
+    document.getElementById('button-right').addEventListener('touchend', (e) => {
+        keyboard.RIGHT = false;
+        e.preventDefault();
+    });
+    document.getElementById('button-jump').addEventListener('touchend', (e) => {
+        keyboard.UP = false;
+        e.preventDefault();
+    });
+    document.getElementById('button-throw').addEventListener('touchend', (e) => {
+        keyboard.D = false;
+        e.preventDefault();
+    });
+});
+
+
+
+
+/*
 function touchOn() {
     document.getElementById('button-left').addEventListener('touchstart', (e) => {
         keyboard.LEFT = true;
@@ -100,7 +144,9 @@ function touchOut() {
     });
 }
 
-// Stopped work here
+
+*/
+
 function stopGame() {
     inGame = false;
     background_music.pause();
@@ -226,7 +272,8 @@ function toggleSound() {
 
 
 function toggleFullscreen() {
-    let canvas = document.getElementById('canvas');
+    let canvas = document.getElementById('game-container');
+    let fullscreenButton = document.getElementById('fullscreen-image');
     if (!document.fullscreenElement) {
         if (canvas.requestFullscreen) {
             canvas.requestFullscreen();
@@ -237,10 +284,26 @@ function toggleFullscreen() {
         } else if (canvas.msRequestFullscreen) { // IE/Edge
             canvas.msRequestFullscreen();
         }
+        fullscreenButton.src = 'img/button_image/exitFullscreen.svg'; 
     } else {
         if (document.exitFullscreen) {
-            document.exitFullscreen();
+            document.exitFullscreen();     
         }
+        
+        fullscreenButton.src = 'img/button_image/enterFullscreen.svg'; 
+        console.log('not-fullscreen')
     }
 }
+
+
+
+document.addEventListener("fullscreenchange", () => {
+    let fullscreenButton = document.getElementById('fullscreen-image');
+    if (document.fullscreenElement) {
+        fullscreenButton.src = 'img/button_image/exitFullscreen.svg';
+    } else {
+        fullscreenButton.src = 'img/button_image/enterFullscreen.svg';
+    }
+});
+
 

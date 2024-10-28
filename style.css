@@ -29,12 +29,18 @@ h1 {
     user-select: none;
 }
 
-#game-container {
+
+
+
+
+
+
+/* #game-container {
     position: relative;
     width: 100%;
     max-width: 720px;
     margin: 0 auto;
-}
+} */
 
 canvas {
     width: 100%;
@@ -70,6 +76,12 @@ canvas#canvas {
     height: 100%;
     z-index: 3;
 }
+
+canvas#canvas:fullscreen {
+    width: 100vw;
+    height: 100vh;
+}
+
 
 #start-button, #replay-button {
     position: absolute;
@@ -200,6 +212,37 @@ canvas#canvas {
     align-items: center;
     z-index: 9999;
 }
+
+
+#button-left, #button-right, #button-jump, #button-throw {
+    touch-action: none; 
+}
+
+
+canvas {
+    touch-action: none;
+}
+
+
+#game-container {
+    position: relative;
+    width: 720; /* Volle Breite */
+    height: 480; /* Volle Höhe des Viewports */
+    max-width: 720px; /* Beschränkt die Breite für nicht-Fullscreen */
+    max-height: 100vh; /* Höhe bleibt Viewport-füllend im Fullscreen */
+    margin: 0 auto;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
 
 @media only screen and (max-width: 720px) {
     canvas {
