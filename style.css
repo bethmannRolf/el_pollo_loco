@@ -226,10 +226,10 @@ canvas {
 
 #game-container {
     position: relative;
-    width: 720; /* Volle Breite */
-    height: 480; /* Volle Höhe des Viewports */
-    max-width: 720px; /* Beschränkt die Breite für nicht-Fullscreen */
-    max-height: 100vh; /* Höhe bleibt Viewport-füllend im Fullscreen */
+    width: 720; 
+    height: 480; 
+    max-width: 720px; 
+    max-height: 100vh; 
     margin: 0 auto;
 }
 
@@ -241,6 +241,76 @@ canvas {
 
 
 
+
+
+.game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+
+#helpOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 720; 
+    height: 480; 
+    background-color: rgba(218,92,29, 0.9); 
+    color: black;
+    z-index: 9999;
+    display: none; 
+    text-align: left;
+    padding: 20px;
+
+    border-radius: 10px;
+}
+
+.show-help #helpOverlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#control-list{
+    list-style-type: none;
+}
+
+#game-control-heading{
+font-size: 24px;
+font-weight: 700
+}
+
+#help-text-column{
+    display: flex;
+}
+
+#help-close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#help-close-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(196, 115, 78, 0.1); 
+}
+
+#help-close-button img {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease;
+}
+
+#help-close-button:hover img {
+    opacity: 0.8; 
+}
 
 
 

@@ -36,37 +36,49 @@
 <body onload="initStartScreen()">
     <h1>El Pollo Loco</h1>
     <div id="game-container">
-     
+
         <canvas id="overlay-canvas-start" width="720" height="480"></canvas>
-       
+
         <button id="start-button" onclick="init()" class="d-none">Start Game</button>
-       
+
         <canvas id="canvas" width="720" height="480"></canvas>
-     
+
         <canvas id="overlay-canvas-outro" class="d-none" width="720" height="480"></canvas>
-       
+        <div id="helpOverlay">
+            <div id="help-text-column">
+                <p id="game-control-heading">Game controls</p>
+                <ul id="control-list">
+                    <li><b>Arrow Right</b>: Move Right</li>
+                    <li><b>Arrow Left</b>: Move Left</li>
+                    <li><b>Arrow Up</b>: Jump</li>
+                    <li><b>D</b>: Throw Bottle</li>
+                </ul>
+            </div>
+            <button id="help-close-button" onclick="closeHelp()"><img src="img/button_image/close.svg"></button>
+        </div>
         <button id="replay-button" class="d-none" onclick="replayGame()"><span>Replay</span>
             <img class="replay-image-style" src="img/button_image/replay.svg">
         </button>
-      
+
         <div id="options-container">
             <div id="optionflex-container">
-             
-                <button onclick="toggleSound()" id="button-sound" class="options-button-style general-ingame-button-style">
+
+                <button onclick="toggleSound()" id="button-sound"
+                    class="options-button-style general-ingame-button-style">
                     <img src="img/button_image/soundOn.svg" id="sound-image">
                 </button>
-           
-                <button id="button-help" class="options-button-style general-ingame-button-style">
+
+                <button onclick="showHelp()" id="button-help" class="options-button-style general-ingame-button-style">
                     <img src="img/button_image/help.svg">
                 </button>
-           
-                <button id="button-fullscreen" onclick="toggleFullscreen()" class="options-button-style general-ingame-button-style">
+
+                <button id="button-fullscreen" onclick="toggleFullscreen()"
+                    class="options-button-style general-ingame-button-style">
                     <img src="img/button_image/enterFullscreen.svg" id="fullscreen-image">
                 </button>
-                
+
             </div>
         </div>
-      
         <div id="container-control" class="d-none control-container-style">
             <div id="left-right-container" class="control-left-right-style">
                 <button id="button-left" class="control-button-style general-ingame-button-style">

@@ -7,6 +7,7 @@ let isMuted = false;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
+// let helpOpen = false;
 
 function init() {
     initLevel()
@@ -64,7 +65,7 @@ window.addEventListener("keyup", (e) => {
 
 
 window.addEventListener('load', () => {
-    // Funktionen für Touchstart
+   
     document.getElementById('button-left').addEventListener('touchstart', (e) => {
         keyboard.LEFT = true;
         e.preventDefault();
@@ -82,7 +83,7 @@ window.addEventListener('load', () => {
         e.preventDefault();
     });
 
-    // Funktionen für Touchend
+   
     document.getElementById('button-left').addEventListener('touchend', (e) => {
         keyboard.LEFT = false;
         e.preventDefault();
@@ -101,56 +102,9 @@ window.addEventListener('load', () => {
     });
 });
 
-
-
-
-/*
-function touchOn() {
-    document.getElementById('button-left').addEventListener('touchstart', (e) => {
-        keyboard.LEFT = true;
-        e.preventDefault();
-    });
-    document.getElementById('button-right').addEventListener('touchstart', (e) => {
-        keyboard.RIGHT = true;
-        e.preventDefault();
-    });
-    document.getElementById('button-jump').addEventListener('touchstart', (e) => {
-        keyboard.SPACE = true;
-        e.preventDefault();
-    });
-    document.getElementById('button-throw').addEventListener('touchstart', (e) => {
-        keyboard.D = true;
-        e.preventDefault();
-    });
-
-}
-
-function touchOut() {
-    document.getElementById('button-left').addEventListener('touchend', (e) => {
-        keyboard.LEFT = false;
-        e.preventDefault();
-    });
-    document.getElementById('button-right').addEventListener('touchend', (e) => {
-        keyboard.RIGHT = false;
-        e.preventDefault();
-    });
-    document.getElementById('button-jump').addEventListener('touchend', (e) => {
-        keyboard.SPACE = false;
-        e.preventDefault();
-    });
-    document.getElementById('button-throw').addEventListener('touchend', (e) => {
-        keyboard.D = false;
-        e.preventDefault();
-    });
-}
-
-
-*/
-
 function stopGame() {
     inGame = false;
     background_music.pause();
-
     clearAllIntervals();
     if (win == true && isMuted == false) {
         winning_sound.play();
@@ -175,7 +129,6 @@ function drawOverlayOutroImage() {
     document.getElementById('overlay-canvas-outro').classList.remove('d-none')
     let overlayCanvas = document.getElementById('overlay-canvas-outro');
     let overlayContext = overlayCanvas.getContext('2d');
-
     let image = new Image();
     if (win == true) {
         image.src = 'img/9_intro_outro_screens/win/win_2.png';
@@ -231,44 +184,24 @@ function toggleSound() {
     checkBackgroundMusic()
 }
 
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+}
 
-
-//
-/*
-
-        // Funktion, um zu überprüfen, ob es sich um ein mobiles Gerät handelt
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+function checkOrientation() {
+    if (isMobileDevice()) {
+        if (window.innerWidth < window.innerHeight) {
+            document.getElementById('rotate-message').style.display = 'flex';
+        } else {
+            document.getElementById('rotate-message').style.display = 'none';
         }
+    } else {
+        document.getElementById('rotate-message').style.display = 'none';
+    }
+}
 
-        // Überprüft die Ausrichtung und zeigt die Nachricht nur auf mobilen Geräten im Hochformat an
-        function checkOrientation() {
-            if (isMobileDevice()) {
-                if (window.innerWidth < window.innerHeight) {
-                    // Hochformat auf mobilen Geräten
-                    document.getElementById('rotate-message').style.display = 'flex';
-                } else {
-                    // Querformat auf mobilen Geräten
-                    document.getElementById('rotate-message').style.display = 'none';
-                }
-            } else {
-                // Desktop-Geräte zeigen die Nachricht nicht an
-                document.getElementById('rotate-message').style.display = 'none';
-            }
-        }
-
-        // Überprüfe die Ausrichtung beim Laden der Seite
-        window.addEventListener('load', checkOrientation);
-
-        // Überprüfe die Ausrichtung bei jeder Größenänderung des Fensters
-        window.addEventListener('resize', checkOrientation);
-
-
-
-
-
-
-*/
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
 
 
 function toggleFullscreen() {
@@ -277,25 +210,22 @@ function toggleFullscreen() {
     if (!document.fullscreenElement) {
         if (canvas.requestFullscreen) {
             canvas.requestFullscreen();
-        } else if (canvas.mozRequestFullScreen) { // Firefox
+        } else if (canvas.mozRequestFullScreen) {
             canvas.mozRequestFullScreen();
-        } else if (canvas.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        } else if (canvas.webkitRequestFullscreen) {
             canvas.webkitRequestFullscreen();
-        } else if (canvas.msRequestFullscreen) { // IE/Edge
+        } else if (canvas.msRequestFullscreen) {
             canvas.msRequestFullscreen();
         }
-        fullscreenButton.src = 'img/button_image/exitFullscreen.svg'; 
+        fullscreenButton.src = 'img/button_image/exitFullscreen.svg';
     } else {
         if (document.exitFullscreen) {
-            document.exitFullscreen();     
+            document.exitFullscreen();
         }
-        
-        fullscreenButton.src = 'img/button_image/enterFullscreen.svg'; 
+        fullscreenButton.src = 'img/button_image/enterFullscreen.svg';
         console.log('not-fullscreen')
     }
 }
-
-
 
 document.addEventListener("fullscreenchange", () => {
     let fullscreenButton = document.getElementById('fullscreen-image');
@@ -306,4 +236,22 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 
+function showHelp() {
+    document.getElementById('game-container').classList.add('show-help');
+    setTimeout(() => {
+        document.addEventListener('click', closeHelpOnOutsideClick);
+    }, 0);
+}
 
+function closeHelp() {
+    document.getElementById('game-container').classList.remove('show-help');
+    document.removeEventListener('click', closeHelpOnOutsideClick);
+}
+
+function closeHelpOnOutsideClick(event) {
+    let helpOverlay = document.getElementById('helpOverlay');
+    let closeButton = document.getElementById('help-close-button');
+    if (!helpOverlay.contains(event.target) && event.target !== closeButton) {
+        closeHelp();
+    }
+}
