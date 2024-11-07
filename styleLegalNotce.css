@@ -1,3 +1,45 @@
 body{
     background: rgb(221, 135, 96);
+    display: flex;
+   flex-direction: column;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+
+#back-button-div{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+#back-to-game-button{
+
+   
+    z-index: 3;
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
+    border-radius: 16px;
+    border: unset;
+    font-family: 'marlboro', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: black;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease
+}
+
+#back-to-game-button:hover{
+
+    background: linear-gradient(to top right, rgb(139, 101, 52), rgb(255, 114, 49));
+    transform:  scale(1.10);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
