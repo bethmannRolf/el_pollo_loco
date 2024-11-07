@@ -1,11 +1,8 @@
 class Endboss extends MovableObject {
-
-
     y = 140;
     height = 300;
     width = 300;
     energy = 100;
-
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -17,7 +14,6 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G11.png',
         'img/4_enemie_boss_chicken/2_alert/G12.png'
     ];
-
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -49,8 +45,6 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G20.png'
     ];
 
-
-
     constructor() {
         super();
         this.loadImage(this.IMAGES_WALKING[0]);
@@ -67,15 +61,13 @@ class Endboss extends MovableObject {
 
     endboss_cackling = new Audio('audio/cackle3.mp3')
 
-
     animate() {
         setInterval(() => {
             if (this.world && this.world.character) {
-                const distance = this.calculateDistance(this.world.character);
+                let distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
                 if (!this.isDead() && !isMuted) {
-                    this.endboss_cackling.play();
-                    
+                    this.endboss_cackling.play();   
                 }
                 else{
                     this.endboss_cackling.pause();
@@ -87,7 +79,6 @@ class Endboss extends MovableObject {
     calculateDistance(character) {
         return Math.abs(character.x - this.x);
     }
-
 
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
@@ -102,14 +93,9 @@ class Endboss extends MovableObject {
         }
     }
 
-
     getDistanceToCharacter(character) {
         return Math.abs(this.x - character.x);
     }
-
-
-
-
 
     hitByBottle() {
         this.hitCount++;
@@ -120,11 +106,9 @@ class Endboss extends MovableObject {
                 win = true;
                 stopGame();
             }, 1500);
-
         } else {
             this.energy = 100 - 40 * this.hitCount;
             this.playAnimation(this.IMAGES_HURT);
-
             if (this.world) {
                 this.world.statusBarEndboss.setPercentage(this.energy);
             }
@@ -134,6 +118,4 @@ class Endboss extends MovableObject {
     isDead() {
         return this.hitCount >= 3;
     }
-
-
 }

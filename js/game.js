@@ -7,7 +7,14 @@ let isMuted = false;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
-// let helpOpen = false;
+
+
+
+
+
+
+
+
 
 function init() {
     initLevel()
@@ -17,8 +24,14 @@ function init() {
     document.getElementById('start-button').classList.add('d-none');
     document.getElementById('overlay-canvas-start').classList.add('d-none')
     document.getElementById('container-control').classList.remove('d-none');
+    toggleMobileControls();
     checkBackgroundMusic()
 }
+
+
+
+
+
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
@@ -183,6 +196,19 @@ function toggleSound() {
     }
     checkBackgroundMusic()
 }
+
+
+function toggleMobileControls() {
+    if (isMobileDevice()) {
+        document.getElementById('container-control').classList.remove('d-none');
+    } else {
+        document.getElementById('container-control').classList.add('d-none');
+    }
+}
+
+
+
+
 
 function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
