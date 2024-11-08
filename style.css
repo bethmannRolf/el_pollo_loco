@@ -306,11 +306,47 @@ font-weight: 700
     width: 24px;
     height: 24px;
     transition: opacity 0.3s ease;
+    margin-bottom: 10px;
 }
 
 #help-close-button:hover img {
     opacity: 0.8; 
 }
+
+
+
+#legal-notice-section{
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.footer-button-styling{
+   
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
+    border-radius: 16px;
+    border: unset;
+    font-weight: bold;
+    color: black;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease
+
+}
+
+.footer-button-styling:hover{
+    background: linear-gradient(to top right, rgb(139, 101, 52), rgb(255, 114, 49));
+    transform:  scale(1.10);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+  }
 
 
 

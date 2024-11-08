@@ -28,7 +28,6 @@ a {
     background: linear-gradient(to top right, rgb(119, 81, 32), rgb(235, 94, 29));
     border-radius: 16px;
     border: unset;
-    font-family: 'marlboro', Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: black;
     transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease
