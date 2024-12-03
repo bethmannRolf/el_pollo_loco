@@ -4,11 +4,9 @@ class DrawableObject {
     y = 280;
     height = 150;
     width = 100;
-
     img;
     imageCache = {};
     currentImage = 0;
-
 
     loadImage(path) {
         this.img = new Image();
@@ -30,14 +28,11 @@ class DrawableObject {
     }
 
     loadImages(arr) {
-
         arr.forEach(path => {
-
             let img = new Image();
             img.src = path;
-            img.style = 'transform: scaleX(-1)'
+            img.style = 'transform: scaleX(-1)';
             this.imageCache[path] = img;
         });
     }
-
 }

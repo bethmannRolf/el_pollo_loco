@@ -5,22 +5,21 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-
     statusBar = new Statusbar();
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     throwing_sound = new Audio('audio/throwing.mp3');
-    splash_sound = new Audio('audio/glass_breaking1.mp3')
+    splash_sound = new Audio('audio/glass_breaking1.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw()
+        this.draw();
         this.setWorld();
-        this.run()
+        this.run();
     };
 
     setWorld() {
@@ -36,7 +35,6 @@ class World {
         setInterval(() => {
             this.checkCollisionFromAbove();
         }, 50);
-
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
@@ -84,15 +82,6 @@ class World {
         });
     }
 
-
-
-
-
-
-
-
-
-
     checkThrowObjects() {
         if (this.keyboard.D && this.character.bottles > 0) {
             if (isMuted == false) {
@@ -105,11 +94,6 @@ class World {
         }
     }
 
-
-
-
-
-
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isCollidingFromAbove(enemy)) {
@@ -118,22 +102,6 @@ class World {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     checkCoinCollisions() {
         this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
@@ -163,17 +131,13 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
-        // Space for fixed objects
         this.addToMap(this.bottleBar);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.character);
-
         this.addObjectsToMap(this.level.enemies);
-
         this.addObjectsToMap(this.throwableObjects)
         this.addObjectsToMap(this.level.collectableCoinObjects);
         this.addObjectsToMap(this.level.collectableBottleObjects);
@@ -190,10 +154,6 @@ class World {
         });
     }
 
-
-
-
-
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo)
@@ -205,10 +165,6 @@ class World {
         }
     }
 
-
-
-
-
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -216,17 +172,8 @@ class World {
         mo.x = mo.x * -1;
     }
 
-
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
-
-
-
-
-
-
-
-
 }

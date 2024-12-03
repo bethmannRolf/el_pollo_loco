@@ -8,14 +8,6 @@ let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
 
-
-
-
-
-
-
-
-
 function init() {
     initLevel()
     inGame = true
@@ -27,11 +19,6 @@ function init() {
     toggleMobileControls();
     checkBackgroundMusic()
 }
-
-
-
-
-
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
@@ -74,8 +61,6 @@ window.addEventListener("keyup", (e) => {
         keyboard.D = false;
     }
 })
-
-
 
 window.addEventListener('load', () => {
    
@@ -155,9 +140,6 @@ function drawOverlayOutroImage() {
 }
 
 function replayGame() {
-    // initStartScreen(); 
-    // world = null
-
     location.reload();
     document.getElementById('replay-button').classList.add('d-none')
 }
@@ -206,10 +188,6 @@ function toggleMobileControls() {
     }
 }
 
-
-
-
-
 function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
 }
@@ -228,7 +206,6 @@ function checkOrientation() {
 
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
-
 
 function toggleFullscreen() {
     let canvas = document.getElementById('game-container');

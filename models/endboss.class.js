@@ -1,4 +1,5 @@
 class Endboss extends MovableObject {
+
     y = 140;
     height = 300;
     width = 300;
@@ -67,9 +68,9 @@ class Endboss extends MovableObject {
                 let distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
                 if (!this.isDead() && !isMuted) {
-                    this.endboss_cackling.play();   
+                    this.endboss_cackling.play();
                 }
-                else{
+                else {
                     this.endboss_cackling.pause();
                 }
             }

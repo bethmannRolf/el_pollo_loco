@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-
+    
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -8,7 +8,6 @@ class MovableObject extends DrawableObject {
     coins = 0;
     bottles = 0;
     lastHit = 0;
-
     collectCoinSound = new Audio('audio/coin1.mp3');
     collectBottleSound = new Audio('audio/collect_bottle.mp3');
 
@@ -60,7 +59,7 @@ class MovableObject extends DrawableObject {
     }
 
     hitByBottle() {
-        this.energy = this.energy - 40
+        this.energy = this.energy - 40;
     }
 
     isDead() {
@@ -79,7 +78,7 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-        this.x -= this.speed
+        this.x -= this.speed;
     }
 
     jumpCooldown = false;

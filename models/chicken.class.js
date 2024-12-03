@@ -5,7 +5,6 @@ class Chicken extends MovableObject {
     width = 80;
     energy = 10;
     chicken_cackling = new Audio('audio/cackle2.mp3');
-    
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
@@ -31,7 +30,6 @@ class Chicken extends MovableObject {
                 this.moveLeft();
             }
         }, 1000 / 60);
-
         setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
@@ -39,15 +37,12 @@ class Chicken extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 100);
-
-
         setInterval(() => {
             if (this.isDead() || isMuted == true || inGame == false) {
-                this.chicken_cackling.pause()
+                this.chicken_cackling.pause();
             } else {
-                this.chicken_cackling.play()
+                this.chicken_cackling.play();
             }
         }, 100);
     }
-
 }
