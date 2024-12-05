@@ -108,7 +108,6 @@ class World {
             if (this.character.isColliding(collectableCoin)) {
                 this.character.collectCoin()
                 this.coinBar.setPercentage(this.character.coins)
-                console.log('Coinindex', index)
                 this.level.collectableCoinObjects.splice(index, 1);
             }
         });
@@ -119,7 +118,6 @@ class World {
             if (this.character.isColliding(collectableBottle)) {
                 this.character.collectBottle();
                 this.bottleBar.setPercentage(this.character.bottles)
-                console.log('Bottleindex', index)
                 this.level.collectableBottleObjects.splice(index, 1);
             }
         });

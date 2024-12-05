@@ -231,7 +231,6 @@ function toggleFullscreen() {
             document.exitFullscreen();
         }
         fullscreenButton.src = 'img/button_image/enterFullscreen.svg';
-        console.log('not-fullscreen')
     }
 }
 
