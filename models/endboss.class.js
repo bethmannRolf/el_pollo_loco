@@ -57,6 +57,7 @@ class Endboss extends MovableObject {
         this.x = 3800;
         this.hitCount = 0;
         this.energy = 100;
+        this.hitDamage = 40;
         this.animate()
     }
 
@@ -108,7 +109,7 @@ class Endboss extends MovableObject {
                 stopGame();
             }, 1500);
         } else {
-            this.energy = 100 - 40 * this.hitCount;
+            this.energy = this.energy - this.hitDamage * this.hitCount;
             this.playAnimation(this.IMAGES_HURT);
             if (this.world) {
                 this.world.statusBarEndboss.setPercentage(this.energy);
