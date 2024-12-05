@@ -323,7 +323,6 @@ a {
     color: black;
 }
 
-
 @media (max-width: 580px) {
 
     #start-button {
@@ -333,8 +332,11 @@ a {
     }
 
     #replay-button {
-        top: 85%;
+        top: 80%;
         left: 50%;
+        border-radius: 10px;
+        font-size: 32px;
+        padding: 5px 10px;
         transform: translate(-50%, -50%);
     }
 }
@@ -357,7 +359,6 @@ a {
         border-radius: 6px;
         padding: 6px;
     }
-
 }
 
 @media only screen and (max-width: 720px) {
