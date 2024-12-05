@@ -29,26 +29,66 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
-        this.speedY = 10;
+        this.setInitialThrowSpeed();
         this.applyGravity();
+        this.startThrowInterval();
+    }
+
+    setInitialThrowSpeed() {
+        this.speedY = 10;
+    }
+
+    startThrowInterval() {
         let throwInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_ROTATING);
-            this.x += 10;
-            this.world.level.enemies.forEach((enemy) => {
-                if (this.isColliding(enemy)) {
-                    enemy.hitByJump();
-                    this.speedY = 0;
-                    clearInterval(throwInterval);
-                    setInterval(() => {
-                        this.playAnimation(this.IMAGES_SPLASH);
-                    }, 100);
-                    setTimeout(() => {
-                        this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this);
-                    }, 500);
-                }
-            });
+            this.playThrowAnimation();
+            this.moveBottle();
+            this.checkCollisions(throwInterval);
         }, 25);
     }
+
+    playThrowAnimation() {
+        this.playAnimation(this.IMAGES_ROTATING);
+    }
+
+    moveBottle() {
+        this.x += 10;
+    }
+
+    checkCollisions(throwInterval) {
+        this.world.level.enemies.forEach((enemy) => {
+            if (this.isColliding(enemy)) {
+                this.handleCollision(enemy, throwInterval);
+            }
+        });
+    }
+
+    handleCollision(enemy, throwInterval) {
+        enemy.hitByJump();
+        this.speedY = 0;
+        clearInterval(throwInterval);
+        this.showSplashAnimation();
+        this.removeBottleFromWorld();
+    }
+
+    showSplashAnimation() {
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_SPLASH);
+        }, 100);
+    }
+
+    removeBottleFromWorld() {
+        setTimeout(() => {
+            this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this);
+        }, 500);
+    }
+
+
+
+
+
+
+
+
 
     splash() {
         this.speedY = 0;
