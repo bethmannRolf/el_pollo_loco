@@ -44,29 +44,53 @@ class World {
         }, 200);
     }
 
-    checkBottleEnemyCollisions() {
-        this.splash_sound.pause();
-        this.throwableObjects.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy, enemyIndex) => {
-                if (bottle.isColliding(enemy)) {
-                    bottle.splash();
-                    enemy.hitByBottle();
-                    if (isMuted == false) {
-                        this.splash_sound.play();
-                    }
-                    this.statusBarEndboss.setPercentage(enemy.energy);
-                    if (enemy.isDead()) {
-                        setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1);
-                        }, 500);
-                    }
-                    setTimeout(() => {
-                        this.throwableObjects.splice(bottleIndex, 1);
-                    }, 100);
-                }
-            });
+checkBottleEnemyCollisions() {
+    this.splash_sound.pause();
+    this.throwableObjects.forEach((bottle, bottleIndex) => {
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+            if (this.isBottleCollidingWithEnemy(bottle, enemy)) {
+                this.handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex);
+            }
         });
+    });
+}
+
+isBottleCollidingWithEnemy(bottle, enemy) {
+    return bottle.isColliding(enemy);
+}
+
+handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex) {
+    bottle.splash();
+    enemy.hitByBottle();
+    this.playSplashSoundIfNeeded();
+    this.updateEndbossStatus(enemy);
+    this.removeEnemyIfDead(enemy, enemyIndex);
+    this.removeBottleFromWorld(bottleIndex);
+}
+
+playSplashSoundIfNeeded() {
+    if (isMuted === false) {
+        this.splash_sound.play();
     }
+}
+
+updateEndbossStatus(enemy) {
+    this.statusBarEndboss.setPercentage(enemy.energy);
+}
+
+removeEnemyIfDead(enemy, enemyIndex) {
+    if (enemy.isDead()) {
+        setTimeout(() => {
+            this.level.enemies.splice(enemyIndex, 1);
+        }, 500);
+    }
+}
+
+removeBottleFromWorld(bottleIndex) {
+    setTimeout(() => {
+        this.throwableObjects.splice(bottleIndex, 1);
+    }, 100);
+}
 
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy, index) => {

@@ -82,14 +82,6 @@ class ThrowableObject extends MovableObject {
         }, 500);
     }
 
-
-
-
-
-
-
-
-
     splash() {
         this.speedY = 0;
         this.currentImage = 0;

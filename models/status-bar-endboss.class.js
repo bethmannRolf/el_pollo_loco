@@ -1,51 +1,49 @@
-class StatusBarEndboss extends DrawableObject{
+class StatusBarEndboss extends DrawableObject {
 
-IMAGES = [
-'img/7_statusbars/2_statusbar_endboss/green/green0.png',
-'img/7_statusbars/2_statusbar_endboss/green/green20.png',
-'img/7_statusbars/2_statusbar_endboss/green/green40.png',
-'img/7_statusbars/2_statusbar_endboss/green/green60.png',
-'img/7_statusbars/2_statusbar_endboss/green/green80.png',
-'img/7_statusbars/2_statusbar_endboss/green/green100.png'
-];
+    IMAGES = [
+        'img/7_statusbars/2_statusbar_endboss/green/green0.png',
+        'img/7_statusbars/2_statusbar_endboss/green/green20.png',
+        'img/7_statusbars/2_statusbar_endboss/green/green40.png',
+        'img/7_statusbars/2_statusbar_endboss/green/green60.png',
+        'img/7_statusbars/2_statusbar_endboss/green/green80.png',
+        'img/7_statusbars/2_statusbar_endboss/green/green100.png'
+    ];
 
-percentage = 100;
+    percentage = 100;
 
-constructor(){
-   super();
-    this.loadImages(this.IMAGES);
-    this.x = 250;
-    this.y = -5;
-    this.width = 200;
-    this.height = 60; 
-    this.setPercentage(100);
-}
-
-setPercentage(percentage){
-    this.percentage = percentage; 
-    let path = this.IMAGES[this.resolveImageIndex()];
-    this.img = this.imageCache[path];
-}
-
-resolveImageIndex() {
-    return this.calculateIndexBasedOnPercentage(this.percentage);
-}
-
-calculateIndexBasedOnPercentage(percentage) {
-    if (percentage >= 100) {
-        return 5;
-    } else if (percentage >= 80) {
-        return 4;
-    } else if (percentage >= 60) {
-        return 3;
-    } else if (percentage >= 40) {
-        return 2;
-    } else if (percentage >= 20) {
-        return 1;
-    } else {
-        return 0;
+    constructor() {
+        super();
+        this.loadImages(this.IMAGES);
+        this.x = 250;
+        this.y = -5;
+        this.width = 200;
+        this.height = 60;
+        this.setPercentage(100);
     }
-} 
 
+    setPercentage(percentage) {
+        this.percentage = percentage;
+        let path = this.IMAGES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
+    }
 
+    resolveImageIndex() {
+        return this.calculateIndexBasedOnPercentage(this.percentage);
+    }
+
+    calculateIndexBasedOnPercentage(percentage) {
+        if (percentage >= 100) {
+            return 5;
+        } else if (percentage >= 80) {
+            return 4;
+        } else if (percentage >= 60) {
+            return 3;
+        } else if (percentage >= 40) {
+            return 2;
+        } else if (percentage >= 20) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
