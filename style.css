@@ -323,6 +323,43 @@ a {
     color: black;
 }
 
+
+@media (max-width: 580px) {
+
+    #start-button {
+        top: 15%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+    }
+
+    #replay-button {
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 410px) {
+
+    #start-button {
+        top: 15%;
+        left: 30%;
+        transform: translate(-50%, -50%);
+    }
+
+    .options-button-style img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .options-button-style {
+
+        border-radius: 6px;
+        padding: 6px;
+    }
+
+}
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;

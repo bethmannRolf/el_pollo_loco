@@ -63,41 +63,46 @@ window.addEventListener("keyup", (e) => {
 })
 
 window.addEventListener('load', () => {
-   
+    let options = { passive: false }; 
     document.getElementById('button-left').addEventListener('touchstart', (e) => {
         keyboard.LEFT = true;
         e.preventDefault();
-    });
+    }, options);
+    
     document.getElementById('button-right').addEventListener('touchstart', (e) => {
         keyboard.RIGHT = true;
         e.preventDefault();
-    });
+    }, options);
+
     document.getElementById('button-jump').addEventListener('touchstart', (e) => {
         keyboard.UP = true;
         e.preventDefault();
-    });
+    }, options);
+    
     document.getElementById('button-throw').addEventListener('touchstart', (e) => {
         keyboard.D = true;
         e.preventDefault();
-    });
+    }, options);
 
-   
     document.getElementById('button-left').addEventListener('touchend', (e) => {
         keyboard.LEFT = false;
         e.preventDefault();
-    });
+    }, options);
+    
     document.getElementById('button-right').addEventListener('touchend', (e) => {
         keyboard.RIGHT = false;
         e.preventDefault();
-    });
+    }, options);
+    
     document.getElementById('button-jump').addEventListener('touchend', (e) => {
         keyboard.UP = false;
         e.preventDefault();
-    });
+    }, options);
+    
     document.getElementById('button-throw').addEventListener('touchend', (e) => {
         keyboard.D = false;
         e.preventDefault();
-    });
+    }, options);
 });
 
 function stopGame() {
@@ -118,7 +123,7 @@ function stopGame() {
 }
 
 function clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) {
+    for (let i = 1; i < 999; i++) {
         window.clearInterval(i);
     }
 }
@@ -258,3 +263,6 @@ function closeHelpOnOutsideClick(event) {
         closeHelp();
     }
 }
+
+
+
