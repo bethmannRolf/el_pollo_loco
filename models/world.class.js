@@ -44,53 +44,53 @@ class World {
         }, 200);
     }
 
-checkBottleEnemyCollisions() {
-    this.splash_sound.pause();
-    this.throwableObjects.forEach((bottle, bottleIndex) => {
-        this.level.enemies.forEach((enemy, enemyIndex) => {
-            if (this.isBottleCollidingWithEnemy(bottle, enemy)) {
-                this.handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex);
-            }
+    checkBottleEnemyCollisions() {
+        this.splash_sound.pause();
+        this.throwableObjects.forEach((bottle, bottleIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (this.isBottleCollidingWithEnemy(bottle, enemy)) {
+                    this.handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex);
+                }
+            });
         });
-    });
-}
-
-isBottleCollidingWithEnemy(bottle, enemy) {
-    return bottle.isColliding(enemy);
-}
-
-handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex) {
-    bottle.splash();
-    enemy.hitByBottle();
-    this.playSplashSoundIfNeeded();
-    this.updateEndbossStatus(enemy);
-    this.removeEnemyIfDead(enemy, enemyIndex);
-    this.removeBottleFromWorld(bottleIndex);
-}
-
-playSplashSoundIfNeeded() {
-    if (isMuted === false) {
-        this.splash_sound.play();
     }
-}
 
-updateEndbossStatus(enemy) {
-    this.statusBarEndboss.setPercentage(enemy.energy);
-}
+    isBottleCollidingWithEnemy(bottle, enemy) {
+        return bottle.isColliding(enemy);
+    }
 
-removeEnemyIfDead(enemy, enemyIndex) {
-    if (enemy.isDead()) {
+    handleBottleCollision(bottle, bottleIndex, enemy, enemyIndex) {
+        bottle.splash();
+        enemy.hitByBottle();
+        this.playSplashSoundIfNeeded();
+        this.updateEndbossStatus(enemy);
+        this.removeEnemyIfDead(enemy, enemyIndex);
+        this.removeBottleFromWorld(bottleIndex);
+    }
+
+    playSplashSoundIfNeeded() {
+        if (isMuted === false) {
+            this.splash_sound.play();
+        }
+    }
+
+    updateEndbossStatus(enemy) {
+        this.statusBarEndboss.setPercentage(enemy.energy);
+    }
+
+    removeEnemyIfDead(enemy, enemyIndex) {
+        if (enemy.isDead()) {
+            setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+            }, 500);
+        }
+    }
+
+    removeBottleFromWorld(bottleIndex) {
         setTimeout(() => {
-            this.level.enemies.splice(enemyIndex, 1);
-        }, 500);
+            this.throwableObjects.splice(bottleIndex, 1);
+        }, 100);
     }
-}
-
-removeBottleFromWorld(bottleIndex) {
-    setTimeout(() => {
-        this.throwableObjects.splice(bottleIndex, 1);
-    }, 100);
-}
 
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy, index) => {
@@ -150,24 +150,36 @@ removeBottleFromWorld(bottleIndex) {
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
+        this.addBackground();
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.bottleBar);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.coinBar);
-        this.addToMap(this.statusBarEndboss);
+        this.addStaticObjects();
         this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects)
-        this.addObjectsToMap(this.level.collectableCoinObjects);
-        this.addObjectsToMap(this.level.collectableBottleObjects);
+        this.addDynamicObjects();
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         })
+    }
+
+    addBackground() {
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+    }
+
+    addStaticObjects() {
+        this.addToMap(this.bottleBar);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
+        this.addToMap(this.statusBarEndboss);
+    }
+
+    addDynamicObjects() {
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects)
+        this.addObjectsToMap(this.level.collectableCoinObjects);
+        this.addObjectsToMap(this.level.collectableBottleObjects);
     }
 
     addObjectsToMap(objects) {
