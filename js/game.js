@@ -263,6 +263,3 @@ function closeHelpOnOutsideClick(event) {
         closeHelp();
     }
 }
-
-
-
