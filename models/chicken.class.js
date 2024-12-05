@@ -25,11 +25,20 @@ class Chicken extends MovableObject {
     }
 
     animate() {
+        this.moveLeftPeriodically();
+        this.updateAnimation();
+        this.handleCacklingSound();
+    }
+
+    moveLeftPeriodically() {
         setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
+    }
+
+    updateAnimation() {
         setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
@@ -37,6 +46,9 @@ class Chicken extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 100);
+    }
+
+    handleCacklingSound() {
         setInterval(() => {
             if (this.isDead() || isMuted == true || inGame == false) {
                 this.chicken_cackling.pause();
