@@ -11,6 +11,11 @@ class CoinBar extends DrawableObject {
 
     percentage = 100;
 
+    /**
+ * Creates an instance of the CoinBar class.
+ * Initializes the position, size, and sets the initial percentage.
+ * @constructor
+ */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -21,15 +26,33 @@ class CoinBar extends DrawableObject {
         this.setPercentage(0);
     }
 
+    /**
+  * Sets the percentage of the coin bar and updates the image based on the new percentage.
+  * @param {number} percentage - The new percentage value (0-100).
+  * @function
+  */
     setPercentage(percentage) {
-        this.percentage = percentage; 
+        this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
+
+    /**
+ * Resolves the image index based on the current percentage.
+ * @returns {number} The index of the image to be displayed.
+ * @function
+ */
     resolveImageIndex() {
         return this.calculateIndexBasedOnPercentage(this.percentage);
     }
-    
+
+    /**
+ * Calculates the image index based on the given percentage.
+ * The index determines which image is displayed based on the percentage range.
+ * @param {number} percentage - The percentage of the coin bar.
+ * @returns {number} The index corresponding to the percentage range.
+ * @function
+ */
     calculateIndexBasedOnPercentage(percentage) {
         if (percentage >= 100) {
             return 5;
@@ -44,5 +67,5 @@ class CoinBar extends DrawableObject {
         } else {
             return 0;
         }
-    } 
+    }
 }
