@@ -25,20 +25,30 @@ class SmallChicken extends MovableObject {
     }
 
     animate() {
+        this.moveLeftPeriodically();
+        this.updateAnimation();
+        this.handleChirpingSound();
+    }
+
+    moveLeftPeriodically() {
         setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();  
             }
-            else {
-            }
         }, 1000 / 60);
+    }
+
+    updateAnimation() {
         setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else {
-                 this.playAnimation(this.IMAGES_DEAD);
+                this.playAnimation(this.IMAGES_DEAD);
             }
         }, 100);
+    }
+
+    handleChirpingSound() {
         setInterval(() => {
             if (this.isDead() || isMuted == true || inGame == false) {
                 this.chirping_sound.pause();
