@@ -210,27 +210,37 @@ function checkOrientation() {
 }
 
 window.addEventListener('load', checkOrientation);
+
 window.addEventListener('resize', checkOrientation);
 
 function toggleFullscreen() {
     let canvas = document.getElementById('game-container');
     let fullscreenButton = document.getElementById('fullscreen-image');
+    
     if (!document.fullscreenElement) {
-        if (canvas.requestFullscreen) {
-            canvas.requestFullscreen();
-        } else if (canvas.mozRequestFullScreen) {
-            canvas.mozRequestFullScreen();
-        } else if (canvas.webkitRequestFullscreen) {
-            canvas.webkitRequestFullscreen();
-        } else if (canvas.msRequestFullscreen) {
-            canvas.msRequestFullscreen();
-        }
+        enterFullscreen(canvas);
         fullscreenButton.src = 'img/button_image/exitFullscreen.svg';
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
+        exitFullscreen();
         fullscreenButton.src = 'img/button_image/enterFullscreen.svg';
+    }
+}
+
+function enterFullscreen(canvas) {
+    if (canvas.requestFullscreen) {
+        canvas.requestFullscreen();
+    } else if (canvas.mozRequestFullScreen) {
+        canvas.mozRequestFullScreen();
+    } else if (canvas.webkitRequestFullscreen) {
+        canvas.webkitRequestFullscreen();
+    } else if (canvas.msRequestFullscreen) {
+        canvas.msRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
     }
 }
 
