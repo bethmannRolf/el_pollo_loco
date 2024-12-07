@@ -1,5 +1,5 @@
 class SmallChicken extends MovableObject {
-    
+
     y = 395;
     height = 35;
     width = 40;
@@ -15,6 +15,10 @@ class SmallChicken extends MovableObject {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ]
 
+    /**
+  * Initializes a new SmallChicken instance.
+  * Loads images for animations and sets initial position and speed.
+  */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -24,20 +28,30 @@ class SmallChicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Starts all animations and behaviors for the small chicken.
+     */
     animate() {
         this.moveLeftPeriodically();
         this.updateAnimation();
         this.handleChirpingSound();
     }
 
+    /**
+     * Moves the small chicken to the left periodically if it is not dead.
+     */
     moveLeftPeriodically() {
         setInterval(() => {
             if (!this.isDead()) {
-                this.moveLeft();  
+                this.moveLeft();
             }
         }, 1000 / 60);
     }
 
+    /**
+ * Updates the animation of the small chicken based on its state.
+ * Plays walking animation if alive, or dead animation otherwise.
+ */
     updateAnimation() {
         setInterval(() => {
             if (!this.isDead()) {
@@ -48,6 +62,10 @@ class SmallChicken extends MovableObject {
         }, 100);
     }
 
+    /**
+ * Handles the chirping sound of the small chicken.
+ * Pauses sound if the chicken is dead, the game is muted, or the game is not active.
+ */
     handleChirpingSound() {
         setInterval(() => {
             if (this.isDead() || isMuted == true || inGame == false) {
