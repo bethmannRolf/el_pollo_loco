@@ -7,7 +7,6 @@ class CollectableCoinObject extends MovableObject {
         'img/8_coin/coin_2.png'
 
     ];
-
     
     /**
      * Creates an instance of a collectable coin object.

@@ -56,7 +56,6 @@ class World {
         }, 200);
     }
 
-
     /**
      * Checks if any throwable bottles collide with enemies. Handles the collision
      * logic such as playing splash animations, updating energy levels, and removing
@@ -105,8 +104,6 @@ class World {
         this.removeEnemyIfDead(enemy, enemyIndex);
         this.removeBottleFromWorld(bottleIndex);
     }
-
-
 
     /**
      * Plays the splash sound effect if sound is not muted.
@@ -178,7 +175,6 @@ class World {
             }
         });
     }
-
 
     /**
      * Checks if the player has pressed the "D" key to throw a bottle.

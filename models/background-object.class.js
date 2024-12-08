@@ -3,7 +3,6 @@ class BackgroundObject extends MovableObject {
     width = 720;
     height = 480;
 
-    
     /**
  * Creates an instance of a class that inherits from another class and loads an image.
  * Initializes the object's position with the specified x-coordinate and calculates the y-coordinate.

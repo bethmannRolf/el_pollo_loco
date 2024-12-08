@@ -11,7 +11,6 @@ class BottleBar extends DrawableObject {
 
     percentage = 100;
 
-
     /**
  * Creates an instance of the class and initializes properties like position, size, and image loading.
  * Inherits from a parent class and loads a set of images for the object.

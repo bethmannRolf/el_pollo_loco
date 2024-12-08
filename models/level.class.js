@@ -7,7 +7,6 @@ class Level {
     collectableBottleObjects;
     level_end_x = 4500;
 
-
         /**
      * Constructor for initializing a level with its objects.
      * 
