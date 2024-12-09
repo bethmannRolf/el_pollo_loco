@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     collectCoinSound = new Audio('audio/coin1.mp3');
     collectBottleSound = new Audio('audio/collect_bottle.mp3');
-
+    verticalCollectableTolerance = 60;
     /**
  * Applies gravity to the object, updating its vertical position and speed.
  */
@@ -152,14 +152,20 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height
     }
 
-
+    isCollidingWithCollectable(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height -this.verticalCollectableTolerance;
+    }
+    
     /**
      * Checks for a collision from above with another movable object.
      * @param {MovableObject} mo Another movable object to check against.
      * @returns {boolean} True if a collision from above occurs, false otherwise.
      */
     isCollidingFromAbove(mo) {
-        const tolerance = 20;
+        let tolerance = 20;
         return (
             this.y + this.height <= mo.y + tolerance &&
             this.y + this.height > mo.y &&

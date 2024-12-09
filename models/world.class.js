@@ -218,7 +218,7 @@ class World {
  */
     checkCoinCollisions() {
         this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
-            if (this.character.isColliding(collectableCoin)) {
+            if (this.character.isCollidingWithCollectable(collectableCoin)) {
                 this.character.collectCoin()
                 this.coinBar.setPercentage(this.character.coins)
                 this.level.collectableCoinObjects.splice(index, 1);
@@ -233,7 +233,7 @@ class World {
  */
     checkBottleCollisions() {
         this.level.collectableBottleObjects.forEach((collectableBottle, index) => {
-            if (this.character.isColliding(collectableBottle)) {
+            if (this.character.isCollidingWithCollectable(collectableBottle)) {
                 this.character.collectBottle();
                 this.bottleBar.setPercentage(this.character.bottles)
                 this.level.collectableBottleObjects.splice(index, 1);

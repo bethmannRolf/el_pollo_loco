@@ -6,7 +6,6 @@ class Character extends MovableObject {
     lastPressTime = null;
     snoring = false;
   
-
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
