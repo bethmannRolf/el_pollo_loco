@@ -37,12 +37,7 @@ class World {
         });
     }
 
-    /**
- * Starts the main game logic by running collision checks and object interactions
- * at regular intervals. Uses two separate intervals for efficient execution.
- * @function
- * @memberof World
- */
+
     run() {
         setInterval(() => {
             this.checkCollisionFromAbove();
@@ -53,6 +48,7 @@ class World {
             this.checkCoinCollisions();
             this.checkBottleCollisions();
             this.checkBottleEnemyCollisions();
+            this.checkFirstContactWithEndboss();
         }, 200);
     }
 
@@ -170,7 +166,7 @@ class World {
                 if (enemy.isDead()) {
                     setTimeout(() => {
                         this.level.enemies.splice(index, 1);
-                    }, 50);
+                    }, 500);
                 }
             }
         });
@@ -286,8 +282,19 @@ class World {
         this.addToMap(this.bottleBar);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
-        this.addToMap(this.statusBarEndboss);
+
+        if (firstEndbossContact === true) {
+          this.addToMap(this.statusBarEndboss);  
+        }
     }
+
+    checkFirstContactWithEndboss(){
+        if (this.character.x >=3300) {
+            firstEndbossContact = true;
+        }
+    }
+
+
 
     /**
  * Adds dynamic objects to the canvas, including the character, enemies, throwable objects,

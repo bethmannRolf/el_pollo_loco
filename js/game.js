@@ -3,10 +3,11 @@ let world;
 let keyboard = new Keyboard();
 let win = false;
 let background_music = new Audio('audio/background_music1.mp3');
-let isMuted = false;
+let isMuted = true;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
+let firstEndbossContact = false;
 
 /**
  * Initializes the game and all necessary components.
@@ -33,29 +34,6 @@ function init() {
     checkBackgroundMusic()
 }
 
-
-/*
-window.addEventListener("keydown", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    if (e.keyCode == 68) {
-        keyboard.D = true
-    }
-})
-*/
 window.addEventListener('load', () => {
     setupKeyboardListeners();
 });
@@ -73,15 +51,15 @@ function handleKeyDown(e) {
 }
 
 function handleArrowKeys(e) {
-    if (e.keyCode === 39) setKeyboardState('RIGHT', true); // Pfeil rechts
-    if (e.keyCode === 37) setKeyboardState('LEFT', true);  // Pfeil links
-    if (e.keyCode === 38) setKeyboardState('UP', true);    // Pfeil hoch
-    if (e.keyCode === 40) setKeyboardState('DOWN', true);  // Pfeil runter
+    if (e.keyCode === 39) setKeyboardState('RIGHT', true); 
+    if (e.keyCode === 37) setKeyboardState('LEFT', true); 
+    if (e.keyCode === 38) setKeyboardState('UP', true);    
+    if (e.keyCode === 40) setKeyboardState('DOWN', true); 
 }
 
 function handleActionKeys(e) {
-    if (e.keyCode === 32) setKeyboardState('SPACE', true);  // Leertaste
-    if (e.keyCode === 68) setKeyboardState('D', true);      // Taste D
+    if (e.keyCode === 32) setKeyboardState('SPACE', true); 
+    if (e.keyCode === 68) setKeyboardState('D', true);     
 }
 
 function setKeyboardState(key, state) {
@@ -102,51 +80,70 @@ function handleKeyRelease(e) {
 }
 
 function handleArrowKeyRelease(e) {
-    if (e.keyCode === 39) setKeyboardState('RIGHT', false); // Pfeil rechts
-    if (e.keyCode === 37) setKeyboardState('LEFT', false);  // Pfeil links
-    if (e.keyCode === 38) setKeyboardState('UP', false);    // Pfeil hoch
-    if (e.keyCode === 40) setKeyboardState('DOWN', false);  // Pfeil runter
+    if (e.keyCode === 39) setKeyboardState('RIGHT', false); 
+    if (e.keyCode === 37) setKeyboardState('LEFT', false);  
+    if (e.keyCode === 38) setKeyboardState('UP', false);    
+    if (e.keyCode === 40) setKeyboardState('DOWN', false); 
 }
 
 function handleActionKeyRelease(e) {
-    if (e.keyCode === 32) setKeyboardState('UP', false);    // Leertaste
-    if (e.keyCode === 68) setKeyboardState('D', false);     // Taste D
+    if (e.keyCode === 32) setKeyboardState('UP', false);   
+    if (e.keyCode === 68) setKeyboardState('D', false);    
 }
 
 function setKeyboardState(key, state) {
     keyboard[key] = state;
 }
 
+
+
 window.addEventListener('load', () => {
     let options = { passive: false }; 
-    setupTouchStartListeners(options);
-    setupTouchEndListeners(options);
+    document.getElementById('button-left').addEventListener('touchstart', (e) => {
+        keyboard.LEFT = true;
+        e.preventDefault();
+    }, options);
+    
+    document.getElementById('button-right').addEventListener('touchstart', (e) => {
+        keyboard.RIGHT = true;
+        e.preventDefault();
+    }, options);
+
+    document.getElementById('button-jump').addEventListener('touchstart', (e) => {
+        keyboard.UP = true;
+        e.preventDefault();
+    }, options);
+    
+    document.getElementById('button-throw').addEventListener('touchstart', (e) => {
+        keyboard.D = true;
+        e.preventDefault();
+    }, options);
+
+    document.getElementById('button-left').addEventListener('touchend', (e) => {
+        keyboard.LEFT = false;
+        e.preventDefault();
+    }, options);
+    
+    document.getElementById('button-right').addEventListener('touchend', (e) => {
+        keyboard.RIGHT = false;
+        e.preventDefault();
+    }, options);
+    
+    document.getElementById('button-jump').addEventListener('touchend', (e) => {
+        keyboard.UP = false;
+        e.preventDefault();
+    }, options);
+    
+    document.getElementById('button-throw').addEventListener('touchend', (e) => {
+        keyboard.D = false;
+        e.preventDefault();
+    }, options);
 });
 
-function setupTouchStartListeners(options) {
-    addTouchListener('button-left', () => (keyboard.LEFT = true), options);
-    addTouchListener('button-right', () => (keyboard.RIGHT = true), options);
-    addTouchListener('button-jump', () => (keyboard.UP = true), options);
-    addTouchListener('button-throw', () => (keyboard.D = true), options);
-}
 
-function setupTouchEndListeners(options) {
-    addTouchListener('button-left', () => (keyboard.LEFT = false), options);
-    addTouchListener('button-right', () => (keyboard.RIGHT = false), options);
-    addTouchListener('button-jump', () => (keyboard.UP = false), options);
-    addTouchListener('button-throw', () => (keyboard.D = false), options);
-}
 
-function addTouchListener(buttonId, callback, options) {
-    document.getElementById(buttonId).addEventListener('touchstart', (e) => {
-        callback();
-        e.preventDefault();
-    }, options);
-    document.getElementById(buttonId).addEventListener('touchend', (e) => {
-        callback();
-        e.preventDefault();
-    }, options);
-}
+
+
 
 /**
  * Stops the game and handles all end-game actions.

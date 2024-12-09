@@ -121,6 +121,8 @@ class Endboss extends MovableObject {
         }
     }
 
+    
+
     /**
      * Returns the distance to the character.
      * 
