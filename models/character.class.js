@@ -5,6 +5,7 @@ class Character extends MovableObject {
     speed = 5;
     lastPressTime = null;
     snoring = false;
+  
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -255,12 +256,32 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isIdle(timeSinceLastPress)) {
             this.playIdleState(timeSinceLastPress);
+        } else if (this.speedY > 0 ) {
+            this.playAnimation(this.IMAGES_JUMPING);
+        } else if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && !this.isAboveGround())  {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+
+/*
+    handleCharacterState() {
+        let timeSinceLastPress = this.getTimeSinceLastPress();
+        if (this.isDead()) {
+            this.playDeadState();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isIdle(timeSinceLastPress)) {
+            this.playIdleState(timeSinceLastPress);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_WALKING);
         }
     }
+
+*/
+
 
     /**
  * Plays the "dead" animation and triggers the end of the game.
