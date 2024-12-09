@@ -88,7 +88,7 @@ class Endboss extends MovableObject {
                     this.endboss_cackling.pause();
                 }
             }
-        }, 100);
+        }, 200);
     }
 
     /**
@@ -147,7 +147,7 @@ class Endboss extends MovableObject {
             setTimeout(() => {
                 win = true;
                 stopGame();
-            }, 1500);
+            }, 2000);
         } else {
             this.energy = this.energy - this.hitDamage * this.hitCount;
             this.playAnimation(this.IMAGES_HURT);

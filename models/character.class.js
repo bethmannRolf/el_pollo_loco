@@ -234,8 +234,6 @@ class Character extends MovableObject {
  * 
  * This method checks if the walking sound is not already paused, and if it is playing, it pauses it.
  * 
- * @function
- * @memberof Character
  */
     stopWalkingSound() {
         if (!this.walking_sound.paused) {
@@ -247,8 +245,6 @@ class Character extends MovableObject {
  * Updates the snoring state of the character by setting the `snoring` flag to `false`
  * and then calling the `snore()` method to manage the snoring sound accordingly.
  * 
- * @function
- * @memberof Character
  */
     setupStateAnimation() {
         setInterval(() => {
@@ -308,8 +304,6 @@ class Character extends MovableObject {
  * This method plays the death animation for the character and, after a short delay, 
  * sets the `win` flag to `false` and stops the game.
  * 
- * @function
- * @memberof Character
  * @see stopGame() - Stops the game and triggers the game-over sequence.
  */
     playDeadState() {

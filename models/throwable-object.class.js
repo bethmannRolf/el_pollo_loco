@@ -58,7 +58,7 @@ class ThrowableObject extends MovableObject {
             this.playThrowAnimation();
             this.moveBottle();
             this.checkCollisions(throwInterval);
-        }, 25);
+        }, 1000/60);
     }
 
     /**

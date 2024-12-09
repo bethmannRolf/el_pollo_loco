@@ -164,13 +164,13 @@ class World {
  */
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead()) {
+            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead() && this.character.speedY <= 0 ) {
                 this.character.jump();
                 enemy.hitByJump();
                 if (enemy.isDead()) {
                     setTimeout(() => {
                         this.level.enemies.splice(index, 1);
-                    }, 500);
+                    }, 50);
                 }
             }
         });
