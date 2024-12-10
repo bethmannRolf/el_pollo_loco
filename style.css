@@ -217,8 +217,8 @@ canvas {
 
 #game-container {
     position: relative;
-    width: 720;
-    height: 480;
+    /* width: 720;
+    height: 480; */
     max-width: 720px;
     max-height: 100vh;
     margin: 0 auto;
@@ -242,15 +242,16 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 720;
-    height: 480;
+ 
+    /* width: 720;
+    height: 480; */
     background-color: rgba(218, 92, 29, 0.9);
     color: black;
     z-index: 9999;
     display: none;
     text-align: left;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .show-help #helpOverlay {
@@ -326,12 +327,18 @@ a {
     color: black;
 }
 
+button{
+    user-select: none;
+}
+
 @media (max-width: 580px) {
 
     #start-button {
         top: 15%;
         left: 25%;
         transform: translate(-50%, -50%);
+
+        
     }
 
     #replay-button {
@@ -341,6 +348,9 @@ a {
         font-size: 32px;
         padding: 5px 10px;
         transform: translate(-50%, -50%);
+    }
+    h1{
+        margin:0;
     }
 }
 
@@ -386,3 +396,53 @@ a {
         width: 100vh;
     }
 }
+
+@media only screen and (max-height: 580px) {
+
+    #start-button {
+        top: 15%;
+        left: 25%;
+        transform: translate(-50%, -50%);   
+    }
+
+    h1{
+        margin:0;
+    }
+
+    #replay-button {
+        top: 80%;
+        left: 50%;
+        border-radius: 10px;
+        font-size: 32px;
+        padding: 5px 10px;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media only screen and (max-height: 410px) {
+    #start-button {
+        top: 15%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+        padding: 2px 6px;
+    }
+
+    .options-button-style img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .options-button-style {
+
+        border-radius: 6px;
+        padding: 6px;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+} 
+
+

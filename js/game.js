@@ -271,13 +271,11 @@ function toggleSound() {
     checkBackgroundMusic()
 }
 
+
+
+
 /**
  * Toggles the visibility of mobile controls based on the device type.
- *
- * - Displays the mobile control container if the device is mobile.
- * - Hides the mobile control container if the device is not mobile.
- *
- * @function
  */
 function toggleMobileControls() {
     if (isMobileDevice()) {
@@ -287,30 +285,20 @@ function toggleMobileControls() {
     }
 }
 
+/**
+ * Frequently checks the device orientation and toggles controls.
+ */
+function frequentlyDeviceCheck() {
+    setInterval(() => {
+        checkOrientation();
+        toggleMobileControls();
 
 
-
-
-function frequentlyDeviceCheck(){
-
-setInterval(() => {
-    checkOrientation()
-    toggleMobileControls()
-}, 100);
-
-
+    }, 100);
 }
-
-
 
 /**
  * Checks if the device is a mobile device based on the user agent.
- *
- * - Uses a regular expression to test the `navigator.userAgent` for mobile device keywords.
- * - Returns `true` if the device is mobile, otherwise returns `false`.
- *
- * @function
- * @returns {boolean} `true` if the device is mobile, `false` otherwise.
  */
 function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
@@ -318,18 +306,20 @@ function isMobileDevice() {
 
 /**
  * Checks the device's orientation and displays a message if the device is in portrait mode.
- *
- * - Displays a message prompting the user to rotate their device if the device is in portrait mode.
- * - Hides the message if the device is in landscape mode or if the device is not mobile.
- *
- * @function
  */
-
 function checkOrientation() {
+    console.log('Viewport Width:', window.innerWidth);
+    console.log('Viewport Height:', window.innerHeight);
     if (isMobileDevice()) {
-        if (window.innerWidth < window.innerHeight) {
+        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+
+        if (!isLandscape && window.innerWidth < window.innerHeight) {
+            // Im Portrait-Modus (korrigiert für Chrome-Entwicklertools)
+            console.log('Portrait mode detected');
             document.getElementById('rotate-message').style.display = 'flex';
         } else {
+            // Im Landscape-Modus
+            console.log('Landscape mode detected');
             document.getElementById('rotate-message').style.display = 'none';
         }
     } else {
@@ -337,8 +327,98 @@ function checkOrientation() {
     }
 }
 
+// Event-Listener für Orientation-Checks
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
+
+
+
+
+
+
+
+// /**
+//  * Toggles the visibility of mobile controls based on the device type.
+//  *
+//  * - Displays the mobile control container if the device is mobile.
+//  * - Hides the mobile control container if the device is not mobile.
+//  *
+//  * @function
+//  */
+// function toggleMobileControls() {
+//     if (isMobileDevice()) {
+//         document.getElementById('container-control').classList.remove('d-none');
+//     } else {
+//         document.getElementById('container-control').classList.add('d-none');
+//     }
+// }
+
+// function frequentlyDeviceCheck(){
+
+// setInterval(() => {
+//     checkOrientation()
+//     toggleMobileControls()
+    
+// }, 100);
+
+
+// }
+
+// /*
+
+// /**
+//  * Checks if the device is a mobile device based on the user agent.
+//  *
+//  * - Uses a regular expression to test the `navigator.userAgent` for mobile device keywords.
+//  * - Returns `true` if the device is mobile, otherwise returns `false`.
+//  *
+//  * @function
+//  * @returns {boolean} `true` if the device is mobile, `false` otherwise.
+//  */
+// function isMobileDevice() {
+//     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+// }
+
+// /*
+
+
+// /**
+//  * Checks the device's orientation and displays a message if the device is in portrait mode.
+//  *
+//  * - Displays a message prompting the user to rotate their device if the device is in portrait mode.
+//  * - Hides the message if the device is in landscape mode or if the device is not mobile.
+//  *
+//  * @function
+//  */
+
+// function checkOrientation() {
+//     if (isMobileDevice()) {
+//         // console.log('Hallo')
+
+//         if (window.innerWidth < window.innerHeight) {
+//             console.log('window.innerWidth < window.innerHeight')
+
+
+//             document.getElementById('rotate-message').style.display = 'flex';
+//         } else {
+//             document.getElementById('rotate-message').style.display = 'none';
+//         }
+//     } else {
+//         document.getElementById('rotate-message').style.display = 'none';
+//     }
+// }
+
+// window.addEventListener('load', checkOrientation);
+// window.addEventListener('resize', checkOrientation);
+
+
+
+
+
+
+//////////////////////////
+
+
 
 /**
  * Toggles between entering and exiting fullscreen mode.
