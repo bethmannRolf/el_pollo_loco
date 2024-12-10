@@ -23,6 +23,7 @@ let firstEndbossContact = false;
  * @global {World} world - The main game world instance.
  */
 function init() {
+    frequentlyDeviceCheck()
     initLevel()
     inGame = true
     canvas = document.getElementById('canvas');
@@ -286,6 +287,22 @@ function toggleMobileControls() {
     }
 }
 
+
+
+
+
+function frequentlyDeviceCheck(){
+
+setInterval(() => {
+    checkOrientation()
+    toggleMobileControls()
+}, 100);
+
+
+}
+
+
+
 /**
  * Checks if the device is a mobile device based on the user agent.
  *
@@ -307,6 +324,7 @@ function isMobileDevice() {
  *
  * @function
  */
+
 function checkOrientation() {
     if (isMobileDevice()) {
         if (window.innerWidth < window.innerHeight) {

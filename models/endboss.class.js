@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     y = 140;
     height = 300;
     width = 300;
-    energy = 100;
+   
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -142,6 +142,7 @@ class Endboss extends MovableObject {
  * @method hitByBottle
  */
     hitByBottle() {
+        debugger;
         this.hitCount++;
         if (this.hitCount >= 3) {
             this.energy = 0;
@@ -151,7 +152,7 @@ class Endboss extends MovableObject {
                 stopGame();
             }, 2000);
         } else {
-            this.energy = this.energy - this.hitDamage * this.hitCount;
+            this.energy = 100 - this.hitDamage*this.hitCount
             this.playAnimation(this.IMAGES_HURT);
             if (this.world) {
                 this.world.statusBarEndboss.setPercentage(this.energy);
