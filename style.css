@@ -170,7 +170,7 @@ canvas#canvas:fullscreen {
     padding: 8px;
     cursor: pointer;
     user-select: none;
-    opacity: 0.7;
+    opacity: 0.9;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
@@ -351,7 +351,28 @@ button{
     }
     h1{
         margin:0;
+
     }
+
+    .control-container-style {
+        bottom: 2px;
+        padding: 0px;
+    }
+    
+    
+    .control-button-style {
+        border-radius: 4px;
+        padding: 4px;
+        opacity: 1;
+    }
+
+    
+.control-button-style img {
+    width: 18px;
+    height: 18px;
+}
+
+
 }
 
 @media (max-width: 410px) {
@@ -395,6 +416,26 @@ button{
     #overlay-canvas-start {
         width: 100vh;
     }
+
+    .control-container-style {
+        bottom: 2px;
+        padding: 0px;
+    }
+    
+    
+    .control-button-style {
+        border-radius: 4px;
+        padding: 4px;
+        opacity: 1;
+    }
+
+    
+.control-button-style img {
+    width: 18px;
+    height: 18px;
+}
+
+
 }
 
 @media only screen and (max-height: 580px) {
@@ -410,7 +451,7 @@ button{
     }
 
     #replay-button {
-        top: 80%;
+        top: 85%;
         left: 50%;
         border-radius: 10px;
         font-size: 32px;
@@ -437,6 +478,7 @@ button{
         border-radius: 6px;
         padding: 6px;
     }
+
 }
 
 html, body {
@@ -445,4 +487,8 @@ html, body {
 
 } 
 
+
+
+
+/* unterhalb werden die Klassen zusammengesetzt */
 
