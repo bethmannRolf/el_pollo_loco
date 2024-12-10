@@ -96,52 +96,33 @@ function setKeyboardState(key, state) {
 }
 
 
-
 window.addEventListener('load', () => {
-    let options = { passive: false }; 
-    document.getElementById('button-left').addEventListener('touchstart', (e) => {
-        keyboard.LEFT = true;
-        e.preventDefault();
-    }, options);
-    
-    document.getElementById('button-right').addEventListener('touchstart', (e) => {
-        keyboard.RIGHT = true;
-        e.preventDefault();
-    }, options);
-
-    document.getElementById('button-jump').addEventListener('touchstart', (e) => {
-        keyboard.UP = true;
-        e.preventDefault();
-    }, options);
-    
-    document.getElementById('button-throw').addEventListener('touchstart', (e) => {
-        keyboard.D = true;
-        e.preventDefault();
-    }, options);
-
-    document.getElementById('button-left').addEventListener('touchend', (e) => {
-        keyboard.LEFT = false;
-        e.preventDefault();
-    }, options);
-    
-    document.getElementById('button-right').addEventListener('touchend', (e) => {
-        keyboard.RIGHT = false;
-        e.preventDefault();
-    }, options);
-    
-    document.getElementById('button-jump').addEventListener('touchend', (e) => {
-        keyboard.UP = false;
-        e.preventDefault();
-    }, options);
-    
-    document.getElementById('button-throw').addEventListener('touchend', (e) => {
-        keyboard.D = false;
-        e.preventDefault();
-    }, options);
+    const options = { passive: false }; 
+    initializeTouchEvents(options);
 });
 
+function initializeTouchEvents(options) {
+    setupButtonEvent('button-left', 'LEFT', options);
+    setupButtonEvent('button-right', 'RIGHT', options);
+    setupButtonEvent('button-jump', 'UP', options);
+    setupButtonEvent('button-throw', 'D', options);
+}
 
+function setupButtonEvent(buttonId, key, options) {
+    const button = document.getElementById(buttonId);
+    button.addEventListener('touchstart', (e) => handleTouchStart(key, e), options);
+    button.addEventListener('touchend', (e) => handleTouchEnd(key, e), options);
+}
 
+function handleTouchStart(key, event) {
+    keyboard[key] = true;
+    event.preventDefault();
+}
+
+function handleTouchEnd(key, event) {
+    keyboard[key] = false;
+    event.preventDefault();
+}
 
 
 
