@@ -11,8 +11,6 @@ class CollectableCoinObject extends MovableObject {
     /**
      * Creates an instance of a collectable coin object.
      * The coin is initialized with a random position and alternating images for animation.
-     * 
-     * @constructor
      */
     constructor() {
         super().loadImage(this.IMAGES_COIN_ALTERNATING[0]);
@@ -25,8 +23,6 @@ class CollectableCoinObject extends MovableObject {
        /**
      * Starts an interval that alternates the coin's image to create an animation effect.
      * The coin image alternates every 200ms.
-     * 
-     * @method animate
      */
     animate() {
         setInterval(() => {

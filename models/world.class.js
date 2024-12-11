@@ -16,10 +16,8 @@ class World {
 
     /**
  * Constructs an instance of the game world.
- * 
  * Initializes the game world by setting up the canvas context, storing a reference to the 
  * canvas and keyboard, and starting the drawing, world setup, and game loop processes.
- * 
  * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
  * @param {Object} keyboard - The keyboard state object containing key press information.
  */
@@ -35,8 +33,6 @@ class World {
     /**
  * Binds the character and endboss objects to the world instance.
  * Ensures that these objects can interact with the world environment.
- * @function
- * @memberof World
  */
     setWorld() {
         this.character.world = this;
@@ -49,7 +45,6 @@ class World {
 
     /**
      * Starts the game loop by setting up intervals for collision checks and object interactions.
-     * 
      * - Runs `checkCollisionFromAbove` every 50 milliseconds to detect upward collisions.
      * - Runs multiple collision and interaction checks every 200 milliseconds, including:
      *   - General collisions (`checkCollisions`)
@@ -146,7 +141,6 @@ class World {
 
     /**
  * Removes a throwable bottle from the world after a short delay.
- * 
  * @param {number} bottleIndex - The index of the bottle in the throwableObjects array.
  */
     removeBottleFromWorld(bottleIndex) {
@@ -158,7 +152,6 @@ class World {
     /**
  * Checks if the character collides with an enemy from above. If so, the enemy
  * is hit, and the character jumps off.
- * 
  */
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy, index) => {
@@ -177,7 +170,6 @@ class World {
     /**
      * Checks if the player has pressed the "D" key to throw a bottle.
      * Creates a throwable bottle object and deducts one bottle from the character's inventory.
-     * 
      */
     checkThrowObjects() {
         if (this.keyboard.D && this.character.bottles > 0) {
@@ -233,7 +225,6 @@ class World {
     /**
  * Draws the entire game world onto the canvas.
  * This includes background objects, enemies, coins, bottles, and the character.
- * 
  */
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -253,7 +244,6 @@ class World {
     /**
  * Adds background objects and clouds to the canvas.
  * This method is responsible for rendering the static background of the game.
- * 
  */
     addBackground() {
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -262,7 +252,6 @@ class World {
 
 /**
  * Adds static objects to the game map, such as bottles, status bars, and coins.
- * 
  * Adds the `bottleBar`, `statusBar`, and `coinBar` to the map. If the player has made
  * the first contact with the end boss (`firstEndbossContact` is `true`), the `statusBarEndboss`
  * is also added to the map.
@@ -279,7 +268,6 @@ class World {
 
     /**
      * Checks if the character has made the first contact with the end boss.
-     * 
      * Sets the `firstEndbossContact` flag to `true` if the character's horizontal position
      * reaches or exceeds the `endbossStatusEntryPoint` on the game map.
      */
@@ -315,7 +303,6 @@ class World {
     /**
  * Adds a single drawable object to the canvas.
  * If the object is facing the other direction, its image is flipped horizontally.
- * 
  * @param {DrawableObject} mo - The drawable object to add to the canvas.
  */
     addToMap(mo) {
@@ -344,7 +331,6 @@ class World {
     /**
      * Restores the canvas transformation matrix after an image has been flipped.
      * Ensures the subsequent drawings are not affected by the transformation.
-     * 
      * @param {DrawableObject} mo - The drawable object whose image transformation is being restored.
      */
     flipImageBack(mo) {

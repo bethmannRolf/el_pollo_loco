@@ -10,8 +10,6 @@ class CollectableBottleObject extends MovableObject {
         /**
      * Creates an instance of a collectable bottle object.
      * The bottle is initialized with a random position and alternating images for animation.
-     * 
-     * @constructor
      */
     constructor() {
         super().loadImage(this.IMAGES_BOTTLE_ALTERNATING[0]);
@@ -24,8 +22,6 @@ class CollectableBottleObject extends MovableObject {
         /**
      * Starts an interval that alternates the bottle's image to create an animation effect.
      * The bottle image alternates every 350ms.
-     * 
-     * @method animate
      */
     animate() {
         setInterval(() => {

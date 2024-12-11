@@ -48,8 +48,6 @@ class Endboss extends MovableObject {
     /**
  * The constructor initializes the Endboss with images and other properties.
  * It also starts the animation loop for the Endboss.
- * 
- * @constructor
  */
     constructor() {
         super();
@@ -72,8 +70,6 @@ class Endboss extends MovableObject {
      * The animation loop that updates the Endboss' behavior.
      * It checks the distance to the character and updates the Endboss' animation accordingly.
      * It also plays the cackling sound when the Endboss is not dead and sound is not muted.
-     * 
-     * @method animate
      */
     animate() {
         setInterval(() => {
@@ -92,10 +88,8 @@ class Endboss extends MovableObject {
 
     /**
      * Calculates the distance between the Endboss and the character.
-     * 
      * @param {Object} character - The character object to calculate the distance to.
      * @returns {number} The distance between the Endboss and the character.
-     * @method calculateDistance
      */
     calculateDistance(character) {
         return Math.abs(character.x - this.x);
@@ -103,10 +97,8 @@ class Endboss extends MovableObject {
 
     /**
  * Updates the Endboss' animation based on the distance to the character.
- * 
  * @param {number} distanceToCharacter - The distance to the character.
- * @method updateAnimation
- */
+  */
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
             return;
@@ -122,10 +114,8 @@ class Endboss extends MovableObject {
 
     /**
      * Returns the distance to the character.
-     * 
      * @param {Object} character - The character object.
      * @returns {number} The distance between the Endboss and the character.
-     * @method getDistanceToCharacter
      */
     getDistanceToCharacter(character) {
         return Math.abs(this.x - character.x);
@@ -135,8 +125,6 @@ class Endboss extends MovableObject {
  * Handles when the Endboss is hit by a bottle.
  * It increases the hit count and decreases the Endboss' energy.
  * If the Endboss is hit 3 times, it dies.
- * 
- * @method hitByBottle
  */
     hitByBottle() {
         this.hitCount++;
@@ -158,9 +146,7 @@ class Endboss extends MovableObject {
 
     /**
  * Checks if the Endboss is dead (i.e., hit 3 times).
- * 
  * @returns {boolean} True if the Endboss is dead, otherwise false.
- * @method isDead
  */
     isDead() {
         return this.hitCount >= 3;

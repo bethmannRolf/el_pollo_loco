@@ -14,8 +14,6 @@ class StatusBarEndboss extends DrawableObject {
     /**
  * Constructor for initializing the status bar of the endboss.
  * Loads images, sets the position, size, and initializes the percentage to 100.
- * 
- * @constructor
  */
     constructor() {
         super();
@@ -29,7 +27,6 @@ class StatusBarEndboss extends DrawableObject {
 
     /**
      * Sets the percentage of the endboss's health and updates the corresponding image for the status bar.
-     * 
      * @param {number} percentage - The health percentage of the endboss (0-100).
      */
     setPercentage(percentage) {
@@ -41,7 +38,6 @@ class StatusBarEndboss extends DrawableObject {
     /**
      * Resolves the index of the image based on the current percentage.
      * This method is used to determine which image corresponds to the current health.
-     * 
      * @returns {number} The index of the image corresponding to the current health.
      */
     resolveImageIndex() {
@@ -50,7 +46,6 @@ class StatusBarEndboss extends DrawableObject {
 
     /**
      * Calculates the index of the image based on the given percentage.
-     * 
      * @param {number} percentage - The health percentage of the endboss (0-100).
      * @returns {number} The index of the image to display.
      */

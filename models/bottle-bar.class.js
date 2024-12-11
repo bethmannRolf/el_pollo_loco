@@ -14,8 +14,6 @@ class BottleBar extends DrawableObject {
     /**
  * Creates an instance of the class and initializes properties like position, size, and image loading.
  * Inherits from a parent class and loads a set of images for the object.
- *
- * @constructor
  */
     constructor() {
         super();
@@ -29,10 +27,8 @@ class BottleBar extends DrawableObject {
 
     /**
  * Sets the percentage value and updates the object's image based on the new percentage.
- * 
  * - Updates the `percentage` property.
  * - Resolves the appropriate image index based on the current percentage and updates the image.
- *
  * @param {number} percentage - The percentage value (between 0 and 5) that determines the object's state and image.
  */
     setPercentage(percentage) {
@@ -43,9 +39,7 @@ class BottleBar extends DrawableObject {
 
     /**
  * Resolves the image index based on the current percentage value.
- * 
  * - Calls the `calculateIndexBasedOnPercentage` method to determine the correct image index.
- *
  * @returns {number} The index of the image to be used, calculated based on the current percentage.
  */
     resolveImageIndex() {
@@ -54,10 +48,8 @@ class BottleBar extends DrawableObject {
 
     /**
  * Calculates the image index based on the given percentage.
- * 
  * - Maps the percentage value to an image index between 0 and 5.
  * - The higher the percentage, the higher the index returned.
- *
  * @param {number} percentage - The percentage value (0 to 100) used to calculate the image index.
  * @returns {number} The corresponding image index based on the percentage.
  */

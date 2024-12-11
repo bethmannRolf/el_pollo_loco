@@ -20,7 +20,6 @@ class Chicken extends MovableObject {
     /**
  * Creates an instance of the Chicken class.
  * Initializes the chicken's position, speed, images, and starts the animation and sound.
- * @constructor
  */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
@@ -33,7 +32,6 @@ class Chicken extends MovableObject {
 
     /**
   * Starts the animation for the chicken, including movement and cackling sound.
-  * @function
   */
     animate() {
         this.moveLeftPeriodically();
@@ -44,7 +42,6 @@ class Chicken extends MovableObject {
     /**
  * Moves the chicken left at a regular interval.
  * The chicken stops moving if it is dead.
- * @function
  */
     moveLeftPeriodically() {
         setInterval(() => {
@@ -56,7 +53,6 @@ class Chicken extends MovableObject {
 
     /**
  * Updates the animation of the chicken based on its state (walking or dead).
- * @function
  */
     updateAnimation() {
         setInterval(() => {
@@ -73,7 +69,6 @@ class Chicken extends MovableObject {
     /**
  * Handles the cackling sound of the chicken, playing or pausing it depending on the chicken's state.
  * The sound is paused if the chicken is dead, the game is not active, or the sound is muted.
- * @function
  */
     handleCacklingSound() {
         setInterval(() => {

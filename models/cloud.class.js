@@ -7,7 +7,6 @@ class Cloud extends MovableObject {
        /**
      * Creates an instance of the Cloud class.
      * Initializes the cloud's position, speed, and starts the animation.
-     * @constructor
      */
     constructor() {
         super().loadImage('img/5_background/layers/4_clouds/1.png');
@@ -18,7 +17,6 @@ class Cloud extends MovableObject {
 
         /**
      * Starts the animation for the cloud, causing it to move left at a regular interval.
-     * @function
      */
     animate() {
         setInterval(() => {

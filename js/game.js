@@ -11,13 +11,11 @@ let firstEndbossContact = false;
 
 /**
  * Initializes the game and all necessary components.
- *
  * - Loads the game level.
  * - Sets the game status to active.
  * - Binds the canvas element and creates the game world.
  * - Hides the start screen and displays the control panel.
  * - Activates mobile controls and checks background music.
- *
  * @global {boolean} inGame - Indicates whether the game is active.
  * @global {HTMLElement} canvas - The game's canvas element.
  * @global {World} world - The main game world instance.
@@ -50,9 +48,7 @@ function setupKeyboardListeners() {
 
 /**
  * Handles the "keydown" event and delegates actions based on the key pressed.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by a key press.
- * 
  * Keys:
  * - Arrow keys (37: Left, 38: Up, 39: Right, 40: Down) trigger `handleArrowKeys`.
  * - Action keys (32: Space, 68: 'D') trigger `handleActionKeys`.
@@ -67,9 +63,7 @@ function handleKeyDown(e) {
 
 /**
  * Processes arrow key presses and updates the keyboard state accordingly.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by an arrow key press.
- * 
  * Keys and their actions:
  * - 39: Sets the 'RIGHT' state to true.
  * - 37: Sets the 'LEFT' state to true.
@@ -85,9 +79,7 @@ function handleArrowKeys(e) {
 
 /**
  * Processes action key presses and updates the keyboard state accordingly.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by an action key press.
- * 
  * Keys and their actions:
  * - 32: Sets the 'SPACE' state to true.
  * - 68: Sets the 'D' state to true.
@@ -99,7 +91,6 @@ function handleActionKeys(e) {
 
 /**
  * Updates the state of a specified key in the keyboard object.
- * 
  * @param {string} key - The key identifier (e.g., 'RIGHT', 'SPACE').
  * @param {boolean} state - The new state of the key (true for pressed, false for released).
  */
@@ -111,9 +102,7 @@ window.addEventListener("keyup", (e) => handleKeyRelease(e));
 
 /**
  * Handles the "keyup" event and delegates actions based on the key released.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by a key release.
- * 
  * Keys:
  * - Arrow keys (37: Left, 38: Up, 39: Right, 40: Down) trigger `handleArrowKeyRelease`.
  * - Action keys (32: Space, 68: 'D') trigger `handleActionKeyRelease`.
@@ -128,9 +117,7 @@ function handleKeyRelease(e) {
 
 /**
  * Processes the release of arrow keys and updates the keyboard state accordingly.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by an arrow key release.
- * 
  * Keys and their actions:
  * - 39: Sets the 'RIGHT' state to false.
  * - 37: Sets the 'LEFT' state to false.
@@ -146,9 +133,7 @@ function handleArrowKeyRelease(e) {
 
 /**
  * Processes the release of action keys and updates the keyboard state accordingly.
- * 
  * @param {KeyboardEvent} e - The keyboard event triggered by an action key release.
- * 
  * Keys and their actions:
  * - 32: Sets the 'UP' state to false.
  * - 68: Sets the 'D' state to false.
@@ -160,7 +145,6 @@ function handleActionKeyRelease(e) {
 
 /**
  * Updates the state of a specified key in the keyboard state object.
- * 
  * @param {string} key - The key identifier (e.g., 'RIGHT', 'SPACE').
  * @param {boolean} state - The new state of the key (true if pressed, false if released).
  */
@@ -175,9 +159,7 @@ window.addEventListener('load', () => {
 
 /**
  * Initializes touch events for on-screen buttons by setting up their actions.
- * 
  * Associates touch interactions with specific keyboard states using the `setupButtonEvent` function.
- * 
  * @param {Object} options - Configuration options for touch event setup.
  * @param {string} options - Button identifiers mapping to their corresponding actions:
  *                         - 'button-left' triggers the 'LEFT' state.
@@ -194,9 +176,7 @@ function initializeTouchEvents(options) {
 
 /**
  * Sets up touch event listeners for a specified on-screen button.
- * 
  * Associates touch interactions with a specified key by adding 'touchstart' and 'touchend' listeners.
- * 
  * @param {string} buttonId - The ID of the HTML button element to associate with the key.
  * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
  * @param {Object} [options] - Optional event listener configuration.
@@ -210,10 +190,8 @@ function setupButtonEvent(buttonId, key, options) {
 
 /**
  * Handles the touchstart event for on-screen buttons and updates the keyboard state.
- * 
  * Sets the specified key state to `true` when a touch interaction starts and prevents
  * the default behavior of the event to avoid unintended interactions.
- * 
  * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
  * @param {TouchEvent} event - The touch event triggered by the user's interaction.
  */
@@ -224,10 +202,8 @@ function handleTouchStart(key, event) {
 
 /**
  * Handles the touchend event for on-screen buttons and updates the keyboard state.
- * 
  * Sets the specified key state to `false` when a touch interaction ends and prevents
  * the default behavior of the event to ensure proper interaction handling.
- * 
  * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
  * @param {TouchEvent} event - The touch event triggered when the user's touch interaction ends.
  */
@@ -238,13 +214,11 @@ function handleTouchEnd(key, event) {
 
 /**
  * Stops the game and handles all end-game actions.
- *
  * - Sets the game status to inactive.
  * - Pauses the background music and clears all active intervals.
  * - Plays the appropriate sound based on the game result (win or lose) if sound is not muted.
  * - Displays the outro overlay image.
  * - Reveals the replay button and hides the control panel.
- *
  * @global {boolean} inGame - Indicates whether the game is active.
  * @global {boolean} win - Indicates whether the player has won the game.
  * @global {boolean} isMuted - Indicates whether the game sounds are muted.
@@ -271,11 +245,8 @@ function stopGame() {
 
 /**
  * Clears all active intervals in the browser.
- *
  * - Iterates through a range of possible interval IDs (1 to 999) and clears them.
  * - Ensures that no leftover intervals continue running after being called.
- *
- * @function
  */
 function clearAllIntervals() {
     for (let i = 1; i < 999; i++) {
@@ -285,11 +256,9 @@ function clearAllIntervals() {
 
 /**
  * Draws the outro overlay image on the designated canvas.
- *
  * - Displays the outro overlay canvas by removing its hidden class.
  * - Loads an image depending on the game result (win or lose).
  * - Draws the image on the overlay canvas once it is fully loaded.
- *
  * @global {boolean} win - Indicates whether the player has won the game.
  */
 function drawOverlayOutroImage() {
@@ -310,7 +279,6 @@ function drawOverlayOutroImage() {
 
 /**
  * Restarts the game by reloading the page.
- *
  * - Reloads the current page to reset all game components.
  * - Hides the replay button after the game restarts.
  */
@@ -321,7 +289,6 @@ function replayGame() {
 
 /**
  * Initializes and displays the start screen.
- *
  * - Prepares the start canvas and its drawing context.
  * - Shows the start button and the start canvas.
  * - Loads the start screen image and draws it on the canvas once loaded.
@@ -340,10 +307,8 @@ function initStartScreen() {
 
 /**
  * Checks and controls the state of the background music.
- *
  * - Plays the background music if the game is active and sound is not muted.
  * - Pauses the background music if sound is muted.
- *
  * @global {boolean} isMuted - Indicates whether the game sounds are muted.
  * @global {boolean} inGame - Indicates whether the game is currently active.
  * @global {HTMLAudioElement} background_music - The background music audio element.
@@ -361,11 +326,9 @@ function checkBackgroundMusic() {
 
 /**
  * Toggles the sound state of the game between muted and unmuted.
- *
  * - Updates the sound button image to reflect the current sound state.
  * - Sets the `isMuted` flag to true or false.
  * - Calls `checkBackgroundMusic()` to update the background music accordingly.
- *
  * @global {boolean} isMuted - Indicates whether the game sounds are muted.
  */
 function toggleSound() {
@@ -429,12 +392,9 @@ window.addEventListener('resize', checkOrientation);
 
 /**
  * Toggles between entering and exiting fullscreen mode.
- *
  * - Enters fullscreen mode for the game container when not in fullscreen.
  * - Exits fullscreen mode when currently in fullscreen.
  * - Updates the fullscreen button image accordingly.
- *
- * @function
  */
 function toggleFullscreen() {
     let canvas = document.getElementById('game-container');
@@ -451,11 +411,8 @@ function toggleFullscreen() {
 
 /**
  * Attempts to enter fullscreen mode for the provided canvas element.
- *
  * - Uses different methods to request fullscreen based on the browser's implementation.
  * - Supports standard, Mozilla, WebKit, and Microsoft fullscreen APIs.
- *
- * @function
  * @param {HTMLCanvasElement} canvas - The canvas element that should be displayed in fullscreen.
  */
 function enterFullscreen(canvas) {
@@ -472,10 +429,7 @@ function enterFullscreen(canvas) {
 
 /**
  * Exits fullscreen mode if the document is currently in fullscreen.
- *
  * - Uses the standard `exitFullscreen` method to exit fullscreen mode.
- *
- * @function
  */
 function exitFullscreen() {
     if (document.exitFullscreen) {
@@ -494,11 +448,8 @@ document.addEventListener("fullscreenchange", () => {
 
 /**
  * Displays the help window by showing the help overlay on the game container.
- *
  * - Adds a class to the game container to display the help overlay.
  * - Sets a timeout to add an event listener for closing the help window when clicked outside.
- *
- * @function
  */
 function showHelp() {
     document.getElementById('game-container').classList.add('show-help');
@@ -509,11 +460,8 @@ function showHelp() {
 
 /**
  * Closes the help window by hiding the help overlay on the game container.
- *
  * - Removes the class from the game container to hide the help overlay.
  * - Removes the event listener that was added to close the help window when clicked outside.
- *
- * @function
  */
 function closeHelp() {
     document.getElementById('game-container').classList.remove('show-help');
@@ -522,11 +470,8 @@ function closeHelp() {
 
 /**
  * Closes the help window if a click outside the help overlay or close button is detected.
- *
  * - Checks if the click event occurred outside the help overlay and the close button.
  * - Calls the `closeHelp` function to hide the help window if the click was outside.
- *
- * @function
  * @param {Event} event - The click event triggered when the user interacts with the page.
  */
 function closeHelpOnOutsideClick(event) {

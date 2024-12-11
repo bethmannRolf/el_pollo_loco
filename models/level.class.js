@@ -9,8 +9,6 @@ class Level {
 
         /**
      * Constructor for initializing a level with its objects.
-     * 
-     * @constructor
      * @param {MovableObject[]} enemies - The list of enemies in the level.
      * @param {Object[]} clouds - The list of clouds in the level.
      * @param {Object[]} backgroundObjects - The list of background objects in the level.

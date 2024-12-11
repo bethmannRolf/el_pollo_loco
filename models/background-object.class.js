@@ -6,7 +6,6 @@ class BackgroundObject extends MovableObject {
     /**
  * Creates an instance of a class that inherits from another class and loads an image.
  * Initializes the object's position with the specified x-coordinate and calculates the y-coordinate.
- *
  * @param {string} imagePath - The path to the image that should be loaded for the object.
  * @param {number} x - The x-coordinate of the object's initial position.
  */
