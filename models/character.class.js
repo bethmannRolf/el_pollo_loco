@@ -285,7 +285,7 @@ class Character extends MovableObject {
  * @returns {boolean} True if the character is idle, false otherwise.
  */
     isIdle(timeSinceLastPress) {
-        return !this.isAboveGround() && (timeSinceLastPress >= 2000);
+        return !this.isAboveGround() && (timeSinceLastPress >= 50);
     }
 
     /**
