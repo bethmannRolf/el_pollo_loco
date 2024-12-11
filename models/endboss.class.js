@@ -121,8 +121,6 @@ class Endboss extends MovableObject {
         }
     }
 
-    
-
     /**
      * Returns the distance to the character.
      * 
@@ -142,7 +140,6 @@ class Endboss extends MovableObject {
  * @method hitByBottle
  */
     hitByBottle() {
-        debugger;
         this.hitCount++;
         if (this.hitCount >= 3) {
             this.energy = 0;

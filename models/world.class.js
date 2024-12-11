@@ -10,9 +10,19 @@ class World {
     coinBar = new CoinBar();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
+    endbossStatusEntryPoint = 3300;
     throwing_sound = new Audio('audio/throwing.mp3');
     splash_sound = new Audio('audio/glass_breaking1.mp3');
 
+    /**
+ * Constructs an instance of the game world.
+ * 
+ * Initializes the game world by setting up the canvas context, storing a reference to the 
+ * canvas and keyboard, and starting the drawing, world setup, and game loop processes.
+ * 
+ * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
+ * @param {Object} keyboard - The keyboard state object containing key press information.
+ */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -37,7 +47,16 @@ class World {
         });
     }
 
-
+    /**
+     * Starts the game loop by setting up intervals for collision checks and object interactions.
+     * 
+     * - Runs `checkCollisionFromAbove` every 50 milliseconds to detect upward collisions.
+     * - Runs multiple collision and interaction checks every 200 milliseconds, including:
+     *   - General collisions (`checkCollisions`)
+     *   - Object interactions like throwing objects (`checkThrowObjects`)
+     *   - Collectable interactions (`checkCoinCollisions`, `checkBottleCollisions`)
+     *   - Enemy interactions and game state checks (`checkBottleEnemyCollisions`, `checkFirstContactWithEndboss`).
+     */
     run() {
         setInterval(() => {
             this.checkCollisionFromAbove();
@@ -56,8 +75,6 @@ class World {
      * Checks if any throwable bottles collide with enemies. Handles the collision
      * logic such as playing splash animations, updating energy levels, and removing
      * dead enemies or used bottles.
-     * @function
-     * @memberof World
      */
     checkBottleEnemyCollisions() {
         this.splash_sound.pause();
@@ -72,8 +89,6 @@ class World {
 
     /**
  * Determines whether a throwable bottle is colliding with an enemy.
- * @function
- * @memberof World
  * @param {ThrowableObject} bottle - The throwable bottle object.
  * @param {MovableObject} enemy - The enemy to check for collisions.
  * @returns {boolean} - True if the bottle is colliding with the enemy, false otherwise.
@@ -85,8 +100,6 @@ class World {
     /**
  * Handles the logic for a collision between a throwable bottle and an enemy.
  * Updates animations, plays sound effects, adjusts energy, and removes objects as needed.
- * @function
- * @memberof World
  * @param {ThrowableObject} bottle - The bottle involved in the collision.
  * @param {number} bottleIndex - The index of the bottle in the throwableObjects array.
  * @param {MovableObject} enemy - The enemy involved in the collision.
@@ -103,8 +116,6 @@ class World {
 
     /**
      * Plays the splash sound effect if sound is not muted.
-     * @function
-     * @memberof World
      */
     playSplashSoundIfNeeded() {
         if (isMuted === false) {
@@ -114,8 +125,6 @@ class World {
 
     /**
  * Updates the status bar of the endboss based on its current energy level.
- * @function
- * @memberof World
  * @param {MovableObject} enemy - The enemy whose status is being updated.
  */
     updateEndbossStatus(enemy) {
@@ -124,9 +133,6 @@ class World {
 
     /**
  * Removes an enemy from the world if it is dead. Adds a delay for animation purposes.
- * 
- * @function
- * @memberof World
  * @param {MovableObject} enemy - The enemy to be removed.
  * @param {number} enemyIndex - The index of the enemy in the enemies array.
  */
@@ -141,8 +147,6 @@ class World {
     /**
  * Removes a throwable bottle from the world after a short delay.
  * 
- * @function
- * @memberof World
  * @param {number} bottleIndex - The index of the bottle in the throwableObjects array.
  */
     removeBottleFromWorld(bottleIndex) {
@@ -155,12 +159,10 @@ class World {
  * Checks if the character collides with an enemy from above. If so, the enemy
  * is hit, and the character jumps off.
  * 
- * @function
- * @memberof World
  */
     checkCollisionFromAbove() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead() && this.character.speedY <= 0 ) {
+            if (this.character.isCollidingFromAbove(enemy) && !this.character.jumpCooldown && !enemy.isDead() && this.character.speedY <= 0) {
                 this.character.jump();
                 enemy.hitByJump();
                 if (enemy.isDead()) {
@@ -176,8 +178,6 @@ class World {
      * Checks if the player has pressed the "D" key to throw a bottle.
      * Creates a throwable bottle object and deducts one bottle from the character's inventory.
      * 
-     * @function
-     * @memberof World
      */
     checkThrowObjects() {
         if (this.keyboard.D && this.character.bottles > 0) {
@@ -194,9 +194,6 @@ class World {
     /**
  * Continuously checks for collisions between the character and enemies.
  * If a collision is detected, the character takes damage.
- * 
- * @function
- * @memberof World
  */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -209,8 +206,6 @@ class World {
 
     /**
  * Checks if the character collects a coin and updates the coin bar and inventory.
- * @function
- * @memberof World
  */
     checkCoinCollisions() {
         this.level.collectableCoinObjects.forEach((collectableCoin, index) => {
@@ -224,8 +219,6 @@ class World {
 
     /**
  * Checks if the character collects a bottle and updates the bottle bar and inventory.
- * @function
- * @memberof World
  */
     checkBottleCollisions() {
         this.level.collectableBottleObjects.forEach((collectableBottle, index) => {
@@ -241,8 +234,6 @@ class World {
  * Draws the entire game world onto the canvas.
  * This includes background objects, enemies, coins, bottles, and the character.
  * 
- * @function
- * @memberof World
  */
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -263,20 +254,18 @@ class World {
  * Adds background objects and clouds to the canvas.
  * This method is responsible for rendering the static background of the game.
  * 
- * @function
- * @memberof World
  */
     addBackground() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
     }
 
-    /**
- * Adds static UI elements, such as status bars, to the canvas.
- * These elements do not change position during gameplay.
+/**
+ * Adds static objects to the game map, such as bottles, status bars, and coins.
  * 
- * @function
- * @memberof World
+ * Adds the `bottleBar`, `statusBar`, and `coinBar` to the map. If the player has made
+ * the first contact with the end boss (`firstEndbossContact` is `true`), the `statusBarEndboss`
+ * is also added to the map.
  */
     addStaticObjects() {
         this.addToMap(this.bottleBar);
@@ -284,24 +273,26 @@ class World {
         this.addToMap(this.coinBar);
 
         if (firstEndbossContact === true) {
-          this.addToMap(this.statusBarEndboss);  
+            this.addToMap(this.statusBarEndboss);
         }
     }
 
-    checkFirstContactWithEndboss(){
-        if (this.character.x >=3300) {
+    /**
+     * Checks if the character has made the first contact with the end boss.
+     * 
+     * Sets the `firstEndbossContact` flag to `true` if the character's horizontal position
+     * reaches or exceeds the `endbossStatusEntryPoint` on the game map.
+     */
+    checkFirstContactWithEndboss() {
+        if (this.character.x >= this.endbossStatusEntryPoint) {
             firstEndbossContact = true;
         }
     }
-
-
 
     /**
  * Adds dynamic objects to the canvas, including the character, enemies, throwable objects,
  * collectible coins, and bottles. These objects move or change during gameplay.
  * 
- * @function
- * @memberof World
  */
     addDynamicObjects() {
         this.addToMap(this.character);
@@ -313,9 +304,6 @@ class World {
 
     /**
  * Iterates over an array of objects and adds each one to the canvas map.
- * 
- * @function
- * @memberof World
  * @param {Array<DrawableObject>} objects - An array of drawable objects to add to the canvas.
  */
     addObjectsToMap(objects) {
@@ -328,8 +316,6 @@ class World {
  * Adds a single drawable object to the canvas.
  * If the object is facing the other direction, its image is flipped horizontally.
  * 
- * @function
- * @memberof World
  * @param {DrawableObject} mo - The drawable object to add to the canvas.
  */
     addToMap(mo) {
@@ -346,8 +332,6 @@ class World {
  * Flips an image horizontally by modifying the canvas transformation matrix.
  * Used for objects facing the opposite direction.
  * 
- * @function
- * @memberof World
  * @param {DrawableObject} mo - The drawable object whose image needs to be flipped.
  */
     flipImage(mo) {
@@ -361,8 +345,6 @@ class World {
      * Restores the canvas transformation matrix after an image has been flipped.
      * Ensures the subsequent drawings are not affected by the transformation.
      * 
-     * @function
-     * @memberof World
      * @param {DrawableObject} mo - The drawable object whose image transformation is being restored.
      */
     flipImageBack(mo) {

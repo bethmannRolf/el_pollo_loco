@@ -263,26 +263,6 @@ class Character extends MovableObject {
         }
     }
 
-
-/*
-    handleCharacterState() {
-        let timeSinceLastPress = this.getTimeSinceLastPress();
-        if (this.isDead()) {
-            this.playDeadState();
-        } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-        } else if (this.isIdle(timeSinceLastPress)) {
-            this.playIdleState(timeSinceLastPress);
-        } else if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMPING);
-        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_WALKING);
-        }
-    }
-
-*/
-
-
     /**
  * Plays the "dead" animation and triggers the end of the game.
  * This method plays the death animation for the character and, after a short delay, 

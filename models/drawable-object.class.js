@@ -8,8 +8,6 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
 
-
-
         /**
      * Loads an image from a given path and assigns it to the `img` property.
      * 
