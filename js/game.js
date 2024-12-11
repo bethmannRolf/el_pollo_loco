@@ -39,10 +39,24 @@ window.addEventListener('load', () => {
     setupKeyboardListeners();
 });
 
+/**
+ * Adds an event listener to detect keyboard input and handle "keydown" events.
+ * 
+ * The listener triggers the `handleKeyDown` function whenever a key is pressed.
+ */
 function setupKeyboardListeners() {
     window.addEventListener("keydown", handleKeyDown);
 }
 
+/**
+ * Handles the "keydown" event and delegates actions based on the key pressed.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by a key press.
+ * 
+ * Keys:
+ * - Arrow keys (37: Left, 38: Up, 39: Right, 40: Down) trigger `handleArrowKeys`.
+ * - Action keys (32: Space, 68: 'D') trigger `handleActionKeys`.
+ */
 function handleKeyDown(e) {
     if ([39, 37, 38, 40].includes(e.keyCode)) {
         handleArrowKeys(e);
@@ -51,27 +65,59 @@ function handleKeyDown(e) {
     }
 }
 
+/**
+ * Processes arrow key presses and updates the keyboard state accordingly.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by an arrow key press.
+ * 
+ * Keys and their actions:
+ * - 39: Sets the 'RIGHT' state to true.
+ * - 37: Sets the 'LEFT' state to true.
+ * - 38: Sets the 'UP' state to true.
+ * - 40: Sets the 'DOWN' state to true.
+ */
 function handleArrowKeys(e) {
-    if (e.keyCode === 39) setKeyboardState('RIGHT', true); 
-    if (e.keyCode === 37) setKeyboardState('LEFT', true); 
-    if (e.keyCode === 38) setKeyboardState('UP', true);    
-    if (e.keyCode === 40) setKeyboardState('DOWN', true); 
+    if (e.keyCode === 39) setKeyboardState('RIGHT', true);
+    if (e.keyCode === 37) setKeyboardState('LEFT', true);
+    if (e.keyCode === 38) setKeyboardState('UP', true);
+    if (e.keyCode === 40) setKeyboardState('DOWN', true);
 }
 
+/**
+ * Processes action key presses and updates the keyboard state accordingly.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by an action key press.
+ * 
+ * Keys and their actions:
+ * - 32: Sets the 'SPACE' state to true.
+ * - 68: Sets the 'D' state to true.
+ */
 function handleActionKeys(e) {
-    if (e.keyCode === 32) setKeyboardState('SPACE', true); 
-    if (e.keyCode === 68) setKeyboardState('D', true);     
+    if (e.keyCode === 32) setKeyboardState('SPACE', true);
+    if (e.keyCode === 68) setKeyboardState('D', true);
 }
 
+/**
+ * Updates the state of a specified key in the keyboard object.
+ * 
+ * @param {string} key - The key identifier (e.g., 'RIGHT', 'SPACE').
+ * @param {boolean} state - The new state of the key (true for pressed, false for released).
+ */
 function setKeyboardState(key, state) {
     keyboard[key] = state;
 }
 
-
-
-
 window.addEventListener("keyup", (e) => handleKeyRelease(e));
 
+/**
+ * Handles the "keyup" event and delegates actions based on the key released.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by a key release.
+ * 
+ * Keys:
+ * - Arrow keys (37: Left, 38: Up, 39: Right, 40: Down) trigger `handleArrowKeyRelease`.
+ * - Action keys (32: Space, 68: 'D') trigger `handleActionKeyRelease`.
+ */
 function handleKeyRelease(e) {
     if ([39, 37, 38, 40].includes(e.keyCode)) {
         handleArrowKeyRelease(e);
@@ -80,28 +126,65 @@ function handleKeyRelease(e) {
     }
 }
 
+/**
+ * Processes the release of arrow keys and updates the keyboard state accordingly.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by an arrow key release.
+ * 
+ * Keys and their actions:
+ * - 39: Sets the 'RIGHT' state to false.
+ * - 37: Sets the 'LEFT' state to false.
+ * - 38: Sets the 'UP' state to false.
+ * - 40: Sets the 'DOWN' state to false.
+ */
 function handleArrowKeyRelease(e) {
-    if (e.keyCode === 39) setKeyboardState('RIGHT', false); 
-    if (e.keyCode === 37) setKeyboardState('LEFT', false);  
-    if (e.keyCode === 38) setKeyboardState('UP', false);    
-    if (e.keyCode === 40) setKeyboardState('DOWN', false); 
+    if (e.keyCode === 39) setKeyboardState('RIGHT', false);
+    if (e.keyCode === 37) setKeyboardState('LEFT', false);
+    if (e.keyCode === 38) setKeyboardState('UP', false);
+    if (e.keyCode === 40) setKeyboardState('DOWN', false);
 }
 
+/**
+ * Processes the release of action keys and updates the keyboard state accordingly.
+ * 
+ * @param {KeyboardEvent} e - The keyboard event triggered by an action key release.
+ * 
+ * Keys and their actions:
+ * - 32: Sets the 'UP' state to false.
+ * - 68: Sets the 'D' state to false.
+ */
 function handleActionKeyRelease(e) {
-    if (e.keyCode === 32) setKeyboardState('UP', false);   
-    if (e.keyCode === 68) setKeyboardState('D', false);    
+    if (e.keyCode === 32) setKeyboardState('UP', false);
+    if (e.keyCode === 68) setKeyboardState('D', false);
 }
 
+/**
+ * Updates the state of a specified key in the keyboard state object.
+ * 
+ * @param {string} key - The key identifier (e.g., 'RIGHT', 'SPACE').
+ * @param {boolean} state - The new state of the key (true if pressed, false if released).
+ */
 function setKeyboardState(key, state) {
     keyboard[key] = state;
 }
 
-
 window.addEventListener('load', () => {
-    const options = { passive: false }; 
+    const options = { passive: false };
     initializeTouchEvents(options);
 });
 
+/**
+ * Initializes touch events for on-screen buttons by setting up their actions.
+ * 
+ * Associates touch interactions with specific keyboard states using the `setupButtonEvent` function.
+ * 
+ * @param {Object} options - Configuration options for touch event setup.
+ * @param {string} options - Button identifiers mapping to their corresponding actions:
+ *                         - 'button-left' triggers the 'LEFT' state.
+ *                         - 'button-right' triggers the 'RIGHT' state.
+ *                         - 'button-jump' triggers the 'UP' state.
+ *                         - 'button-throw' triggers the 'D' state.
+ */
 function initializeTouchEvents(options) {
     setupButtonEvent('button-left', 'LEFT', options);
     setupButtonEvent('button-right', 'RIGHT', options);
@@ -109,23 +192,49 @@ function initializeTouchEvents(options) {
     setupButtonEvent('button-throw', 'D', options);
 }
 
+/**
+ * Sets up touch event listeners for a specified on-screen button.
+ * 
+ * Associates touch interactions with a specified key by adding 'touchstart' and 'touchend' listeners.
+ * 
+ * @param {string} buttonId - The ID of the HTML button element to associate with the key.
+ * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
+ * @param {Object} [options] - Optional event listener configuration.
+ * @param {boolean} [options.passive=true] - Indicates if the event listener should be passive.
+ */
 function setupButtonEvent(buttonId, key, options) {
     const button = document.getElementById(buttonId);
     button.addEventListener('touchstart', (e) => handleTouchStart(key, e), options);
     button.addEventListener('touchend', (e) => handleTouchEnd(key, e), options);
 }
 
+/**
+ * Handles the touchstart event for on-screen buttons and updates the keyboard state.
+ * 
+ * Sets the specified key state to `true` when a touch interaction starts and prevents
+ * the default behavior of the event to avoid unintended interactions.
+ * 
+ * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
+ * @param {TouchEvent} event - The touch event triggered by the user's interaction.
+ */
 function handleTouchStart(key, event) {
     keyboard[key] = true;
     event.preventDefault();
 }
 
+/**
+ * Handles the touchend event for on-screen buttons and updates the keyboard state.
+ * 
+ * Sets the specified key state to `false` when a touch interaction ends and prevents
+ * the default behavior of the event to ensure proper interaction handling.
+ * 
+ * @param {string} key - The key identifier (e.g., 'LEFT', 'RIGHT', 'UP', 'D').
+ * @param {TouchEvent} event - The touch event triggered when the user's touch interaction ends.
+ */
 function handleTouchEnd(key, event) {
     keyboard[key] = false;
     event.preventDefault();
 }
-
-
 
 /**
  * Stops the game and handles all end-game actions.
@@ -271,9 +380,6 @@ function toggleSound() {
     checkBackgroundMusic()
 }
 
-
-
-
 /**
  * Toggles the visibility of mobile controls based on the device type.
  */
@@ -292,8 +398,6 @@ function frequentlyDeviceCheck() {
     setInterval(() => {
         checkOrientation();
         toggleMobileControls();
-
-
     }, 100);
 }
 
@@ -308,18 +412,11 @@ function isMobileDevice() {
  * Checks the device's orientation and displays a message if the device is in portrait mode.
  */
 function checkOrientation() {
-    console.log('Viewport Width:', window.innerWidth);
-    console.log('Viewport Height:', window.innerHeight);
     if (isMobileDevice()) {
-        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
-
+        let isLandscape = window.matchMedia('(orientation: landscape)').matches;
         if (!isLandscape && window.innerWidth < window.innerHeight) {
-            // Im Portrait-Modus (korrigiert für Chrome-Entwicklertools)
-            console.log('Portrait mode detected');
             document.getElementById('rotate-message').style.display = 'flex';
         } else {
-            // Im Landscape-Modus
-            console.log('Landscape mode detected');
             document.getElementById('rotate-message').style.display = 'none';
         }
     } else {
@@ -327,98 +424,8 @@ function checkOrientation() {
     }
 }
 
-// Event-Listener für Orientation-Checks
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
-
-
-
-
-
-
-
-// /**
-//  * Toggles the visibility of mobile controls based on the device type.
-//  *
-//  * - Displays the mobile control container if the device is mobile.
-//  * - Hides the mobile control container if the device is not mobile.
-//  *
-//  * @function
-//  */
-// function toggleMobileControls() {
-//     if (isMobileDevice()) {
-//         document.getElementById('container-control').classList.remove('d-none');
-//     } else {
-//         document.getElementById('container-control').classList.add('d-none');
-//     }
-// }
-
-// function frequentlyDeviceCheck(){
-
-// setInterval(() => {
-//     checkOrientation()
-//     toggleMobileControls()
-    
-// }, 100);
-
-
-// }
-
-// /*
-
-// /**
-//  * Checks if the device is a mobile device based on the user agent.
-//  *
-//  * - Uses a regular expression to test the `navigator.userAgent` for mobile device keywords.
-//  * - Returns `true` if the device is mobile, otherwise returns `false`.
-//  *
-//  * @function
-//  * @returns {boolean} `true` if the device is mobile, `false` otherwise.
-//  */
-// function isMobileDevice() {
-//     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
-// }
-
-// /*
-
-
-// /**
-//  * Checks the device's orientation and displays a message if the device is in portrait mode.
-//  *
-//  * - Displays a message prompting the user to rotate their device if the device is in portrait mode.
-//  * - Hides the message if the device is in landscape mode or if the device is not mobile.
-//  *
-//  * @function
-//  */
-
-// function checkOrientation() {
-//     if (isMobileDevice()) {
-//         // console.log('Hallo')
-
-//         if (window.innerWidth < window.innerHeight) {
-//             console.log('window.innerWidth < window.innerHeight')
-
-
-//             document.getElementById('rotate-message').style.display = 'flex';
-//         } else {
-//             document.getElementById('rotate-message').style.display = 'none';
-//         }
-//     } else {
-//         document.getElementById('rotate-message').style.display = 'none';
-//     }
-// }
-
-// window.addEventListener('load', checkOrientation);
-// window.addEventListener('resize', checkOrientation);
-
-
-
-
-
-
-//////////////////////////
-
-
 
 /**
  * Toggles between entering and exiting fullscreen mode.
@@ -432,7 +439,7 @@ window.addEventListener('resize', checkOrientation);
 function toggleFullscreen() {
     let canvas = document.getElementById('game-container');
     let fullscreenButton = document.getElementById('fullscreen-image');
-    
+
     if (!document.fullscreenElement) {
         enterFullscreen(canvas);
         fullscreenButton.src = 'img/button_image/exitFullscreen.svg';

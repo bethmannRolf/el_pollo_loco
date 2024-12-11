@@ -217,8 +217,6 @@ canvas {
 
 #game-container {
     position: relative;
-    /* width: 720;
-    height: 480; */
     max-width: 720px;
     max-height: 100vh;
     margin: 0 auto;
@@ -242,9 +240,6 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
- 
-    /* width: 720;
-    height: 480; */
     background-color: rgba(218, 92, 29, 0.9);
     color: black;
     z-index: 9999;
@@ -336,9 +331,7 @@ button{
     #start-button {
         top: 15%;
         left: 25%;
-        transform: translate(-50%, -50%);
-
-        
+        transform: translate(-50%, -50%);    
     }
 
     #replay-button {
@@ -349,9 +342,9 @@ button{
         padding: 5px 10px;
         transform: translate(-50%, -50%);
     }
+
     h1{
         margin:0;
-
     }
 
     .control-container-style {
@@ -359,20 +352,16 @@ button{
         padding: 0px;
     }
     
-    
     .control-button-style {
         border-radius: 4px;
         padding: 4px;
         opacity: 1;
     }
 
-    
 .control-button-style img {
     width: 18px;
     height: 18px;
 }
-
-
 }
 
 @media (max-width: 410px) {
@@ -428,14 +417,11 @@ button{
         padding: 4px;
         opacity: 1;
     }
-
-    
+ 
 .control-button-style img {
     width: 18px;
     height: 18px;
 }
-
-
 }
 
 @media only screen and (max-height: 580px) {
@@ -478,17 +464,9 @@ button{
         border-radius: 6px;
         padding: 6px;
     }
-
 }
 
 html, body {
     margin: 0;
     padding: 0;
-
 } 
-
-
-
-
-/* unterhalb werden die Klassen zusammengesetzt */
-
