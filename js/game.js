@@ -371,21 +371,63 @@ function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
 }
 
+
+
 /**
- * Checks the device's orientation and displays a message if the device is in portrait mode.
+ * Checks the device type and updates the visibility of the fullscreen button.
+ * - Hides the fullscreen button for smartphones.
+ * - Displays the fullscreen button for tablets and larger devices.
+ */
+function updateFullscreenButtonVisibility() {
+    let fullscreenButton = document.getElementById('button-fullscreen');
+    let isSmartphone = window.innerWidth <= 932; 
+    if (isSmartphone) {
+        fullscreenButton.classList.add('d-none');   
+    } else {
+        fullscreenButton.classList.remove('d-none'); 
+    }
+}
+
+/**
+ * Checks the orientation and manages UI for mobile devices.
  */
 function checkOrientation() {
     if (isMobileDevice()) {
-        let isLandscape = window.matchMedia('(orientation: landscape)').matches;
+        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+        const rotateMessage = document.getElementById('rotate-message');
+        
         if (!isLandscape && window.innerWidth < window.innerHeight) {
-            document.getElementById('rotate-message').style.display = 'flex';
+            rotateMessage.style.display = 'flex';
         } else {
-            document.getElementById('rotate-message').style.display = 'none';
+            rotateMessage.style.display = 'none';
         }
     } else {
         document.getElementById('rotate-message').style.display = 'none';
     }
+    updateFullscreenButtonVisibility(); 
 }
+
+
+
+
+/**
+ * Checks the device's orientation and displays a message if the device is in portrait mode.
+ */
+
+// function checkOrientation() {
+//     if (isMobileDevice()) {
+//         // document.getElementById('button-fullscreen').classList.add('d-none')
+//         let isLandscape = window.matchMedia('(orientation: landscape)').matches;
+//         if (!isLandscape && window.innerWidth < window.innerHeight) {
+//             document.getElementById('rotate-message').style.display = 'flex';
+//         } else {
+//             document.getElementById('rotate-message').style.display = 'none';
+//         }
+//     } else {
+//         document.getElementById('rotate-message').style.display = 'none';
+//         // document.getElementById('button-fullscreen').classList.remove('d-none')
+//     }
+// }
 
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);

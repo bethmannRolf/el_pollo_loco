@@ -61,6 +61,12 @@ class Endboss extends MovableObject {
         this.hitCount = 0;
         this.energy = 100;
         this.hitDamage = 40;
+
+        /////////   new
+        this.speed = 0.1
+
+
+        //////////////
         this.animate()
     }
 
@@ -72,10 +78,20 @@ class Endboss extends MovableObject {
      * It also plays the cackling sound when the Endboss is not dead and sound is not muted.
      */
     animate() {
+
+
         setInterval(() => {
             if (this.world && this.world.character) {
                 let distance = this.calculateDistance(this.world.character);
                 this.updateAnimation(distance);
+                // console.log("Distanz",distance)
+                setInterval(() => {
+                    distance = this.calculateDistance(this.world.character);
+                    if (!this.isDead() && distance > 400 && firstEndbossContact === true) {
+                        this.moveLeft();
+                        // console.log("Distanz 2",distance)
+                    }
+                }, 1000 / 25);
                 if (!this.isDead() && !isMuted) {
                     this.endboss_cackling.play();
                 }
@@ -93,6 +109,7 @@ class Endboss extends MovableObject {
      */
     calculateDistance(character) {
         return Math.abs(character.x - this.x);
+        
     }
 
     /**
@@ -100,6 +117,7 @@ class Endboss extends MovableObject {
  * @param {number} distanceToCharacter - The distance to the character.
   */
     updateAnimation(distanceToCharacter) {
+        // console.log(distanceToCharacter)
         if (this.isDead()) {
             return;
         }
