@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     collectCoinSound = new Audio('audio/coin1.mp3');
     collectBottleSound = new Audio('audio/collect_bottle.mp3');
     verticalCollectableTolerance = 60;
+    horizontalTolerance = 10;
     /**
  * Applies gravity to the object, updating its vertical position and speed.
  */
@@ -146,14 +147,16 @@ class MovableObject extends DrawableObject {
  * @returns {boolean} True if a collision occurs, false otherwise.
  */
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
+        let enmemyTolerance = 30
+        return this.x + this.width -enmemyTolerance > mo.x &&
+            this.y + this.height  > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
 
     isCollidingWithCollectable(mo) {
-        return this.x + this.width > mo.x &&
+        let CollectableTolerance = 40
+        return this.x + this.width - CollectableTolerance> mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height -this.verticalCollectableTolerance;
@@ -169,8 +172,8 @@ class MovableObject extends DrawableObject {
         return (
             this.y + this.height <= mo.y + tolerance &&
             this.y + this.height > mo.y &&
-            this.x + this.width > mo.x - tolerance &&
-            this.x < mo.x + mo.width + tolerance
+            this.x + this.width  > mo.x - tolerance &&
+            this.x < mo.x + mo.width + tolerance 
         );
     }
 }
