@@ -322,7 +322,7 @@ a {
     color: black;
 }
 
-button{
+button {
     user-select: none;
 }
 
@@ -331,7 +331,7 @@ button{
     #start-button {
         top: 15%;
         left: 25%;
-        transform: translate(-50%, -50%);    
+        transform: translate(-50%, -50%);
     }
 
     #replay-button {
@@ -343,25 +343,25 @@ button{
         transform: translate(-50%, -50%);
     }
 
-    h1{
-        margin:0;
+    h1 {
+        margin: 0;
     }
 
     .control-container-style {
         bottom: 2px;
         padding: 0px;
     }
-    
+
     .control-button-style {
         border-radius: 4px;
         padding: 4px;
         opacity: 1;
     }
 
-.control-button-style img {
-    width: 18px;
-    height: 18px;
-}
+    .control-button-style img {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @media (max-width: 410px) {
@@ -396,7 +396,6 @@ button{
     }
 }
 
-
 @media only screen and (max-height: 480px) {
     canvas {
         width: 100vh;
@@ -411,18 +410,18 @@ button{
         bottom: 2px;
         padding: 0px;
     }
-    
-    
+
+
     .control-button-style {
         border-radius: 4px;
         padding: 4px;
         opacity: 1;
     }
- 
-.control-button-style img {
-    width: 18px;
-    height: 18px;
-}
+
+    .control-button-style img {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @media only screen and (max-height: 580px) {
@@ -430,11 +429,11 @@ button{
     #start-button {
         top: 15%;
         left: 25%;
-        transform: translate(-50%, -50%);   
+        transform: translate(-50%, -50%);
     }
 
-    h1{
-        margin:0;
+    h1 {
+        margin: 0;
     }
 
     #replay-button {
@@ -461,13 +460,35 @@ button{
     }
 
     .options-button-style {
-
         border-radius: 6px;
         padding: 6px;
     }
 }
 
-html, body {
+@media only screen and (max-width: 667px) {
+
+    h1 {
+        display: none !important
+    }
+
+    #canvas {
+        width: 100dvw;
+        height: 100dvh;
+    }
+
+    #overlay-canvas-start {
+        width: 100dvw;
+        height: 100dvh;
+    }
+
+    #overlay-canvas-outro {
+        width: 100dvw;
+        height: 100dvh;
+    }
+}
+
+html,
+body {
     margin: 0;
     padding: 0;
-} 
+}

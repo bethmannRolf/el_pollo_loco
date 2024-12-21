@@ -7,6 +7,7 @@ let isMuted = true;
 let winning_sound = new Audio('audio/win_sound.mp3');
 let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
+let isFullscreen = false;
 let firstEndbossContact = false;
 
 /**
@@ -349,6 +350,11 @@ function toggleSound() {
 function toggleMobileControls() {
     if (isMobileDevice()) {
         document.getElementById('container-control').classList.remove('d-none');
+        if (isTablet() && !isFullscreen ) {
+            document.getElementById('container-control').style.bottom = '-100px'
+        
+        }
+
     } else {
         document.getElementById('container-control').classList.add('d-none');
     }
@@ -364,12 +370,58 @@ function frequentlyDeviceCheck() {
     }, 100);
 }
 
+
+
 /**
- * Checks if the device is a mobile device based on the user agent.
+ * Checks if the current device is a mobile device or tablet.
+ * - Uses user agent and touch support as criteria.
+ * @returns {boolean} True if the device is a mobile or tablet, false otherwise.
  */
 function isMobileDevice() {
-    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Check for mobile devices or tablets in user agent
+    let isMobileOrTablet = /android|iphone|ipad|ipod|mobile|tablet/i.test(userAgent);
+
+    // Additional check for touch support (covers cases like iPads with desktop mode)
+    let hasTouchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    return isMobileOrTablet || hasTouchSupport;
 }
+
+
+/**
+ * Detects if the current device is a smartphone.
+ * @returns {boolean} True if the device is a smartphone, false otherwise.
+ */
+function isSmartphone() {
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    let maxWidth = 767; // Standard breakpoint for smartphones
+    return /android|iphone|ipod|mobile/i.test(userAgent) || window.innerWidth <= maxWidth;
+}
+
+
+/**
+ * Detects if the current device is a tablet.
+ * @returns {boolean} True if the device is a tablet, false otherwise.
+ */
+function isTablet() {
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    let minWidth = 768; // Standard breakpoint for tablets
+    let maxWidth = 1024; // Maximum width for most tablets in portrait mode
+    let isTabletDevice = /ipad|tablet/i.test(userAgent);
+    
+    // Tablets often have width between 768px and 1024px
+    return isTabletDevice || (window.innerWidth >= minWidth && window.innerWidth <= maxWidth);
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -445,9 +497,11 @@ function toggleFullscreen() {
     if (!document.fullscreenElement) {
         enterFullscreen(canvas);
         fullscreenButton.src = 'img/button_image/exitFullscreen.svg';
+        isFullscreen = true
     } else {
         exitFullscreen();
         fullscreenButton.src = 'img/button_image/enterFullscreen.svg';
+        isFullscreen = false
     }
 }
 
