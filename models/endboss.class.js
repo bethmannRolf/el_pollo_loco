@@ -3,7 +3,8 @@ class Endboss extends MovableObject {
     y = 140;
     height = 300;
     width = 300;
-   
+    speed = 24
+
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -62,11 +63,7 @@ class Endboss extends MovableObject {
         this.energy = 100;
         this.hitDamage = 40;
 
-        /////////   new
-        this.speed = 0.1
 
-
-        //////////////
         this.animate()
     }
 
@@ -78,30 +75,32 @@ class Endboss extends MovableObject {
      * It also plays the cackling sound when the Endboss is not dead and sound is not muted.
      */
     animate() {
-
-
         setInterval(() => {
-            if (this.world && this.world.character) {
-                let distance = this.calculateDistance(this.world.character);
-                this.updateAnimation(distance);
-                // console.log("Distanz",distance)
-                setInterval(() => {
-                    distance = this.calculateDistance(this.world.character);
-                    if (!this.isDead() && distance > 400 && firstEndbossContact === true) {
-                        this.moveLeft();
-                        // console.log("Distanz 2",distance)
-                    }
-                }, 1000 / 25);
-                if (!this.isDead() && !isMuted) {
-                    this.endboss_cackling.play();
-                }
-                else {
-                    this.endboss_cackling.pause();
+            let distance = this.calculateDistance(this.world.character);
+            this.world.level.level_end_x = this.x
+            if (firstEndbossContact == true && endbossCounter == false) {
+                this.playAnimation(this.IMAGES_ALERT);
+                endbossCounter = true;
+            }
+            if (endbossCounter == true && distance > 5) {
+                this.playAnimation(this.IMAGES_WALKING);
+                this.moveLeft();
+            }
+            if (endbossCounter == true && distance <= 5) {
+                this.playAnimation(this.IMAGES_ATTACK);
+                if (this.hitByBottle()) {
+                    this.hitByBottle()
                 }
             }
-        }, 200);
-    }
+            if (!this.isDead() && !isMuted) {
+                this.endboss_cackling.play();
+            }
+            else {
+                this.endboss_cackling.pause();
+            }
 
+        }, 400);
+    }
     /**
      * Calculates the distance between the Endboss and the character.
      * @param {Object} character - The character object to calculate the distance to.
@@ -109,26 +108,14 @@ class Endboss extends MovableObject {
      */
     calculateDistance(character) {
         return Math.abs(character.x - this.x);
-        
+
     }
 
     /**
  * Updates the Endboss' animation based on the distance to the character.
  * @param {number} distanceToCharacter - The distance to the character.
   */
-    updateAnimation(distanceToCharacter) {
-        // console.log(distanceToCharacter)
-        if (this.isDead()) {
-            return;
-        }
-        if (distanceToCharacter < 200) {
-            this.playAnimation(this.IMAGES_ATTACK);
-        } else if (distanceToCharacter < 400) {
-            this.playAnimation(this.IMAGES_ALERT);
-        } else {
-            this.playAnimation(this.IMAGES_WALKING);
-        }
-    }
+
 
     /**
      * Returns the distance to the character.
@@ -139,29 +126,51 @@ class Endboss extends MovableObject {
         return Math.abs(this.x - character.x);
     }
 
-    /**
- * Handles when the Endboss is hit by a bottle.
- * It increases the hit count and decreases the Endboss' energy.
- * If the Endboss is hit 3 times, it dies.
- */
+
+
+
     hitByBottle() {
         this.hitCount++;
         if (this.hitCount >= 3) {
             this.energy = 0;
-            this.playAnimation(this.IMAGES_DEAD);
-            setTimeout(() => {
-                win = true;
-                stopGame();
-            }, 2000);
+    
+          
+            if (!this.isPlayingDeathAnimation) {
+                this.isPlayingDeathAnimation = true;
+                this.playAnimationWithDelay(this.IMAGES_DEAD, 400); 
+                setTimeout(() => {
+                    win = true;
+                    stopGame();
+                }, 2000);
+            }
         } else {
-            this.energy = 100 - this.hitDamage*this.hitCount
-            this.playAnimation(this.IMAGES_HURT);
+            this.energy = 100 - this.hitDamage * this.hitCount;
+            this.playAnimationWithDelay(this.IMAGES_HURT, 300); 
             if (this.world) {
                 this.world.statusBarEndboss.setPercentage(this.energy);
             }
         }
     }
-
+    
+    playAnimationWithDelay(images, delay) {
+        let index = 0;
+        const interval = setInterval(() => {
+            this.img = this.imageCache[images[index]]; // Bild aktualisieren
+            if (index >= images.length - 1) {
+                clearInterval(interval); // Animation stoppen, wenn Ende erreicht
+            } else {
+                index++;
+            }
+        }, delay);
+    }
+    
+    stopCurrentAnimation() {
+        if (this.currentAnimationInterval) {
+            clearInterval(this.currentAnimationInterval);
+            this.currentAnimationInterval = null;
+        }
+    }
+    
     /**
  * Checks if the Endboss is dead (i.e., hit 3 times).
  * @returns {boolean} True if the Endboss is dead, otherwise false.

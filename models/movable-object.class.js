@@ -147,7 +147,7 @@ class MovableObject extends DrawableObject {
  * @returns {boolean} True if a collision occurs, false otherwise.
  */
     isColliding(mo) {
-        let enmemyTolerance = 30
+        let enmemyTolerance = 20
         return this.x + this.width -enmemyTolerance > mo.x &&
             this.y + this.height  > mo.y &&
             this.x < mo.x &&
@@ -155,7 +155,7 @@ class MovableObject extends DrawableObject {
     }
 
     isCollidingWithCollectable(mo) {
-        let CollectableTolerance = 40
+        let CollectableTolerance = 30
         return this.x + this.width - CollectableTolerance> mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&

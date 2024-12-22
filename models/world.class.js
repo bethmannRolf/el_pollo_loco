@@ -63,6 +63,7 @@ class World {
             this.checkBottleCollisions();
             this.checkBottleEnemyCollisions();
             this.checkFirstContactWithEndboss();
+            this.checkFirstContactWithEndboss();
         }, 200);
     }
 
@@ -276,6 +277,8 @@ class World {
             firstEndbossContact = true;
         }
     }
+
+
 
     /**
  * Adds dynamic objects to the canvas, including the character, enemies, throwable objects,

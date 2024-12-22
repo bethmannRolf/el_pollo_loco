@@ -9,6 +9,8 @@ let losing_sound = new Audio('audio/game_lose2.mp3');
 let inGame = true;
 let isFullscreen = false;
 let firstEndbossContact = false;
+let endbossCounter = false
+
 
 /**
  * Initializes the game and all necessary components.
