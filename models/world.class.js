@@ -63,7 +63,6 @@ class World {
             this.checkBottleCollisions();
             this.checkBottleEnemyCollisions();
             this.checkFirstContactWithEndboss();
-            this.checkFirstContactWithEndboss();
         }, 200);
     }
 

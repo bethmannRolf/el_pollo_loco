@@ -369,6 +369,7 @@ function frequentlyDeviceCheck() {
     setInterval(() => {
         checkOrientation();
         toggleMobileControls();
+        applySmartphoneStyles()
     }, 100);
 }
 
@@ -401,6 +402,35 @@ function isSmartphone() {
     let maxWidth = 767; // Standard breakpoint for smartphones
     return /android|iphone|ipod|mobile/i.test(userAgent) || window.innerWidth <= maxWidth;
 }
+
+
+function applySmartphoneStyles() {
+    if (isSmartphone()) {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @media only screen and (max-width: 767px) {
+                h1 {
+                    display: none !important;
+                }
+                #canvas {
+                    width: 100dvw;
+                    height: 100dvh;
+                }
+                #overlay-canvas-start {
+                    width: 100dvw;
+                    height: 100dvh;
+                }
+                #overlay-canvas-outro {
+                    width: 100dvw;
+                    height: 100dvh;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+
 
 
 /**

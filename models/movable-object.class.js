@@ -130,7 +130,7 @@ class MovableObject extends DrawableObject {
             this.jumpCooldown = true;
             setTimeout(() => {
                 this.jumpCooldown = false;
-            }, 50);
+            }, 100);
         }
     }
 

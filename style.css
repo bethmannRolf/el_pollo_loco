@@ -465,6 +465,13 @@ button {
     }
 }
 
+
+
+
+
+
+
+/*
 @media only screen and (max-width: 667px) {
 
     h1 {
@@ -486,7 +493,7 @@ button {
         height: 100dvh;
     }
 }
-
+*/
 html,
 body {
     margin: 0;
