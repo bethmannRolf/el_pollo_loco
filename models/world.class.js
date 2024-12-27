@@ -45,12 +45,6 @@ class World {
 
     /**
      * Starts the game loop by setting up intervals for collision checks and object interactions.
-     * - Runs `checkCollisionFromAbove` every 50 milliseconds to detect upward collisions.
-     * - Runs multiple collision and interaction checks every 200 milliseconds, including:
-     *   - General collisions (`checkCollisions`)
-     *   - Object interactions like throwing objects (`checkThrowObjects`)
-     *   - Collectable interactions (`checkCoinCollisions`, `checkBottleCollisions`)
-     *   - Enemy interactions and game state checks (`checkBottleEnemyCollisions`, `checkFirstContactWithEndboss`).
      */
     run() {
         setInterval(() => {
@@ -317,7 +311,6 @@ class World {
     /**
  * Flips an image horizontally by modifying the canvas transformation matrix.
  * Used for objects facing the opposite direction.
- * 
  * @param {DrawableObject} mo - The drawable object whose image needs to be flipped.
  */
     flipImage(mo) {

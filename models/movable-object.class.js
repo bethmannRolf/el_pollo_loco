@@ -154,6 +154,10 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height
     }
 
+    /**
+ * Checks if the current object is colliding with a collectible object.
+ * The collision detection considers tolerances for horizontal and vertical overlaps.
+ */
     isCollidingWithCollectable(mo) {
         let CollectableTolerance = 30
         return this.x + this.width - CollectableTolerance> mo.x &&
