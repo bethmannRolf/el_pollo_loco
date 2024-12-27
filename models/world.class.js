@@ -260,7 +260,6 @@ class World {
         this.addToMap(this.bottleBar);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
-
         if (firstEndbossContact === true) {
             this.addToMap(this.statusBarEndboss);
         }
@@ -276,8 +275,6 @@ class World {
             firstEndbossContact = true;
         }
     }
-
-
 
     /**
  * Adds dynamic objects to the canvas, including the character, enemies, throwable objects,

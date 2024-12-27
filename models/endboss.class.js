@@ -71,78 +71,31 @@ class Endboss extends MovableObject {
 
     endboss_cackling = new Audio('audio/cackle3.mp3');
 
-    /**
-     * The animation loop that updates the Endboss' behavior.
-     * It checks the distance to the character and updates the Endboss' animation accordingly.
-     * It also plays the cackling sound when the Endboss is not dead and sound is not muted.
-     * 
-     * @method animate
-     *//*
-    animate(distanceToCharacter) {
-       setInterval(() => {
-        if (this.world && this.world.character) {
-            let distance = this.calculateDistance(this.world.character);
-            console.log(distance)
-            if (firstEndbossContact == true && endbossCounter == false) {
-                this.playAnimation(this.IMAGES_ALERT)
-                endbossCounter = true
-    
-            }
-            else{
-                if (distanceToCharacter > 35 && firstEndbossContact == true) {
-                    setInterval(() => {
-                       this.playAnimation(this.IMAGES_WALKING);
-                    this.moveLeft()   
-                    }, 200);
-                  
+    animate() {
+        setInterval(() => {
+            if (this.world && this.world.character) {
+                let distance = this.calculateDistance(this.world.character);
+                this.updateAnimation(distance);
+                if (!this.isDead() && !isMuted) {
+                    this.endboss_cackling.play();
+                }
+                else {
+                    this.endboss_cackling.pause();
                 }
             }
-
-        }
-       }, 200);
-
-
+        }, 100);
     }
-*/
-
-
-
-
-
-animate(){
-    setInterval(() => {
-        if (this.world && this.world.character) {
-            let distance = this.calculateDistance(this.world.character);
-            this.updateAnimation(distance);
-            if (!this.isDead() && !isMuted) {
-                this.endboss_cackling.play();
-            }
-            else {
-                this.endboss_cackling.pause();
-            }
-        }
-    }, 100);
-}
-    
-
 
     shrinkLevel() {
         setInterval(() => {
             if (this.world && this.world.character) {
                 this.world.level.level_end_x = this.x;
                 if (this.world.level.level_end_x < this.world.character.x) {
-                 
                     this.world.character.x = this.world.level.level_end_x;
-                    
                 }
             }
         }, 100);
     }
-    
-
-
-
-
 
     checkIfEndbossLeft() {
         setInterval(() => {
@@ -152,10 +105,8 @@ animate(){
                     stopGame();
                 }, 2000);
             }
-
         }, 100);
     }
-
 
     /**
      * Calculates the distance between the Endboss and the character.
@@ -170,34 +121,21 @@ animate(){
 
     /**
  * Updates the Endboss' animation based on the distance to the character.
- * 
+
  * @param {number} distanceToCharacter - The distance to the character.
  * @method updateAnimation
  */
     updateAnimation(distanceToCharacter) {
         if (this.isDead()) {
-            return;
-        }
-
+            return;}
         if (firstEndbossContact == true && endbossCounter == false) {
             this.playAnimation(this.IMAGES_ALERT)
-            endbossCounter = true
-
-        }
-
+            endbossCounter = true}
         else if (distanceToCharacter > 45 && firstEndbossContact == true) {
-           
-              
-                this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft()
-          
-
+            this.playAnimation(this.IMAGES_WALKING);
+            this.moveLeft()
         } else {
-           
-                  this.playAnimation(this.IMAGES_ATTACK);
-         
-
-          
+            this.playAnimation(this.IMAGES_ATTACK);
         }
     }
 

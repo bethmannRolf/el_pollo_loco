@@ -11,7 +11,6 @@ let isFullscreen = false;
 let firstEndbossContact = false;
 let endbossCounter = false
 
-
 /**
  * Initializes the game and all necessary components.
  * - Loads the game level.
@@ -353,10 +352,8 @@ function toggleMobileControls() {
     if (isMobileDevice()) {
         document.getElementById('container-control').classList.remove('d-none');
         if (isTablet() && !isFullscreen ) {
-            document.getElementById('container-control').style.bottom = '-100px'
-        
+            document.getElementById('container-control').style.bottom = '-100px'    
         }
-
     } else {
         document.getElementById('container-control').classList.add('d-none');
     }
@@ -370,6 +367,7 @@ function frequentlyDeviceCheck() {
         checkOrientation();
         toggleMobileControls();
         applySmartphoneStyles()
+        toggleMobileControls();
     }, 100);
 }
 
@@ -382,13 +380,8 @@ function frequentlyDeviceCheck() {
  */
 function isMobileDevice() {
     let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    
-    // Check for mobile devices or tablets in user agent
     let isMobileOrTablet = /android|iphone|ipad|ipod|mobile|tablet/i.test(userAgent);
-
-    // Additional check for touch support (covers cases like iPads with desktop mode)
     let hasTouchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
     return isMobileOrTablet || hasTouchSupport;
 }
 
@@ -399,7 +392,7 @@ function isMobileDevice() {
  */
 function isSmartphone() {
     let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    let maxWidth = 767; // Standard breakpoint for smartphones
+    let maxWidth = 767; 
     return /android|iphone|ipod|mobile/i.test(userAgent) || window.innerWidth <= maxWidth;
 }
 
@@ -407,31 +400,10 @@ function isSmartphone() {
 function applySmartphoneStyles() {
     if (isSmartphone()) {
         const style = document.createElement('style');
-        style.innerHTML = `
-            @media only screen and (max-width: 767px) {
-                h1 {
-                    display: none !important;
-                }
-                #canvas {
-                    width: 100dvw;
-                    height: 100dvh;
-                }
-                #overlay-canvas-start {
-                    width: 100dvw;
-                    height: 100dvh;
-                }
-                #overlay-canvas-outro {
-                    width: 100dvw;
-                    height: 100dvh;
-                }
-            }
-        `;
+        style.innerHTML = controlPanelForTabletStyle();
         document.head.appendChild(style);
     }
 }
-
-
-
 
 /**
  * Detects if the current device is a tablet.
@@ -446,16 +418,6 @@ function isTablet() {
     // Tablets often have width between 768px and 1024px
     return isTabletDevice || (window.innerWidth >= minWidth && window.innerWidth <= maxWidth);
 }
-
-
-
-
-
-
-
-
-
-
 
 /**
  * Checks the device type and updates the visibility of the fullscreen button.
@@ -491,28 +453,6 @@ function checkOrientation() {
     updateFullscreenButtonVisibility(); 
 }
 
-
-
-
-/**
- * Checks the device's orientation and displays a message if the device is in portrait mode.
- */
-
-// function checkOrientation() {
-//     if (isMobileDevice()) {
-//         // document.getElementById('button-fullscreen').classList.add('d-none')
-//         let isLandscape = window.matchMedia('(orientation: landscape)').matches;
-//         if (!isLandscape && window.innerWidth < window.innerHeight) {
-//             document.getElementById('rotate-message').style.display = 'flex';
-//         } else {
-//             document.getElementById('rotate-message').style.display = 'none';
-//         }
-//     } else {
-//         document.getElementById('rotate-message').style.display = 'none';
-//         // document.getElementById('button-fullscreen').classList.remove('d-none')
-//     }
-// }
-
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 
@@ -525,7 +465,6 @@ window.addEventListener('resize', checkOrientation);
 function toggleFullscreen() {
     let canvas = document.getElementById('game-container');
     let fullscreenButton = document.getElementById('fullscreen-image');
-
     if (!document.fullscreenElement) {
         enterFullscreen(canvas);
         fullscreenButton.src = 'img/button_image/exitFullscreen.svg';
