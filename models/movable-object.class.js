@@ -173,11 +173,12 @@ class MovableObject extends DrawableObject {
      */
     isCollidingFromAbove(mo) {
         let tolerance = 20;
+        let strictness = -20;
         return (
             this.y + this.height <= mo.y + tolerance &&
             this.y + this.height > mo.y &&
-            this.x + this.width  > mo.x - tolerance &&
-            this.x < mo.x + mo.width + tolerance 
+            this.x + this.width  > mo.x - strictness  &&
+            this.x < mo.x + mo.width + strictness 
         );
     }
 }
