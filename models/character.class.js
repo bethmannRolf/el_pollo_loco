@@ -93,10 +93,6 @@ class Character extends MovableObject {
 
 /**
  * Calculates the time elapsed since the last key press.
- * This method checks the time difference between the current time and the 
- * last recorded key press time. If no key has been pressed yet (i.e., 
- * `lastPressTime` is `null`), it returns `null`.
- * @returns {number|null} The time in milliseconds since the last key press, or `null` if no key press has occurred.
  */
     getTimeSinceLastPress() {
         if (this.lastPressTime === null) {
@@ -108,9 +104,6 @@ class Character extends MovableObject {
 
 /**
  * Tracks the time of the last key press by monitoring specific keyboard inputs.
- * This method sets an interval to periodically check if any of the specified keys 
- * (RIGHT, LEFT, UP, DOWN, or D) are pressed. If any of these keys are pressed, 
- * the time of the last key press is recorded in `lastPressTime`.
  */
     getPressTime() {
         setInterval(() => {
@@ -126,9 +119,6 @@ class Character extends MovableObject {
 
 /**
  * Starts the animation process for the character, including movement and state animations.
- * This method sets up the movement animation and state animation for the character. 
- * It calls `setupMovementAnimation()` to handle movement updates (e.g., horizontal movement and jumping),
- * and `setupStateAnimation()` to manage different character states (e.g., walking, idle, dead, hurt).
  */
     animate() {
         this.setupMovementAnimation();
@@ -137,11 +127,6 @@ class Character extends MovableObject {
 
 /**
  * Sets up the movement animation by repeatedly handling horizontal movement, jumping, 
- * and adjusting the camera position based on the character's current position.
- * This method runs at a constant frame rate of approximately 60 frames per second, 
- * ensuring smooth animation updates for movement and jumping. It also updates the camera 
- * position to follow the character, with the camera's `x` coordinate adjusted 
- * relative to the character's `x` position.
  */
     setupMovementAnimation() {
         setInterval(() => {
@@ -153,11 +138,7 @@ class Character extends MovableObject {
 
     /**
  * Handles the character's horizontal movement based on keyboard input.
- * If the RIGHT arrow key is pressed and the character is not beyond the level's end,
- * the character will move right. If the LEFT arrow key is pressed and the character is
- * not at the left edge of the level, the character will move left. The direction of movement 
- * is tracked by the `otherDirection` flag. While the character is moving, the walking sound is played.
- * If neither direction key is pressed, the walking sound is stopped.
+
  */
     handleHorizontalMovement() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -175,9 +156,6 @@ class Character extends MovableObject {
 
 /**
  * Handles the character's jumping action.
- * If the UP arrow key is pressed and the character is not already above ground, 
- * the character will jump. Additionally, if the game is not muted, the jump sound will play.
- * If an error occurs during the sound playback, it will be logged to the console.
  */
     handleJumping() {
         if (this.world.keyboard.UP && !this.isAboveGround()) {
@@ -190,8 +168,6 @@ class Character extends MovableObject {
 
 /**
  * Plays the walking sound if the character is not above ground, the sound is not muted, and the sound is not already playing.
- * This method checks if the character is not above the ground, if the game is not muted, and if the walking sound is paused. 
- * If all conditions are met, the walking sound is played. Any errors during playback are caught and logged.
  */
     playWalkingSound() {
         if (!this.isAboveGround() && !isMuted && this.walking_sound.paused) {
@@ -201,7 +177,6 @@ class Character extends MovableObject {
 
 /**
  * Pauses the walking sound if it is currently playing.
- * This method checks if the walking sound is not already paused, and if it is playing, it pauses it.
  */
     stopWalkingSound() {
         if (!this.walking_sound.paused) {
@@ -222,8 +197,6 @@ class Character extends MovableObject {
 
 /**
  * Updates the character's snoring state and triggers the snoring sound or animation.
- * - Sets the `snoring` property to `false` to reset the snoring state.
- * - Calls the `snore()` method to handle the actual snoring behavior, such as playing the sound or triggering an animation.
  */    
     updateSnoring() {
         this.snoring = false;
@@ -232,21 +205,6 @@ class Character extends MovableObject {
 
     /**
  * Handles the character's state and triggers the appropriate animation or action based on the character's current status.
- * The method checks the character's state by evaluating various conditions such as whether the character is dead, hurt, idle, 
- * jumping, or walking. Based on the state, it triggers the appropriate animation or action.
- * The sequence of states checked:
- * - If the character is dead, the "dead" animation is played.
- * - If the character is hurt, the "hurt" animation is played.
- * - If the character is idle for a significant amount of time, the "idle" state is triggered.
- * - If the character is in the air, the "jumping" animation is played.
- * - If the character is moving horizontally, the "walking" animation is played.
- * 
- * @see #getTimeSinceLastPress() to calculate the time since the last key press.
- * @see #isDead() to check if the character is dead.
- * @see #isHurt() to check if the character is hurt.
- * @see #isIdle() to check if the character is idle.
- * @see #isAboveGround() to check if the character is in the air (jumping).
- * @see #playAnimation() to play the appropriate animation based on the state.
  */
     handleCharacterState() {
         let timeSinceLastPress = this.getTimeSinceLastPress();
@@ -265,9 +223,6 @@ class Character extends MovableObject {
 
     /**
  * Plays the "dead" animation and triggers the end of the game.
- * This method plays the death animation for the character and, after a short delay, 
- * sets the `win` flag to `false` and stops the game.
- * @see stopGame() - Stops the game and triggers the game-over sequence.
  */
     playDeadState() {
         this.playAnimation(this.IMAGES_DEAD);
@@ -279,10 +234,6 @@ class Character extends MovableObject {
 
     /**
  * Checks if the character is idle based on the time since the last key press.
- * The character is considered idle if it is not above the ground and 
- * the time since the last key press exceeds 2000 milliseconds.
- * @param {number} timeSinceLastPress - The time (in milliseconds) since the last key press.
- * @returns {boolean} True if the character is idle, false otherwise.
  */
     isIdle(timeSinceLastPress) {
         return !this.isAboveGround() && (timeSinceLastPress >= 50);
@@ -290,10 +241,6 @@ class Character extends MovableObject {
 
     /**
  * Plays the appropriate idle animation based on the time since the last key press.
- * If the character has been idle for more than 7000 milliseconds and the game is still ongoing,
- * the long idle animation is played, and the character starts snoring.
- * Otherwise, the regular idle animation is played.
- * @param {number} timeSinceLastPress - The time (in milliseconds) since the last key press.
  */
     playIdleState(timeSinceLastPress) {
         if (timeSinceLastPress >= 7000 && inGame) {
@@ -307,8 +254,6 @@ class Character extends MovableObject {
 
     /**
  * Plays or pauses the snoring sound based on the current snoring state and mute status.
- * If the character is snoring and the game is not muted, the snoring sound is played.
- * Otherwise, the snoring sound is paused.
  */
     snore() {
         if (this.snoring == true && isMuted == false) {
